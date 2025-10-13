@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>TIPS 지원사업 사업계획서 초안 - 투명한 병원정보 B2C 플랫폼</title>
+<style>
+  :root {
+    --bg: #0b1021;
+    --card: #141a35;
+    --text: #eef2ff;
+    --muted: #a0a8c6;
+    --accent: #6aa6ff;
+    --ok: #35d49a;
+    --warn: #ffd166;
+    --bad: #ef476f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, 'Noto Sans KR', Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+    line-height: 1.5;
+  }
+  header { padding: 32px 24px 0; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 24px; }
+  .grid { display: grid; gap: 20px; }
+  .slide {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  }
+  h1,h2,h3 { margin: 0 0 12px; line-height: 1.25; }
+  h1 { font-size: 28px; }
+  h2 { font-size: 24px; color: #dbe5ff; }
+  h3 { font-size: 18px; color: var(--muted); }
+  p, li { color: #e8edff; }
+  .two-col { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px; }
+  .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .badge { display: inline-block; padding: 3px 8px; border-radius: 999px; background: rgba(255,255,255,0.08); color: #dbe5ff; font-size: 12px; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 6px; background: rgba(106,166,255,0.15); color: var(--accent); font-size: 12px; margin-right: 6px; }
+  .note { color: var(--muted); font-size: 13px; }
+  .kpi { font-size: 28px; font-weight: 700; color: var(--ok); }
+  .table {
+    width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px;
+  }
+  .table th, .table td {
+    border-bottom: 1px dashed rgba(255,255,255,0.1);
+    padding: 8px 6px; text-align: left;
+  }
+  .hl { color: var(--accent); font-weight: 700; }
+  .danger { color: var(--bad); font-weight: 700; }
+  .ok { color: var(--ok); font-weight: 700; }
+  /* Simple SVG container */
+  .viz {
+    width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px; padding: 12px;
+  }
+  footer { color: var(--muted); font-size: 12px; padding: 24px; text-align: center; }
+</style>
+</head>
+<body>
+<header class="wrap">
+  <h1>투명한 병원정보 B2C 플랫폼<br/>― “광고가 아닌, 진짜 정보로 고르는 병원”</h1>
+  <p class="note">본 문서는 TIPS 지원사업 제출을 위한 사업·기술 타당성 중심의 20장 분량 HTML 초안입니다. (텍스트+도표/이미지 포함)</p>
+</header>
+
+<main class="wrap grid">
+
+  <!-- 1 -->
+  <section class="slide">
+    <h2>01. 요약(Executive Summary)</h2>
+    <div class="two-col">
+      <div>
+        <p>국내 환자들은 병원 선택 과정에서 대부분 <span class="hl">의료광고</span>에만 노출되고, 이를 신뢰하지 않습니다. 그 결과 광고비가 큰 병원으로 환자 쏠림이 발생하고, 소규모이지만 <span class="ok">임상역량이 높은 병원</span>은 묻힙니다.</p>
+        <p>우리는 B2B로 축적한 기술(<span class="tag">Review Manager</span><span class="tag">Review Booster</span><span class="tag">MediContents</span>)을 확장해, <span class="hl">B2C 투명 병원정보 플랫폼</span>을 개발합니다.</p>
+        <ul>
+          <li>실제 환자 리뷰(검증), 실제 의사 사례(컴플라이언스 체크), 유효 병원·의료진 정보</li>
+          <li>의료광고법 위반/광고성 자동판단(LLM × 의료법 전문성)</li>
+          <li>마이데이터 동의 기반 맞춤 병원 추천(“나에게 맞는 병원”)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="viz">
+          <svg viewBox="0 0 600 260">
+            <text x="10" y="24" fill="#dbe5ff" font-size="14">시장 구조(단순화)</text>
+            <rect x="20" y="40" width="160" height="50" fill="#233055" rx="8"/>
+            <text x="30" y="70" fill="#eef2ff" font-size="14">광고 중심 탐색</text>
+
+            <rect x="220" y="40" width="160" height="50" fill="#233055" rx="8"/>
+            <text x="230" y="70" fill="#eef2ff" font-size="14">정보 비대칭</text>
+
+            <rect x="420" y="40" width="160" height="50" fill="#233055" rx="8"/>
+            <text x="430" y="70" fill="#eef2ff" font-size="14">환자 불만족</text>
+
+            <line x1="180" y1="65" x2="220" y2="65" stroke="#6aa6ff" stroke-width="3"/>
+            <line x1="380" y1="65" x2="420" y2="65" stroke="#6aa6ff" stroke-width="3"/>
+
+            <rect x="20" y="120" width="560" height="110" fill="#1b2447" rx="12"/>
+            <text x="30" y="145" fill="#6aa6ff" font-size="14">해결: 투명 정보 플랫폼</text>
+            <circle cx="120" cy="180" r="22" fill="#2c845c"/>
+            <text x="90" y="210" fill="#a0f0c5" font-size="12">검증 리뷰</text>
+            <circle cx="300" cy="180" r="22" fill="#6aa6ff"/>
+            <text x="265" y="210" fill="#a0c6ff" font-size="12">의료사례</text>
+            <circle cx="480" cy="180" r="22" fill="#ffd166"/>
+            <text x="440" y="210" fill="#ffe6a6" font-size="12">맞춤추천</text>
+          </svg>
+        </div>
+        <p class="note">의료광고 규제 강화·마이데이터 전국 시행 등 제도 변화와 함께 시장 기회가 확대되고 있습니다. :contentReference[oaicite:1]{index=1}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="slide">
+    <h2>02. 사회적 문제와 공익성</h2>
+    <div class="two-col">
+      <div>
+        <ul>
+          <li><b>광고 편중</b>으로 환자-정보 간 <span class="danger">심한 비대칭</span> 발생</li>
+          <li>실력 있는 <b>소규모 병원</b>은 홍보 역량·예산 한계</li>
+          <li>광고비의 해외 유출(Google/Meta), <b>국부 유출</b> 구조</li>
+          <li>생성형 AI로 <b>가짜 후기/영상</b> 확산, 일반 소비자 구별 어려움</li>
+        </ul>
+      </div>
+      <div>
+        <table class="table">
+          <tr><th>현상</th><th>결과</th><th>영향</th></tr>
+          <tr><td>광고 중심 노출</td><td>대형 병원 쏠림</td><td>진료품질 대비 비용 불만</td></tr>
+          <tr><td>소형 병원 홍보 한계</td><td>선순환 붕괴</td><td>지역 의료 생태계 약화</td></tr>
+          <tr><td>AI 생성 광고 확산</td><td>가짜 후기 증가</td><td>환자 피해·혼란</td></tr>
+        </table>
+        <p class="note">플랫폼 사전심의·의료광고법 규제 강화로 컴플라이언스 수요 급증(2023~2025). :contentReference[oaicite:2]{index=2}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="slide">
+    <h2>03. 솔루션 개요</h2>
+    <p>“<b>광고가 아닌, 투명한 정보</b>”를 제공하는 B2C 플랫폼</p>
+    <div class="three-col">
+      <div class="slide" style="padding:16px;">
+        <h3>① 검증 리뷰</h3>
+        <ul>
+          <li>본인·영수증 인증 + 어뷰징 방지</li>
+          <li>LLM 기반 광고성/위반 탐지</li>
+          <li>QAG Score, DAG Scorer 로직</li>
+        </ul>
+      </div>
+      <div class="slide" style="padding:16px;">
+        <h3>② 임상 사례</h3>
+        <ul>
+          <li>의사가 작성한 실제 치료 사례</li>
+          <li>의료광고법·가이드라인 준수 체크</li>
+          <li>병원 신뢰지수 구성</li>
+        </ul>
+      </div>
+      <div class="slide" style="padding:16px;">
+        <h3>③ 맞춤 추천</h3>
+        <ul>
+          <li>마이데이터 동의 기반 진료이력 반영</li>
+          <li>개인 상황과 선호도 반영</li>
+          <li>가까운/가성비/경험치 기반 다중 추천</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="slide">
+    <h2>04. 시장 니즈 & 기회</h2>
+    <div class="two-col">
+      <div>
+        <ul>
+          <li><b>의료광고 시장 400~450억</b>, 디지털 전환 가속</li>
+          <li>사전심의 의무 확대, <b>불법 후기 단속</b> 증가</li>
+          <li>의대 정원 65% 확대 → 2035년 경쟁 심화</li>
+          <li>마이헬스웨이 전국 시행, <b>의료 마이데이터</b> 본격화</li>
+        </ul>
+        <p class="note">수치·정책 근거: 첨부 리서치 문서 참조. :contentReference[oaicite:3]{index=3}</p>
+      </div>
+      <div class="viz">
+        <!-- Simple comparative bars -->
+        <svg viewBox="0 0 600 250">
+          <text x="10" y="24" fill="#dbe5ff" font-size="14">디지털 헬스/광고·컴플라이언스 기회(개념도)</text>
+          <rect x="40" y="60" width="180" height="18" fill="#6aa6ff"/>
+          <text x="230" y="74" fill="#eef2ff" font-size="12">의료광고 시장 400~450억</text>
+          <rect x="40" y="100" width="260" height="18" fill="#35d49a"/>
+          <text x="310" y="114" fill="#eef2ff" font-size="12">컴플라이언스 수요 급증</text>
+          <rect x="40" y="140" width="300" height="18" fill="#ffd166"/>
+          <text x="350" y="154" fill="#1b2447" font-size="12">마이데이터 활용 확대</text>
+          <rect x="40" y="180" width="220" height="18" fill="#ef476f"/>
+          <text x="270" y="194" fill="#eef2ff" font-size="12">의사 수 확대 → 경쟁 심화</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="slide">
+    <h2>05. 경쟁환경 (국내/국제 비교)</h2>
+    <table class="table">
+      <tr><th>구분</th><th>핵심가치</th><th>강점</th><th>한계</th></tr>
+      <tr><td>모두닥/굿닥 등</td><td>리뷰·예약</td><td>대규모 사용자·검증 리뷰</td><td>광고/노출 모델 의존</td></tr>
+      <tr><td>일반 리뷰 플랫폼</td><td>브랜드 리뷰</td><td>유통·로컬상권 강점</td><td>의료 특화 컴플라이언스 미흡</td></tr>
+      <tr><td>해외(Trustpilot/G2)</td><td>리뷰 애그리게이션</td><td>AI 검증·대규모 네트워크</td><td>국내 의료 규제 적합성 낮음</td></tr>
+    </table>
+    <p class="note">국내 의료 리뷰 플랫폼의 검증/예약 강점과 함께, 의료광고법 준수·마이데이터 연동의 결합이 차별 포인트입니다. :contentReference[oaicite:4]{index=4}</p>
+  </section>
+
+  <!-- 6 -->
+  <section class="slide">
+    <h2>06. 차별화 전략</h2>
+    <ul>
+      <li><b>규제 친화</b>: 의료광고법·사전심의 체계 내장(리걸테크 DNA)</li>
+      <li><b>신뢰 강화</b>: 본인/영수증 인증 + LLM 기반 가짜 후기 탐지</li>
+      <li><b>개인화</b>: 마이데이터 동의 기반 <span class="hl">“나에게 맞는 병원”</span> 추천</li>
+      <li><b>B2B→B2C</b> 확장: 기존 Review Manager/Booster/MediContents 자산 활용</li>
+    </ul>
+  </section>
+
+  <!-- 7 -->
+  <section class="slide">
+    <h2>07. 제품(플랫폼) 구성</h2>
+    <div class="two-col">
+      <div>
+        <ol>
+          <li><b>탐색</b>: 지도/리스트/카테고리·증상 기반 필터</li>
+          <li><b>검증</b>: 리뷰·사례·의료진 데이터 통합 카드</li>
+          <li><b>추천</b>: 환자 프로필·진료이력 기반 맞춤 리스트</li>
+          <li><b>신뢰</b>: 위반 의심 표시·신고/검증 루프</li>
+        </ol>
+      </div>
+      <div class="viz">
+        <!-- simple UI blocks -->
+        <svg viewBox="0 0 600 260">
+          <rect x="20" y="20" width="560" height="220" rx="12" fill="#10163a" stroke="#1f2b57"/>
+          <rect x="40" y="40" width="520" height="30" rx="6" fill="#1b2447"/>
+          <text x="50" y="60" fill="#a0a8c6" font-size="12">검색: “라미네이트, 강남역”</text>
+          <rect x="40" y="90" width="520" height="130" rx="8" fill="#141a35" stroke="#1f2b57"/>
+          <text x="52" y="110" fill="#dbe5ff" font-size="12">추천 카드(검증 리뷰 · 의료사례 · 컴플라이언스)</text>
+          <rect x="52" y="125" width="240" height="80" rx="8" fill="#233055"/>
+          <rect x="302" y="125" width="240" height="80" rx="8" fill="#233055"/>
+          <text x="60" y="145" fill="#eef2ff" font-size="11">병원 A</text>
+          <text x="310" y="145" fill="#eef2ff" font-size="11">병원 B</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="slide">
+    <h2>08. 비즈니스 모델(BM)</h2>
+    <ul>
+      <li><b>B2B 구독</b>: Review Booster / MediContents / 컴플라이언스 모듈(월 과금)</li>
+      <li><b>B2C</b>: 광고가 아닌 <b>가치 기반 노출</b>(신뢰지수/품질지수 연동)</li>
+      <li><b>API</b>: 검증/컴플라이언스·추천 API(파트너 채널 제공)</li>
+      <li><b>부가</b>: 데이터 인사이트 리포트(익명/집계)</li>
+    </ul>
+    <p class="note">“해당 서비스 이용 병원을 우선 노출”하는 광고형 구조가 아니라, <b>투명성·신뢰지수</b> 기반 노출 원칙을 고수합니다.</p>
+  </section>
+
+  <!-- 9 -->
+  <section class="slide">
+    <h2>09. 기술 개요</h2>
+    <div class="two-col">
+      <div>
+        <ul>
+          <li>멀티채널 리뷰 수집(합법적 API·제휴 중심)</li>
+          <li>LLM × 규칙 기반 <b>의료광고법 위반·광고성 판정</b></li>
+          <li>환자 리뷰 생성/게시·의사 사례 생성(템플릿+LLM)</li>
+          <li>마이데이터 연동 추천(표준 API, 동의·철회 관리)</li>
+        </ul>
+      </div>
+      <div class="viz">
+        <!-- architecture -->
+        <svg viewBox="0 0 600 270">
+          <text x="10" y="18" fill="#dbe5ff" font-size="14">아키텍처 개요</text>
+          <rect x="20" y="30" width="560" height="60" rx="10" fill="#1b2447"/>
+          <text x="40" y="65" fill="#eef2ff" font-size="12">수집 계층(API/제휴 · 사용자 제출 · 영수증 인증)</text>
+
+          <rect x="20" y="110" width="560" height="60" rx="10" fill="#1b2447"/>
+          <text x="40" y="145" fill="#eef2ff" font-size="12">처리/검증 계층(정제·중복·감정·가짜 리뷰 탐지·광고성 판정)</text>
+
+          <rect x="20" y="190" width="560" height="60" rx="10" fill="#1b2447"/>
+          <text x="40" y="225" fill="#eef2ff" font-size="12">응용 계층(검색/추천·사례 생성·컴플라이언스 알림·대시보드)</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="slide">
+    <h2>10. 컴플라이언스(의료광고법·가이드라인)</h2>
+    <ul>
+      <li>사전심의 대상 판정, 금지 문구/표현 룰셋, 위반 확률 스코어</li>
+      <li>자동 경고/수정 요청 플로우, <b>감사로그</b>·증적 보관</li>
+      <li>환자 후기/체험담 광고 금지 준수, 병원 계정 가이드</li>
+      <li>정책 업데이트 자동 반영(규제 레지스트리)</li>
+    </ul>
+    <p class="note">2023~2025 집중 단속(가짜 후기·할인·SNS)에 대응하는 구조. :contentReference[oaicite:5]{index=5}</p>
+  </section>
+
+  <!-- 11 -->
+  <section class="slide">
+    <h2>11. 마이데이터 연동 설계</h2>
+    <div class="two-col">
+      <div>
+        <ul>
+          <li>표준 API, 동의/철회 UX, 범위 제한/목적 제한</li>
+          <li>진료이력·검진·투약 데이터로 적합 병원 추천</li>
+          <li>폐쇄망 분석환경·가명처리 파이프라인</li>
+        </ul>
+        <p class="note">마이헬스웨이 전국 시행(2025.03.13)과 맞물려 활용성↑. :contentReference[oaicite:6]{index=6}</p>
+      </div>
+      <div class="viz">
+        <svg viewBox="0 0 600 250">
+          <rect x="30" y="40" width="160" height="60" rx="8" fill="#233055"/>
+          <text x="48" y="75" fill="#eef2ff" font-size="12">나의건강기록 앱</text>
+          <rect x="230" y="40" width="160" height="60" rx="8" fill="#233055"/>
+          <text x="260" y="75" fill="#eef2ff" font-size="12">K-HIS/공공데이터</text>
+          <rect x="430" y="40" width="160" height="60" rx="8" fill="#233055"/>
+          <text x="470" y="75" fill="#eef2ff" font-size="12">플랫폼</text>
+          <line x1="190" y1="70" x2="230" y2="70" stroke="#6aa6ff" stroke-width="3"/>
+          <line x1="390" y1="70" x2="430" y2="70" stroke="#6aa6ff" stroke-width="3"/>
+          <text x="290" y="115" fill="#a0a8c6" font-size="12">동의/철회·목적/범위·보존</text>
+          <rect x="180" y="140" width="240" height="80" rx="10" fill="#1b2447"/>
+          <text x="200" y="175" fill="#eef2ff" font-size="12">가명처리·안전처리·폐쇄분석</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 -->
+  <section class="slide">
+    <h2>12. 기술 타당성(핵심 모듈)</h2>
+    <table class="table">
+      <tr><th>모듈</th><th>기능</th><th>난이도</th><th>기간(추정)</th></tr>
+      <tr><td>다중소스 리뷰 API 통합</td><td>정규화/동기화</td><td>상</td><td>3~4개월</td></tr>
+      <tr><td>가짜 리뷰 탐지</td><td>LLM+그래프 탐지</td><td>매우 상</td><td>6~12개월</td></tr>
+      <tr><td>광고성/위반 판단</td><td>LLM·룰셋·증거화</td><td>상</td><td>4~6개월</td></tr>
+      <tr><td>마이데이터 추천</td><td>표준 API·개인화</td><td>중상</td><td>4~6개월</td></tr>
+    </table>
+    <p class="note">국내외 벤치마크 및 구현 난이도 매트릭스 근거. :contentReference[oaicite:7]{index=7}</p>
+  </section>
+
+  <!-- 13 -->
+  <section class="slide">
+    <h2>13. 개발 로드맵(24개월)</h2>
+    <div class="viz">
+      <svg viewBox="0 0 900 240">
+        <text x="10" y="20" fill="#dbe5ff" font-size="14">1~24개월</text>
+        <!-- lanes -->
+        <text x="20" y="50" fill="#a0a8c6" font-size="12">데이터/백엔드</text>
+        <rect x="140" y="38" width="160" height="16" fill="#6aa6ff"/><text x="150" y="50" fill="#0b1021" font-size="10">API/정규화</text>
+        <rect x="320" y="38" width="140" height="16" fill="#6aa6ff"/><text x="330" y="50" fill="#0b1021" font-size="10">동기화/캐시</text>
+        <rect x="480" y="38" width="160" height="16" fill="#6aa6ff"/><text x="490" y="50" fill="#0b1021" font-size="10">분석파이프라인</text>
+
+        <text x="20" y="90" fill="#a0a8c6" font-size="12">AI/검증</text>
+        <rect x="140" y="78" width="180" height="16" fill="#35d49a"/><text x="150" y="90" fill="#0b1021" font-size="10">감정/광고성1차</text>
+        <rect x="340" y="78" width="180" height="16" fill="#35d49a"/><text x="350" y="90" fill="#0b1021" font-size="10">가짜후기탐지</text>
+        <rect x="540" y="78" width="160" height="16" fill="#35d49a"/><text x="550" y="90" fill="#0b1021" font-size="10">법규룰셋고도화</text>
+
+        <text x="20" y="130" fill="#a0a8c6" font-size="12">마이데이터</text>
+        <rect x="140" y="118" width="160" height="16" fill="#ffd166"/><text x="150" y="130" fill="#0b1021" font-size="10">표준 API 연동</text>
+        <rect x="320" y="118" width="180" height="16" fill="#ffd166"/><text x="330" y="130" fill="#0b1021" font-size="10">추천 모델</text>
+        <rect x="520" y="118" width="120" height="16" fill="#ffd166"/><text x="530" y="130" fill="#0b1021" font-size="10">A/B 검증</text>
+
+        <text x="20" y="170" fill="#a0a8c6" font-size="12">프론트/운영</text>
+        <rect x="140" y="158" width="160" height="16" fill="#ef476f"/><text x="150" y="170" fill="#0b1021" font-size="10">MVP UI</text>
+        <rect x="320" y="158" width="160" height="16" fill="#ef476f"/><text x="330" y="170" fill="#0b1021" font-size="10">베타</text>
+        <rect x="500" y="158" width="180" height="16" fill="#ef476f"/><text x="510" y="170" fill="#0b1021" font-size="10">GA/운영</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 14 -->
+  <section class="slide">
+    <h2>14. 성능지표 및 검증 방법</h2>
+    <table class="table">
+      <tr><th>지표</th><th>정의</th><th>목표</th><th>검증</th></tr>
+      <tr><td>가짜후기탐지 정밀도</td><td>TP/(TP+FP)</td><td>≥90%</td><td>표본 레이블셋·인간평가</td></tr>
+      <tr><td>광고성·위반 판정정확도</td><td>법규 라벨 일치</td><td>≥92%</td><td>법무검증·샘플 대조</td></tr>
+      <tr><td>맞춤 추천 적합도</td><td>클릭/예약 전환</td><td>CTR +20%, CVR +10%</td><td>A/B 테스트</td></tr>
+      <tr><td>리뷰 검증 성공률</td><td>인증·어뷰징 차단</td><td>≥95%</td><td>샘플 감사로그</td></tr>
+    </table>
+  </section>
+
+  <!-- 15 -->
+  <section class="slide">
+    <h2>15. 사업 타당성(시장·정책 정합성)</h2>
+    <ul>
+      <li>규제 강화·사전심의 확대 → <b>컴플라이언스 내장형</b> 서비스 수요</li>
+      <li>마이데이터 전국 시행 → 개인 맞춤 의료 탐색 수요 가속</li>
+      <li>의사 수 증대(2035) → <b>차별화·신뢰</b>의 중요성 증대</li>
+      <li>TIPS 딥테크 트렌드(바이오헬스·AI)와 정합성</li>
+    </ul>
+    <p class="note">정책·지표 근거는 첨부 리서치 문서 참조. :contentReference[oaicite:8]{index=8}</p>
+  </section>
+
+  <!-- 16 -->
+  <section class="slide">
+    <h2>16. 시장 진입·성장 전략(GTM)</h2>
+    <ol>
+      <li><b>베타(니치)</b>: 미용·치과·정형 주요 상권 → 검증 리뷰/사례 집중</li>
+      <li><b>파트너십</b>: 병원협회/자율심의기구/보험·헬스케어 플랫폼</li>
+      <li><b>UGC Flywheel</b>: 인증 리뷰 인센티브, 의사 사례 저작툴</li>
+      <li><b>지역 확장</b>: 수도권 → 광역시 → 전국</li>
+    </ol>
+  </section>
+
+  <!-- 17 -->
+  <section class="slide">
+    <h2>17. 조직/팀(요약)</h2>
+    <ul>
+      <li><b>리걸테크</b> 역량(의료법 전문 변호사 × AI팀)</li>
+      <li><b>데이터/ML</b>: LLM 프롬프팅·그래프 탐지·평가지표 구축</li>
+      <li><b>프로덕트</b>: B2B 운영 역량(Review/MediContents) 보유</li>
+    </ul>
+    <p class="note">세부 이력 및 역할 분장표는 부록에 포함 예정.</p>
+  </section>
+
+  <!-- 18 -->
+  <section class="slide">
+    <h2>18. 예산(요약) 및 TIPS 적합성</h2>
+    <table class="table">
+      <tr><th>항목</th><th>주요 내역</th><th>비중</th></tr>
+      <tr><td>인건비</td><td>AI/백엔드/프론트/법무</td><td>50~60%</td></tr>
+      <tr><td>클라우드/LLM</td><td>API 호출/저장/보안</td><td>15~20%</td></tr>
+      <tr><td>데이터/검증</td><td>라벨링/감사/자문</td><td>10~15%</td></tr>
+      <tr><td>기타</td><td>보안/인증/법무</td><td>10% 내외</td></tr>
+    </table>
+    <p class="note">TIPS(일반/딥테크) 평가 항목과 정합: 기술성·사업성·팀 역량 충족. :contentReference[oaicite:9]{index=9}</p>
+  </section>
+
+  <!-- 19 -->
+  <section class="slide">
+    <h2>19. 리스크와 대응</h2>
+    <table class="table">
+      <tr><th>리스크</th><th>대응</th></tr>
+      <tr><td>규제 변경</td><td>정책 레지스트리·룰셋 업데이트·법무자문 상시</td></tr>
+      <tr><td>데이터 품질</td><td>다중 인증·가짜 탐지·감사로그</td></tr>
+      <tr><td>API 제약</td><td>제휴 다변화·사용자 제출·수동 업로드 보완</td></tr>
+      <tr><td>개인정보/보안</td><td>가명처리·폐쇄분석·ISMS-P 추진</td></tr>
+    </table>
+  </section>
+
+  <!-- 20 -->
+  <section class="slide">
+    <h2>20. 기대효과 & 결론</h2>
+    <ul>
+      <li><b>환자</b>: 광고가 아닌 <b>투명한 정보</b>로 병원 선택 → 만족도↑</li>
+      <li><b>병원</b>: 임상역량 중심의 <b>선순환 홍보</b> → 소규모 병원 기회 확대</li>
+      <li><b>사회</b>: 가짜 후기·과장 광고 감소, <b>국부 유출 완화</b></li>
+      <li><b>산업</b>: 마이데이터·AI·리걸테크 융합 혁신</li>
+    </ul>
+    <p class="kpi">“의료 소비자의 신뢰 회복”이 곧 우리의 성장 동력</p>
+  </section>
+
+</main>
+
+<footer>
+  ⓒ 2025 투명 병원정보 플랫폼 (초안). 본 문서의 시장/정책 수치 및 TIPS 제도 정보 일부는 첨부 리서치에 근거합니다. :contentReference[oaicite:10]{index=10}
+</footer>
+</body>
+</html>
