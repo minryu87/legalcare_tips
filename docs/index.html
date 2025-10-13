@@ -215,7 +215,7 @@
             try {
                 if (docName === 'research') {
                     // Markdown 파일 처리
-                    const response = await fetch('../data/research.md');
+                    const response = await fetch('./data/research.md');
                     if (!response.ok) throw new Error('파일을 찾을 수 없습니다.');
                     
                     const mdContent = await response.text();
@@ -224,7 +224,7 @@
                     contentDiv.innerHTML = `<div class="markdown-container">${htmlContent}</div>`;
                 } else {
                     // HTML 파일 처리
-                    const filePath = `../data/${docName}.html`;
+                    const filePath = `./data/${docName}.html`;
                     contentDiv.innerHTML = `<iframe class="html-container" src="${filePath}"></iframe>`;
                 }
             } catch (error) {
