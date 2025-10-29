@@ -3,1334 +3,855 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사업계획서 - 투명한 의료 정보 생태계 구축</title>
+    <title>TIPS 사업계획서 - AI 기반 투명한 의료 정보 플랫폼</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        /* * 기본 설정 및 슬라이더 컨테이너
-         */
         body {
-            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f0f2f5;
         }
-
-        .slider-container {
-            width: 1000px; /* 슬라이드 표시 영역 너비 (4:3 비율 기준) */
-            max-width: 100%;
+        .slide-container {
+            max-width: 1100px;
+            margin: 2rem auto;
         }
-
-        /* * 개별 슬라이드 스타일 (4:3 비율 및 템플릿 디자인 준수)
-         */
         .slide {
-            background-color: #ffffff;
-            border: 1px solid #ccc;
-            aspect-ratio: 4 / 3; /* 4:3 비율 유지 */
-            width: 100%;
-            margin-bottom: 20px; /* 슬라이드 간 구분 */
-            padding: 15px 30px; /* 패딩 축소 */
-            box-sizing: border-box;
+            background: white;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            padding: 3rem 4rem;
+            border-radius: 8px;
+            position: relative;
+            min-height: 620px;
             display: flex;
             flex-direction: column;
-            position: relative;
-            font-size: 13px; /* 기본 폰트 크기 축소 */
-            overflow: hidden; /* 스크롤바 제거 */
         }
-
-        /* * 1. 상단 (대목차)
-         */
-        .slide .top-title {
-            font-size: 1.1em; /* 14.3px */
-            font-weight: bold;
-            padding-bottom: 5px; /* 패딩 축소 */
-            border-bottom: 2px solid #000;
-            color: #333;
-        }
-
-        /* * 2. 중상단 (소제목)
-         */
-        .slide .sub-title {
-            font-size: 1.4em; /* 18.2px */
-            font-weight: bold;
-            color: #004a99; /* 템플릿의 소제목 색상 */
-            margin-top: 15px; /* 마진 축소 */
-            display: flex;
-            align-items: center;
-            line-height: 1.3;
-        }
-
-        .slide .sub-title::before {
-            content: '▶';
-            color: #007bff;
-            margin-right: 10px;
-            font-size: 0.8em;
-        }
-
-        /* * 3. 중단 (커버링 메시지 박스)
-         */
-        .slide .message-box {
-            background-color: #e0f2ff; /* 템플릿의 하늘색 배경 */
-            padding: 10px; /* 패딩 축소 */
-            margin-top: 10px; /* 마진 축소 */
-            border-radius: 5px;
-        }
-
-        .slide .message-box h4 {
-            margin: 0 0 5px 0; /* 마진 축소 */
-            font-size: 1.1em; /* 14.3px */
-            color: #004a99;
-        }
-
-        .slide .message-box ul {
-            margin: 0;
-            padding-left: 20px; /* 패딩 축소 */
-        }
-        .slide .message-box li {
-            margin-bottom: 3px; /* 마진 축소 */
-            line-height: 1.4;
-        }
-
-        /* * 4. 본문 영역 (흰색 배경)
-         */
-        .slide .content-area {
-            flex-grow: 1;
-            margin-top: 10px; /* 마진 축소 */
-            overflow: hidden; /* 스크롤바 제거 */
-            padding-right: 5px; /* 스크롤바 공간 제거 */
-        }
-
-        .content-area h3 {
-            font-size: 1.1em; /* 14.3px */
-            color: #333;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 3px;
-        }
-        .content-area h4 {
-            font-size: 1.0em; /* 13px */
-            color: #111;
-            margin-top: 10px;
-            margin-bottom: 5px;
-        }
-        .content-area ul {
-            list-style-type: disc;
-            margin-left: 15px; /* 마진 축소 */
-            padding-left: 10px;
-            margin-top: 5px;
-        }
-        .content-area li {
-            margin-bottom: 3px; /* 마진 축소 */
-            line-height: 1.4;
-        }
-
-        /* 표 스타일 */
-        .content-area table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 5px; /* 마진 축소 */
-            font-size: 0.85em; /* 폰트 축소 */
-        }
-
-        .content-area th,
-        .content-area td {
-            border: 1px solid #ddd;
-            padding: 4px; /* 패딩 축소 */
-            text-align: left;
-            vertical-align: top;
-        }
-
-        .content-area th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-        
-        /* 2단/3단 레이아웃 */
-        .two-column {
-            display: flex;
-            gap: 15px; /* 갭 축소 */
-        }
-        .column { flex: 1; }
-        
-        .three-column {
-            display: flex;
-            gap: 10px; /* 갭 축소 */
-        }
-        .three-column .column { flex: 1; }
-
-        /* * 6. 다이어그램 스타일 (신규 추가)
-         */
-        .diagram {
-            border: 1px solid #c0c0c0;
-            background-color: #f9f9f9;
-            padding: 10px; /* 패딩 축소 */
-            margin: 10px 0; /* 마진 축소 */
-            border-radius: 5px;
-            text-align: center;
-        }
-        .diagram-title {
-            font-weight: bold;
-            font-size: 0.9em; /* 폰트 축소 */
-            color: #333;
-            margin-bottom: 10px; /* 마진 축소 */
-        }
-        
-        /* 가로 흐름 (예: A -> B -> C) */
-        .flow-diagram {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 5px; /* 갭 축소 */
-            flex-wrap: wrap; 
-        }
-        .flow-box {
-            background-color: #e0f2ff;
-            border: 1px solid #007bff;
-            padding: 5px 10px; /* 패딩 축소 */
-            border-radius: 5px;
-            font-size: 0.85em; /* 폰트 축소 */
-            text-align: center;
-            min-width: 80px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .flow-arrow {
-            font-size: 1.2em; /* 15.6px */
-            color: #333;
-            font-weight: bold;
-        }
-
-        /* 2단/3단 도식 (예: B2C/B2B) */
-        .diagram-columns {
-            display: flex;
-            justify-content: space-around;
-            gap: 10px; /* 갭 축소 */
-        }
-        .diagram-column {
-            flex: 1;
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            padding: 8px; /* 패딩 축소 */
-            border-radius: 5px;
-        }
-        .diagram-column h5 {
-            margin: 0 0 5px 0; /* 마진 축소 */
-            font-size: 0.9em; /* 폰트 축소 */
-            color: #004a99;
-            text-align: center;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 3px;
-        }
-        .diagram-column ul {
-            font-size: 0.85em; /* 폰트 축소 */
-            text-align: left;
-            margin-bottom: 0;
-            padding-left: 15px;
-        }
-        
-        /* 플라이휠 (단순화된 텍스트 표현) */
-        .flywheel {
-            border: 2px dashed #007bff;
-            padding: 10px;
-            border-radius: 5px; 
-            text-align: center;
-            position: relative;
-        }
-        .flywheel-step {
-            font-weight: bold;
-            font-size: 0.85em;
-            margin: 3px 0;
-        }
-        .flywheel-arrow {
-            font-size: 1.1em;
-            color: #007bff;
-        }
-
-        /* 아키텍처/플로우 (세로) */
-        .vertical-flow .flow-box {
-            margin: 3px auto;
-            width: 80%;
-        }
-         .vertical-flow .flow-arrow {
-            font-size: 1.1em;
-            margin: 3px 0;
-        }
-
-        /* 간트 차트용 스타일 (■ 표시) */
-        .gantt-table {
-            font-size: 0.75em; /* 폰트 축소 */
-        }
-        .gantt-table td.bar {
-            background-color: #0056b3;
-            font-size: 1px;
-            color: #0056b3;
-            overflow: hidden;
-        }
-        .gantt-table th, .gantt-table td {
-            text-align: center;
-            font-size: 0.9em; /* 폰트 축소 */
-            padding: 2px; /* 패딩 축소 */
-        }
-        .gantt-table td:first-child {
-            text-align: left;
-            padding-left: 5px;
-        }
-        .gantt-table .note {
-            font-size: 0.9em;
-            color: #555;
-            font-weight: bold;
-        }
-
-        /* * 5. 하단 푸터 (로고, 페이지 번호)
-         */
-        .slide .footer {
+        .slide-number {
             position: absolute;
-            bottom: 15px; /* 위치 조정 */
-            left: 30px;
+            bottom: 20px;
             right: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 2px solid #000;
-            padding-top: 5px; /* 패딩 축소 */
-            font-size: 0.9em; /* 11.7px */
+            font-size: 1rem;
+            font-weight: 600;
+            color: #9ca3af;
         }
-
-        .slide .footer .logo {
-            font-weight: bold;
-            color: #d00000; /* 템플릿의 KOREA 로고 색상 근사 */
+        .slide-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #1e3a8a; /* darker blue */
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.05em;
+        }
+        .slide-subtitle {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #4b5563;
+            margin-bottom: 2.5rem;
+        }
+        .section-header {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .problem-box {
+            background-color: #fffbeb;
+            border: 1px solid #fde68a;
+            border-left: 5px solid #facc15;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .solution-box {
+            background-color: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-left: 5px solid #3b82f6;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        .highlight {
+            color: #2563eb;
+            font-weight: 700;
+        }
+        .chart-container {
+            background-color: #f9fafb;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+        .tech-card {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.2s ease-in-out;
+        }
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .tech-icon {
+            font-size: 2.5rem;
+            color: #3b82f6;
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            background-color: #dbeafe;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+        }
+        .competitor-table th, .competitor-table td {
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem 1rem;
+            text-align: center;
+        }
+        .competitor-table th {
+            background-color: #f3f4f6;
+            font-weight: 600;
+        }
+        .our-service {
+            background-color: #eff6ff;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
 
-    <div class="slider-container">
-
-        <div class="slide" id="slide1">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">1. 연구개발 요약 (Solution)_필요 서비스</div>
-            <div class="message-box">
-                <h4>환자(내/외국인)와 병원 모두를 위한 '투명한 의료정보 선순환 생태계' 구축</h4>
-                <ul>
-                    <li>환자에게는 신뢰 기반의 맞춤형 정보 접근성(다국어 포함)을 높이고, 병원에게는 효율적인 평판 관리 및 공정한 홍보 기회를 제공합니다.</li>
-                    <li>플랫폼은 AI 기반 검증, 데이터 통합, B2B SaaS 제공을 통해 이러한 선순환 생태계를 구현하고 지원합니다.</li>
-                </ul>
+    <div class="slide-container">
+        <!-- Slide 1: Title -->
+        <div class="slide flex flex-col justify-center items-center text-center">
+            <div class="w-full">
+                <p class="text-xl text-blue-600 font-semibold mb-2">TIPS 기술창업기업 연구개발계획서</p>
+                <h1 class="text-5xl font-extrabold text-blue-900 leading-tight">AI 기반 투명한 의료 정보 플랫폼</h1>
+                <p class="text-2xl text-gray-600 mt-6">의료 정보 비대칭성 해결을 통한 건강한 의료 생태계 구축</p>
             </div>
-            <div class="content-area">
-                <div class="diagram">
-                    <div class="diagram-title">[도식: 환자-플랫폼-병원 연결 생태계]</div>
-                    <div class="flow-diagram">
-                        <div class="flow-box"><b>좌측 (환자)</b><br><small>(내/외국인 포함)<br>신뢰 정보 탐색, 맞춤 추천</small></div>
-                        <div class="flow-arrow">↔</div>
-                        <div class="flow-box" style="background-color: #a0d4ff; border-color: #004a99;"><b>중앙 (플랫폼)</b><br><small>AI 리뷰 검증<br>데이터 수집/가공</small></div>
-                        <div class="flow-arrow">↔</div>
-                        <div class="flow-box"><b>우측 (병원)</b><br><small>공정한 홍보<br>마케팅 비용 절감, 후기 관리</small></div>
+            <div class="mt-20">
+                <img src="https://placehold.co/200x50/1e3a8a/ffffff?text=COMPANY+LOGO" alt="Company Logo">
+            </div>
+            <div class="slide-number">1</div>
+        </div>
+
+        <!-- Slide 2: Executive Summary -->
+        <div class="slide">
+            <h2 class="slide-title">Executive Summary</h2>
+            <p class="slide-subtitle">프로젝트 요약</p>
+            <div class="space-y-6 text-lg">
+                <div class="flex items-start gap-4">
+                    <i class="fa fa-exclamation-triangle text-2xl text-yellow-500 mt-1"></i>
+                    <p><strong class="highlight">Problem:</strong> 환자들은 넘쳐나는 의료 광고를 신뢰하지 않지만, 정작 필요한 정보를 얻을 창구가 부재합니다. 이로 인해 마케팅 중심의 병원 선택이 이루어지고, 환자 만족도 저하 및 실력 있는 중소형 병원의 경영난이 심화되는 악순환이 발생합니다.</p>
+                </div>
+                <div class="flex items-start gap-4">
+                    <i class="fa fa-lightbulb text-2xl text-blue-500 mt-1"></i>
+                    <p><strong class="highlight">Solution:</strong> 광고가 아닌 <span class="font-bold">'실제 데이터'</span>에 기반한 투명한 의료 정보 플랫폼을 제공합니다. 검증된 실제 환자 후기, 병원/의료진 정보, 치료 사례를 통해 환자에게 신뢰할 수 있는 선택지를 제공하고, 병원에게는 본질(진료)에 집중할 기회를 부여합니다.</p>
+                </div>
+                <div class="flex items-start gap-4">
+                    <i class="fa fa-cogs text-2xl text-gray-600 mt-1"></i>
+                    <p><strong class="highlight">Technology:</strong> <span class="font-bold">LLM 기반 리뷰 검증(의료법 준수)</span>, <span class="font-bold">의료 마이데이터 연동 개인화 추천</span> 등 차별화된 AI 기술을 통해 정보의 신뢰성과 유용성을 극대화합니다. 기존 B2B 서비스(review_manager 등)에서 축적된 기술 노하우를 B2C 서비스로 확장 적용합니다.</p>
+                </div>
+                <div class="flex items-start gap-4">
+                    <i class="fa fa-chart-line text-2xl text-green-500 mt-1"></i>
+                    <p><strong class="highlight">Market & BM:</strong> 450억 원 규모의 의료광고 시장의 비효율성을 혁신합니다. 병원 대상의 <span class="font-bold">B2B SaaS 구독 모델(Review Booster, MediContents)</span>을 통해 안정적인 수익을 창출하며, 이는 광고가 아닌 병원의 '투명한 정보 생성'을 돕는 솔루션입니다.</p>
+                </div>
+                 <div class="flex items-start gap-4">
+                    <i class="fa fa-users text-2xl text-indigo-500 mt-1"></i>
+                    <p><strong class="highlight">Team:</strong> 의료법 전문 변호사가 설립한 리걸테크(Legal-Tech) 기반 기술 기업으로, 의료 정보의 법적, 기술적 문제를 동시에 해결할 수 있는 독보적인 전문성을 보유하고 있습니다.</p>
+                </div>
+            </div>
+            <div class="slide-number">2</div>
+        </div>
+
+        <!-- Part 1: 사업 타당성 -->
+        <!-- Slide 3: Problem 1 -->
+        <div class="slide">
+            <h2 class="slide-title">1. 사업 타당성</h2>
+            <p class="slide-subtitle">신뢰를 잃은 의료 정보 시장</p>
+            <div class="section-header">문제점 (1) : 정보의 홍수, 신뢰의 가뭄</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1170&auto=format&fit=crop" alt="[환자가 스마트폰으로 병원 정보를 검색하는 이미지]" class="rounded-lg shadow-md">
+                </div>
+                <div class="space-y-4">
+                    <div class="problem-box">
+                        <h3 class="font-bold text-xl mb-2 text-yellow-800">환자는 광고를 믿지 않습니다.</h3>
+                        <p class="text-gray-700">환자들이 병원 정보를 얻는 주된 경로는 온라인 광고이지만, 대부분의 환자들은 의료 광고를 불신합니다. 하지만 정작 신뢰할 만한 대안 정보가 없는 '정보 비대칭성' 문제가 심각합니다.</p>
+                    </div>
+                    <div class="chart-container">
+                        <h4 class="font-bold text-lg mb-2 text-center">국내 의료 광고 시장 현황</h4>
+                        <div class="text-center">
+                            <p class="text-5xl font-bold text-blue-800">4,500<span class="text-2xl">억 원</span></p>
+                            <p class="text-gray-600 mt-1">(2023년 추정치)</p>
+                        </div>
+                        <p class="mt-4 text-sm text-gray-600">디지털 광고가 80% 이상을 차지하며, 네이버, 구글, 인스타그램 등 소수 플랫폼에 광고비가 집중되어 국부 유출 문제까지 발생하고 있습니다.</p>
                     </div>
                 </div>
-                <div class="two-column">
-                    <div class="column">
-                        <h4>좌측 (환자)</h4>
-                        <ul>
-                            <li>(내/외국인 포함)</li>
+            </div>
+            <div class="slide-number">3</div>
+        </div>
+        
+        <!-- Slide 4: Problem 2 -->
+        <div class="slide">
+            <h2 class="slide-title">1. 사업 타당성</h2>
+            <p class="slide-subtitle">의료 시장의 악순환 구조</p>
+            <div class="section-header">문제점 (2) : 마케팅 경쟁이 의료의 본질을 해친다</div>
+            <div class="relative w-full p-4">
+                <!-- Vicious Cycle Diagram -->
+                <div class="flex justify-center items-center space-x-4">
+                    <div class="text-center p-4 bg-red-100 rounded-lg shadow w-1/4">
+                        <i class="fas fa-bullhorn text-3xl text-red-500 mb-2"></i>
+                        <h4 class="font-bold">과도한 광고 경쟁</h4>
+                        <p class="text-sm">자본력 있는 대형/기업형 병원이 광고 시장 독식</p>
+                    </div>
+                    <i class="fas fa-arrow-right text-4xl text-gray-400"></i>
+                    <div class="text-center p-4 bg-red-100 rounded-lg shadow w-1/4">
+                        <i class="fas fa-search-dollar text-3xl text-red-500 mb-2"></i>
+                        <h4 class="font-bold">왜곡된 병원 선택</h4>
+                        <p class="text-sm">환자는 '실력'이 아닌 '광고 노출 빈도'로 병원 선택</p>
+                    </div>
+                    <i class="fas fa-arrow-right text-4xl text-gray-400"></i>
+                    <div class="text-center p-4 bg-red-100 rounded-lg shadow w-1/4">
+                        <i class="fas fa-frown text-3xl text-red-500 mb-2"></i>
+                        <h4 class="font-bold">환자 만족도 저하</h4>
+                        <p class="text-sm">광고비 회수를 위한 '공장식 진료'로 치료 결과/비용 불만족</p>
+                    </div>
+                </div>
+                <div class="flex justify-center mt-8">
+                     <i class="fas fa-arrow-down text-4xl text-gray-400"></i>
+                </div>
+                <div class="flex justify-center items-center space-x-4 mt-8">
+                     <div class="text-center p-4 bg-yellow-100 rounded-lg shadow w-1/4">
+                        <i class="fas fa-hospital-user text-3xl text-yellow-500 mb-2"></i>
+                        <h4 class="font-bold">소형 병원 경영난</h4>
+                        <p class="text-sm">실력 있는 병원이 마케팅 예산 부족으로 홍보 한계 직면</p>
+                        <p class="text-xs mt-1">(연간 폐업률 3.3%)</p>
+                    </div>
+                    <i class="fas fa-arrow-left text-4xl text-gray-400"></i>
+                    <div class="text-center p-4 bg-yellow-100 rounded-lg shadow w-1/4">
+                        <i class="fas fa-user-md text-3xl text-yellow-500 mb-2"></i>
+                        <h4 class="font-bold">신규 의사 진입 장벽</h4>
+                        <p class="text-sm">2025년 의대 정원 65% 확대로 신규 개원의 환자 모집 더욱 어려워짐</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4 text-center text-gray-700 text-lg">이는 환자, 병원, 그리고 사회 전체에 손실을 초래하는 <strong class="text-red-600">부정적 선순환(Vicious Cycle)</strong> 구조입니다.</div>
+            <div class="slide-number">4</div>
+        </div>
+
+        <!-- Slide 5: Problem 3 -->
+        <div class="slide">
+            <h2 class="slide-title">1. 사업 타당성</h2>
+            <p class="slide-subtitle">새로운 위협: 생성형 AI와 규제 강화</p>
+            <div class="section-header">문제점 (3) : 기술 변화가 야기하는 새로운 문제들</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="problem-box p-6">
+                    <h3 class="font-bold text-xl mb-3 text-yellow-800 flex items-center gap-3"><i class="fas fa-robot"></i> 생성형 AI의 역습</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>가짜 후기 대량 생산:</strong> 생성형 AI로 실제 환자 후기처럼 보이는 불법 광고 콘텐츠(텍스트, 이미지, 영상)를 쉽게 제작 및 유포 가능.</li>
+                        <li><strong>진위 판별의 어려움:</strong> 일반인은 AI 생성 광고와 실제 콘텐츠를 구분하기 매우 어려워 정보 혼란 가중.</li>
+                        <li><strong>해외 서비스 의존 심화:</strong> ChatGPT 등 해외 AI 서비스를 통한 병원 탐색이 활발해지며, 국내 의료 정보 주권이 위협받을 수 있음.</li>
+                    </ul>
+                </div>
+                <div class="problem-box p-6">
+                    <h3 class="font-bold text-xl mb-3 text-yellow-800 flex items-center gap-3"><i class="fas fa-gavel"></i> 강화되는 의료광고 규제</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>사전심의 의무 확대:</strong> SNS(블로그, 인스타 등)를 포함한 대부분의 온라인 채널 광고에 사전심의가 의무화되어 병원의 마케팅 부담 가중.</li>
+                        <li><strong>엄격한 처벌:</strong> 환자 후기를 가장한 광고 등 불법 의료광고 적발 시 과태료, 형사처벌, 업무정지 등 처벌 수위 강화. (최근 3개월간 366건 적발)</li>
+                        <li><strong>컴플라이언스 수요 급증:</strong> 복잡한 규제를 준수하며 효과적인 마케팅을 진행해야 하는 병원의 법률 및 기술 자문 수요 폭증.</li>
+                    </ul>
+                </div>
+            </div>
+             <div class="mt-8 bg-gray-100 p-6 rounded-lg text-center">
+                <p class="text-lg text-gray-800">결론적으로, 시장은 <strong class="highlight">더욱 교묘해지는 불법 광고</strong>와 <strong class="highlight">더욱 엄격해지는 규제</strong> 사이의 딜레마에 빠져 있으며, 이를 해결할 새로운 접근이 절실합니다.</p>
+            </div>
+            <div class="slide-number">5</div>
+        </div>
+
+        <!-- Part 2: 해결 방안 -->
+        <!-- Slide 6: Solution Vision -->
+        <div class="slide">
+            <h2 class="slide-title">2. 해결 방안</h2>
+            <p class="slide-subtitle">신뢰할 수 있는 정보, 건강한 선순환</p>
+            <div class="section-header">Our Vision: 광고에서 정보로, 경쟁에서 상생으로</div>
+            <div class="flex flex-col items-center text-center">
+                <div class="flex items-center space-x-8">
+                    <div class="w-2/5 p-6 bg-red-50 border border-red-200 rounded-lg">
+                        <h3 class="text-2xl font-bold text-red-700">AS-IS</h3>
+                        <p class="text-lg mt-2">광고 중심의<br>왜곡된 시장</p>
+                        <i class="fas fa-times-circle text-5xl text-red-400 my-4"></i>
+                        <p class="text-gray-600">불신, 불만족, 불공정 경쟁</p>
+                    </div>
+                    <i class="fas fa-exchange-alt text-6xl text-gray-400"></i>
+                    <div class="w-2/5 p-6 bg-blue-50 border border-blue-200 rounded-lg">
+                        <h3 class="text-2xl font-bold text-blue-700">TO-BE</h3>
+                        <p class="text-lg mt-2">데이터 기반<br>투명한 플랫폼</p>
+                         <i class="fas fa-check-circle text-5xl text-blue-400 my-4"></i>
+                        <p class="text-gray-600">신뢰, 만족, 공정 경쟁</p>
+                    </div>
+                </div>
+
+                <div class="mt-12 w-full solution-box">
+                    <h3 class="font-bold text-xl mb-3 text-blue-800">핵심 해결 방안</h3>
+                    <p class="text-lg text-gray-700">
+                        우리는 <strong class="highlight">광고를 일절 배제</strong>하고, 오직 <strong class="highlight">객관적이고 검증된 정보</strong>만을 제공하여 의료 시장의 패러다임을 전환합니다.
+                    </p>
+                    <ul class="mt-4 text-left grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
+                        <li class="flex items-center gap-3"><i class="fa fa-user-check text-blue-600"></i><p><strong>실제 환자</strong>가 작성한 검증된 리뷰</p></li>
+                        <li class="flex items-center gap-3"><i class="fa fa-file-medical text-blue-600"></i><p><strong>실제 의사</strong>가 작성한 구체적인 치료 사례</p></li>
+                        <li class="flex items-center gap-3"><i class="fa fa-hospital text-blue-600"></i><p><strong>검증된 절차</strong>를 거친 정확한 병원 및 의료진 정보</p></li>
+                        <li class="flex items-center gap-3"><i class="fa fa-database text-blue-600"></i><p><strong>의료 마이데이터</strong>를 연동한 개인 맞춤형 정보</p></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-number">6</div>
+        </div>
+
+        <!-- Slide 7: Platform Overview -->
+        <div class="slide">
+            <h2 class="slide-title">2. 해결 방안</h2>
+            <p class="slide-subtitle">플랫폼 생태계 구성도</p>
+            <div class="section-header">상호작용을 통한 가치 창출</div>
+            <div class="flex items-center justify-center p-4">
+                <div class="grid grid-cols-3 items-center gap-4 w-full">
+                    <!-- Patients -->
+                    <div class="text-center p-6 bg-green-50 rounded-lg">
+                        <i class="fas fa-users text-4xl text-green-600 mb-3"></i>
+                        <h3 class="text-xl font-bold">환자 (Users)</h3>
+                        <ul class="text-left list-disc list-inside mt-3 space-y-1 text-gray-700">
                             <li>신뢰 정보 기반 병원 탐색</li>
                             <li>맞춤형 병원/의사 추천</li>
                             <li>치료 후기 작성 및 공유</li>
                             <li>투명한 비용 정보 확인</li>
                         </ul>
                     </div>
-                    <div class="column">
-                        <h4>우측 (병원)</h4>
-                        <ul>
+
+                    <!-- Platform -->
+                    <div class="text-center p-6">
+                        <i class="fas fa-arrow-right text-3xl text-gray-400 mb-4"></i>
+                        <div class="p-6 bg-blue-100 rounded-full shadow-lg">
+                            <i class="fas fa-shield-alt text-5xl text-blue-600"></i>
+                            <h3 class="text-2xl font-black text-blue-800 mt-2">OUR<br>PLATFORM</h3>
+                        </div>
+                        <i class="fas fa-arrow-left text-3xl text-gray-400 mt-4"></i>
+                        <ul class="text-left list-disc list-inside mt-3 space-y-1 font-semibold text-blue-800 text-sm">
+                            <li>AI 리뷰 검증 (광고/위법 필터링)</li>
+                            <li>의료 데이터 수집/가공/검증</li>
+                            <li>마이데이터 연동/분석</li>
+                            <li>B2B SaaS 솔루션 제공</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Hospitals -->
+                    <div class="text-center p-6 bg-purple-50 rounded-lg">
+                        <i class="fas fa-hospital-alt text-4xl text-purple-600 mb-3"></i>
+                        <h3 class="text-xl font-bold">병원/의원 (Clients)</h3>
+                        <ul class="text-left list-disc list-inside mt-3 space-y-1 text-gray-700">
                             <li>진료 본질에 따른 공정한 홍보</li>
                             <li>마케팅 비용 절감</li>
                             <li>환자 후기 생성/관리 용이</li>
-                            <li>치료 사례 콘텐츠 생성/게시 등</li>
+                            <li>치료 사례 콘텐츠 생성/게시</li>
                         </ul>
                     </div>
                 </div>
-                <h4>중앙 하단 (플랫폼)</h4>
-                <ul>
-                    <li>AI 리뷰 검증(광고/위법 필터링)</li>
-                    <li>의료 데이터 수집/가공/검증</li>
-                    <li>마이데이터 연동/분석</li>
-                    <li>B2B SaaS 솔루션 제공 등</li>
-                </ul>
             </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>1</span>
-            </div>
+            <div class="slide-number">7</div>
         </div>
 
-        <div class="slide" id="slide2">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">1. 연구개발 요약 (Solution)_필요 기술</div>
-            <div class="message-box">
-                <h4>다양한 의료 데이터를 기보유 기술 기반 '개선 및 고도화'(VERA/TEM/INTRO ) 를 통해 가공하여 B2C/B2B 서비스 전반에 핵심 가치를 제공합니다.</h4>
-                <ul>
-                    <li>기존 B2B 솔루션 및 정부 과제 수행 역량을 활용하여 핵심 AI 엔진을 개선하고 서비스 적용 범위를 확장합니다.</li>
-                    <li>이를 통해 사용자(내/외국인에게 더욱 신뢰성 높고 유용한 맞춤형 의료 정보를 제공합니다.</li>
-                </ul>
-            </div>
-            <div class="content-area">
-                <div class="diagram">
-                    <div class="diagram-title">[파이프라인 도식]</div>
-                    <div class="flow-diagram">
-                        <div class="flow-box">데이터 소스<br><small>(공개 데이터, 평판 데이터)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box">수집/가공<br><small>(VERA: 필터링)<br>(TEM: 분석)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box">병원별<br>마스터 데이터셋</div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box">서비스 적용<br><small>B2C (INTRO 엔진)<br>B2B (SaaS)</small></div>
-                    </div>
+        <!-- Slide 8: Value Proposition -->
+        <div class="slide">
+            <h2 class="slide-title">2. 해결 방안</h2>
+            <p class="slide-subtitle">이해관계자별 기대효과</p>
+            <div class="section-header">모두가 상생하는 선순환 구조</div>
+            <div class.="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-8">
+                <!-- For Patients -->
+                <div class="p-6 bg-gray-50 rounded-lg border-t-4 border-green-500">
+                    <i class="fas fa-user-shield text-4xl text-green-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">환자에게는 <span class="text-green-600">신뢰</span>를</h3>
+                    <p class="text-gray-600">광고성 정보에 지치고 불안했던 병원 탐색 과정에서 벗어나, 나와 내 가족을 위한 최적의 병원을 안심하고 찾을 수 있습니다. 마이데이터 연동으로 내 건강상태에 꼭 맞는 전문가를 추천받습니다.</p>
                 </div>
-                <div class="diagram">
-                    <div class="diagram-title">[하단: B2C 서비스 핵심 UI 화면 예시 6개]</div>
-                    <p style="font-size: 0.9em; color: #777;">(우선순위 설정, 진료 선택, 병원 기본정보/리뷰, AI 종합 평가, 추천 병원 리스트, 항목별 평가/긍정 키워드)</p>
+                <!-- For Hospitals -->
+                <div class="p-6 bg-gray-50 rounded-lg border-t-4 border-purple-500">
+                    <i class="fas fa-stethoscope text-4xl text-purple-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">병원에게는 <span class="text-purple-600">본질</span>을</h3>
+                    <p class="text-gray-600">과도한 마케팅 비용 경쟁에서 벗어나 환자 진료라는 본질에 집중할 수 있습니다. 환자 만족도가 자연스럽게 병원의 평판으로 이어져, 실력 있는 병원이 정당하게 인정받는 환경을 만듭니다.</p>
+                </div>
+                <!-- For Society -->
+                <div class="p-6 bg-gray-50 rounded-lg border-t-4 border-blue-500">
+                    <i class="fas fa-globe-asia text-4xl text-blue-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">사회에게는 <span class="text-blue-600">상생</span>을</h3>
+                    <p class="text-gray-600">의료 정보 비대칭성을 해소하여 국민의 알 권리를 증진하고, 합리적인 의료 소비를 돕습니다. 해외 플랫폼으로 유출되던 광고비를 국내 데이터 산업 발전으로 전환시키는 경제적 효과를 창출합니다.</p>
                 </div>
             </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>2</span>
-            </div>
+            <div class="slide-number">8</div>
         </div>
 
-        <div class="slide" id="slide3">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">2. 연구개발 내용 및 목표 (Technology & Goal)_개요</div>
-            <div class="message-box">
-                <h4>이미 검증된 B2B 기술과 정부 과제 역량을 바탕으로, 데이터 확보부터 3대 핵심 AI 엔진(VERA/TEM/INTRO) 고도화 및 서비스 확장 적용까지 5단계 기술 전략을 추진합니다.</h4>
-                <ul>
-                    <li>본 과제는 기확보/검증된 기술의 부분적 고도화 (AI 엔진) 및 신규 분야 적용 (다국어 기능 등)에 집중하여 사업 경쟁력을 강화합니다.</li>
-                    <li>5단계(준비-수집-처리-분석-적용)를 통해 AI 엔진 성능을 SOTA 이상으로 개선하고, B2C/B2B 서비스 완성도를 높입니다.</li>
-                </ul>
-            </div>
-            <div class="content-area">
-                <div class="diagram">
-                    <div class="diagram-title">[기술 개발 5단계 프로세스 도식]</div>
-                    <div class="flow-box" style="margin-bottom: 15px; width: 60%; margin-inline: auto; background-color: #a0d4ff;">
-                        <b>AI 기반 의료정보 분석 엔진 개선 및 확장</b>
+        <!-- Part 3: 기술 타당성 -->
+        <!-- Slide 9: Tech Overview -->
+        <div class="slide">
+            <h2 class="slide-title">3. 기술 타당성</h2>
+            <p class="slide-subtitle">핵심 기술 및 차별성</p>
+            <div class="section-header">신뢰 구축을 위한 4대 핵심 기술</div>
+            <div class="space-y-4">
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fas fa-spell-check"></i></div>
+                    <div>
+                        <h4 class="text-lg font-bold">1. LLM 활용 리뷰 검증 기술</h4>
+                        <p class="text-gray-600">수집된 리뷰의 광고성 여부 및 의료법 위반 가능성을 AI가 자동으로 판단합니다. 의료법 전문 변호사의 노하우를 학습한 <span class="highlight">리걸테크(Legal-Tech) 기반 LLM</span>으로, 단순 긍/부정 분석을 넘어 법적 리스크까지 분석하는 독보적 기술입니다.</p>
                     </div>
-                    <div class="flow-diagram">
-                        <div class="flow-box" style="background-color: #eee; border-color: #aaa;">(0) 준비<br><small>Data Acquisition</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box">(1) 수집<br><small>Data Pipeline (<b>고도화</b>)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box">(2) 처리<br><small>VERA Engine (<b>고도화</b>)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box">(3) 분석<br><small>TEM Engine (<b>고도화</b>)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box">(4) 적용<br><small>INTRO Engine (<b>개발/고도화</b>)</small></div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fas fa-fingerprint"></i></div>
+                    <div>
+                        <h4 class="text-lg font-bold">2. 의료 마이데이터 연동 개인화 추천 기술</h4>
+                        <p class="text-gray-600">정부 '마이헬스웨이' 플랫폼과 연동, 환자 동의 하에 과거 진료/처방 기록을 분석합니다. 이를 통해 <span class="highlight">개인의 건강 상태와 필요에 가장 적합한 병원과 의료진을 추천</span>하는 초개인화 서비스를 구현합니다.</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fas fa-pen-alt"></i></div>
+                    <div>
+                        <h4 class="text-lg font-bold">3. 리뷰/콘텐츠 생성 보조 기술 (B2B SaaS)</h4>
+                        <p class="text-gray-600"><span class="highlight">(Review Booster)</span> 환자가 자신의 경험을 바탕으로 양질의 리뷰를 쉽게 작성하도록 돕고, <span class="highlight">(MediContents)</span> 병원이 실제 치료 사례를 바탕으로 전문성 있는 블로그 콘텐츠를 손쉽게 생성/게시하도록 지원합니다.</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fas fa-network-wired"></i></div>
+                    <div>
+                        <h4 class="text-lg font-bold">4. 멀티채널 리뷰 수집 기술</h4>
+                        <p class="text-gray-600">다양한 온라인 채널에 흩어져 있는 병원/의사 관련 리뷰 및 정보를 API 기반으로 <span class="highlight">합법적이고 안정적으로 수집/통합</span>하여 정보의 풀(Pool)을 구성하는 기반 기술입니다.</p>
                     </div>
                 </div>
             </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>3</span>
-            </div>
+            <div class="slide-number">9</div>
         </div>
 
-        <div class="slide" id="slide4">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">2. 연구개발 내용 및 목표 (Technology & Goal)_서비스 예시</div>
-            <div class="message-box">
-                <h4>신규 B2C 서비스는 사용자 친화적 디자인(다국어 지원 포함)으로 구현되며, 기존 B2B 솔루션은 이미 안정적으로 운영 중입니다.</h4>
-                <ul>
-                    <li>(신규 B2C 서비스) 신뢰도 높은 정보 검색 및 맞춤 추천 기능을 사용자 친화적인 UI/UX 디자인(목업)으로 구현합니다.</li>
-                    <li>(기존 B2B 솔루션) 현재 안정적으로 운영 중인 리뷰매니저, 리뷰부스터, 메디컨텐츠 서비스는, 본 과제를 통해 확보될 데이터와 개선될 AI 기능을 적용하여 더욱 고도화 될 것입니다.</li>
-                </ul>
-            </div>
-            <div class="content-area">
-                <div class="two-column">
-                    <div class="column">
-                        <h4>(신규) B2C (환자) 서비스 - 신뢰할 수 있는 병원 정보 검색 (디자인 목업)</h4>
-                        <div class="diagram" style="height: 230px;">
-                            <div class="diagram-title">[도식: B2C 서비스 디자인 목업]</div>
-                            <p style="font-size: 0.9em; color: #777;">(예: 메인 검색, 병원 상세, 맞춤 추천 화면. VERA 인증 마크, TEM 토픽 스코어, 언어 선택 기능 포함)</p>
+        <!-- Slide 10: Tech Deep Dive 1 -->
+        <div class="slide">
+            <h2 class="slide-title">3. 기술 타당성</h2>
+            <p class="slide-subtitle">기술 차별성 (1) - AI 기반 법률 검증</p>
+            <div class="section-header">LLM as a Legal-Judge: 단순 필터링을 넘어 법적 준수까지</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-bold text-gray-800">의료법 제56조, 57조 준수를 위한<br>AI 자동 검증 시스템</h3>
+                    <p>환자 후기를 가장한 광고, 과장/허위 표현, 비급여 항목 할인 등 현행 의료법에서 금지하는 항목들을 LLM이 텍스트의 맥락을 이해하여 판단합니다.</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>가짜 후기 탐지:</strong> AI 생성 텍스트의 특징, 어뷰징 패턴 분석</li>
+                        <li><strong>금지 표현 필터링:</strong> '최고', '유일' 등 객관적 근거 없는 표현 탐지</li>
+                        <li><strong>비급여 할인 문구 탐지:</strong> 이벤트, 가격 할인 등 민감 정보 검출</li>
+                        <li><strong>환자 유인 행위 탐지:</strong> 과도한 혜택을 암시하는 뉘앙스 분석</li>
+                    </ul>
+                </div>
+                <div class="chart-container text-center">
+                    <h4 class="font-bold text-lg mb-4">AI 리뷰 검증 프로세스</h4>
+                    <i class="fas fa-comments text-4xl text-blue-500"></i>
+                    <p class="font-semibold">리뷰 텍스트 입력</p>
+                    <i class="fas fa-arrow-down text-2xl text-gray-400 my-2"></i>
+                    <div class="p-4 bg-white rounded-lg border">
+                        <i class="fas fa-brain text-4xl text-purple-500"></i>
+                        <h5 class="font-bold mt-1">Legal-Tech LLM 분석</h5>
+                        <p class="text-sm text-gray-500">(의료법 위반 패턴 학습)</p>
+                    </div>
+                    <i class="fas fa-arrow-down text-2xl text-gray-400 my-2"></i>
+                     <div class="flex justify-around">
+                        <div class="text-center">
+                             <i class="fas fa-check-circle text-4xl text-green-500"></i>
+                             <p class="font-semibold mt-1">게시 승인</p>
+                             <p class="text-sm text-gray-500">(법규 준수)</p>
+                        </div>
+                        <div class="text-center">
+                             <i class="fas fa-flag text-4xl text-yellow-500"></i>
+                             <p class="font-semibold mt-1">수정 권고</p>
+                             <p class="text-sm text-gray-500">(일부 위반 의심)</p>
+                        </div>
+                        <div class="text-center">
+                             <i class="fas fa-times-circle text-4xl text-red-500"></i>
+                             <p class="font-semibold mt-1">게시 거절</p>
+                             <p class="text-sm text-gray-500">(명백한 위반)</p>
                         </div>
                     </div>
-                    <div class="column">
-                        <h4>(기존) B2B (병원) 솔루션 - 효율적인 병원 평판/마케팅 관리 (실제 화면)</h4>
-                        <div class="diagram" style="padding: 5px; margin: 5px 0;">
-                            <div class="diagram-title" style="font-size: 0.9em; margin-bottom: 5px;">[도식: 리뷰매니저 실제 화면]</div>
-                        </div>
-                        <div class="diagram" style="padding: 5px; margin: 5px 0;">
-                            <div class="diagram-title" style="font-size: 0.9em; margin-bottom: 5px;">[도식: 리뷰부스터 실제 화면]</div>
-                        </div>
-                        <div class="diagram" style="padding: 5px; margin: 5px 0;">
-                            <div class="diagram-title" style="font-size: 0.9em; margin-bottom: 5px;">[도식: 메디컨텐츠 실제 화면]</div>
-                        </div>
+                </div>
+            </div>
+            <div class="mt-8 bg-blue-50 p-4 rounded-lg text-blue-800 font-medium">
+            <i class="fas fa-info-circle"></i> 본 기술은 의료법 전문 변호사가 설립한 당사의 핵심 역량으로, 타 플랫폼이 모방하기 어려운 강력한 진입 장벽입니다.
+            </div>
+            <div class="slide-number">10</div>
+        </div>
+        
+        <!-- Slide 11: Tech Deep Dive 2 -->
+        <div class="slide">
+            <h2 class="slide-title">3. 기술 타당성</h2>
+            <p class="slide-subtitle">기술 차별성 (2) - 마이데이터 기반 초개인화</p>
+            <div class="section-header">나의 건강 데이터로 찾는 가장 정확한 의사</div>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                     <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1170&auto=format&fit=crop" alt="[의사가 환자의 차트를 보며 상담하는 이미지]" class="rounded-lg shadow-md">
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-bold text-gray-800">정부 '마이헬스웨이' 플랫폼 연동</h3>
+                    <p>2025년 3월 전국 시행된 마이헬스웨이를 통해, 환자 본인의 동의 하에 공공기관 및 여러 병원에 흩어진 개인 건강 기록을 통합 조회하고 활용합니다.</p>
+                    
+                    <div class="solution-box">
+                        <h4 class="font-bold text-lg mb-2 text-blue-800">개인 맞춤형 추천 로직</h4>
+                        <p><strong>IF</strong> 환자가 최근 3년간 '당뇨' 관련 진료 및 처방 기록이 있고, '망막 합병증'을 우려한다면, <strong>THEN</strong> 단순 '내과'가 아닌, '당뇨 합병증 전문 내분비내과' 혹은 '당뇨망막병증 진료 경험이 풍부한 안과'를 우선 추천합니다.</p>
+                    </div>
+                     <p class="text-sm text-gray-600">※ 데이터 3법 및 보건의료데이터 활용 가이드라인을 철저히 준수하여 민감정보를 안전하게 처리합니다.</p>
+                </div>
+             </div>
+            <div class="slide-number">11</div>
+        </div>
+
+        <!-- Slide 12: Tech Deep Dive 3 -->
+        <div class="slide">
+            <h2 class="slide-title">3. 기술 타당성</h2>
+            <p class="slide-subtitle">B2B SaaS 기술: 병원의 정보 생산성 강화</p>
+            <div class="section-header">병원이 손쉽게 투명한 정보를 만들고 알리는 방법</div>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 h-full">
+                <!-- Review Booster -->
+                <div class="p-6 bg-gray-50 rounded-lg flex flex-col">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-rocket text-4xl text-green-500"></i>
+                        <h3 class="text-2xl font-bold mt-2">Review Booster</h3>
+                        <p class="text-gray-500">환자 경험담을 가치있는 정보로</p>
+                    </div>
+                    <div class="flex-grow">
+                        <p class="mb-4">환자가 리뷰 작성을 어려워한다는 문제에 착안, 진료 경험을 체계적으로 회고하고 유용한 정보가 담긴 후기를 작성하도록 돕는 가이드 템플릿과 보조 기술을 제공합니다.</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong>질문 기반 가이드:</strong> "어떤 점이 가장 만족스러웠나요?", "의료진의 설명은 충분했나요?" 등 구조화된 질문 제공</li>
+                            <li><strong>키워드 추천:</strong> 증상, 치료 과정, 결과 등 관련 키워드 추천으로 구체적인 내용 작성 유도</li>
+                            <li><strong>AI 문장 생성 보조:</strong> 작성된 핵심 내용을 바탕으로 자연스러운 문장 초안 생성</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- MediContents -->
+                 <div class="p-6 bg-gray-50 rounded-lg flex flex-col">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-file-signature text-4xl text-indigo-500"></i>
+                        <h3 class="text-2xl font-bold mt-2">MediContents</h3>
+                        <p class="text-gray-500">의사의 전문성을 콘텐츠로</p>
+                    </div>
+                    <div class="flex-grow">
+                        <p class="mb-4">마케팅 인력이나 콘텐츠 제작 시간이 부족한 병원을 위해, 실제 치료 사례를 바탕으로 전문성과 신뢰도를 높이는 블로그 콘텐츠를 손쉽게 생성하고 게시하도록 지원합니다.</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong>콘텐츠 템플릿 제공:</strong> 질환 정보, 치료 과정, 예후 등 사례별 맞춤 템플릿 제공</li>
+                            <li><strong>익명화/비식별화 처리:</strong> 개인정보보호법에 맞춰 환자 정보를 안전하게 처리</li>
+                            <li><strong>SEO 최적화:</strong> 검색엔진에 잘 노출될 수 있도록 핵심 키워드, 메타 태그 등 자동 최적화</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>4</span>
-            </div>
+            <div class="slide-number">12</div>
         </div>
-
-        <div class="slide" id="slide5">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">2. 연구개발 내용 및 목표 (Technology & Goal)_상세 내용 (0) 준비 ① (대량의 평판 데이터 확보)</div>
-            <div class="message-box">
-                <h4>법적 검토 완료된 기반 위에서, 전국 5,000개 이상 병원의 기보유 데이터를 시작으로 2년간 전국 모든 병원의 평판 데이터(다국어 리뷰 포함)를 확보합니다.</h4>
-                <ul>
-                    <li>'리뷰매니저'를 통해 이미 전국 5,000개 이상 병원의 평판 데이터를 확보했으며, 이를 기반으로 1차년도에는 전국 치과, 2차년도에는 전국 모든 과목으로 신속하게 확장합니다.</li>
-                    <li>모든 데이터 수집 및 활용은 사전 법률 검토를 완료하여 안정적인 사업 추진 기반을 마련했습니다.</li>
-                </ul>
-            </div>
-            <div class="content-area">
-                <ul>
-                    <li><b>수집 대상:</b> 환자 리뷰(네이버, 카카오, 구글맵 등), 네이버 블로그 포스트, 네이버 카페 게시글/댓글 (다국어 포함)</li>
-                    <li><b>압도적 초기 데이터 보유:</b> 이미 전국 5,000개 이상 병원 데이터 수집/분석 중 ('리뷰매니저' 활용)</li>
-                    <li><b>법적 안정성 확보:</b> [법률 검토 완료 마크] 사전 법률 검토 완료</li>
-                </ul>
-                <h4>2개년 평판 데이터 확보 로드맵 (누적 목표)</h4>
-                <table>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>대상 범위</th>
-                            <th>대상 병원 수</th>
-                            <th>리뷰 데이터 목표</th>
-                            <th>블로그/카페 데이터 목표</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><b>1차년도(2026)</b></td>
-                            <td>전국 치과</td>
-                            <td>약 19,458개</td>
-                            <td>2,000만 건</td>
-                            <td>200만 건</td>
-                        </tr>
-                        <tr>
-                            <td><b>2차년도(2027)</b></td>
-                            <td>전국 모든 과목</td>
-                            <td>약 75,485개</td>
-                            <td>8,000만 건</td>
-                            <td>800만 건</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <small>1차년도 목표치 옆: '(기확보 5,000+ 병원 데이터 기반)'</small>
-            </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>5</span>
-            </div>
-        </div>
-
-        <div class="slide" id="slide6">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">2. 연구개발 내용 및 목표 (Technology & Goal)_상세 내용 (0) 준비 ② (다양한 객관적 데이터 확보)</div>
-            <div class="message-box">
-                <h4>평판 외 병원/의사/가격 등 필수 객관적 데이터를 다중 소스에서 연차별 계획에 따라 확보하여 정보의 완성도를 높입니다. ( 외국인 진료 가능 여부 등 포함)</h4>
-                <ul>
-                    <li>환자의 합리적 병원 선택을 돕기 위해, 평판 정보 외에도 병원/의사/시술/가격 등 객관적이고 검증 가능한 정보를 체계적으로 수집하여 통합 제공합니다.</li>
-                    <li>공공 API와 웹 크롤링을 병행하여 데이터를 확보하며, 1차년도에는 필수 정보 중심으로, 2차년도에는 심층 정보까지 범위를 확대합니다.</li>
-                </ul>
-            </div>
-            <div class="content-area">
-                <p>평판 데이터 외 객관적 정보(병원 시설, 의사 경력, 비급여 가격, <b>외국어 진료 가능 여부</b> 등)가 필수적임.</p>
-                <h4>주요 객관적 데이터 수집 목록</h4>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>대분류</th>
-                            <th>중분류</th>
-                            <th>주요 소분류 항목</th>
-                            <th>주요 소스</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>병원</td>
-                            <td>기본/운영, 시설/장비, 전문성</td>
-                            <td>진료시간, 전문의 수, <b>외국어 진료 가능 여부</b></td>
-                            <td>심평원 API, 웹 크롤링</td>
-                        </tr>
-                        <tr>
-                            <td>의사</td>
-                            <td>경력, 전문 분야</td>
-                            <td>의사 경력, 전문 분야</td>
-                            <td>웹 크롤링</td>
-                        </tr>
-                        <tr>
-                            <td>시술/가격</td>
-                            <td>비급여 항목</td>
-                            <td>비급여 가격</td>
-                            <td>웹 크롤링(비급여 고지 등)</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <h4>연차별 수집 전략</h4>
-                <ul>
-                    <li><b>1차년도(2026):</b> 필수 & 수집 용이 데이터 우선 확보 (병원 기본/운영, 비급여 가격 등)</li>
-                    <li><b>2차년도(2027):</b> 심층 데이터 확보로 확장 (의사 상세 경력, 병원 시설/장비 등)</li>
-                </ul>
-            </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>6</span>
-            </div>
-        </div>
-
-        <div class="slide" id="slide7">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">2. 연구개발 내용 및 목표 (Technology & Goal)_상세 내용 (1) 수집 시스템 고도화</div>
-            <div class="message-box">
-                <h4>기보유된 리뷰매니저 수집 기술을 바탕으로, 대용량/다채널 데이터를 안정적으로 수집-추출-정제-통합하는 고도화된 데이터 파이프라인을 구축합니다.</h4>
-                <ul>
-                    <li>이미 B2B 서비스 '리뷰매니저' 운영으로 검증된 안정적인 멀티채널 리뷰 수집 기술을 기반으로 합니다.</li>
-                    <li>본 사업에서는 수집 대상(블로그/카페/병원 홈페이지/공공 API) 및 데이터 유형(객관적 정보, 다국어 텍스트)을 확장하고, 전체 파이프라인(수집-추출-정제-통합)의 효율성과 안정성을 고도화 하는 데 집중합니다.</li>
-                </ul>
-            </div>
-            <div class="content-area">
-                <p>B2B '리뷰매니저' 기반 기술을 블로그/카페/병원 홈페이지/공공 API까지 포괄하는 <b>확장성 높은 통합 데이터 파이프라인</b>으로 <b>개선/고도화</b>.</p>
-                <div class="diagram">
-                    <div class="diagram-title">[도식: 고도화된 데이터 파이프라인 아키텍처]</div>
-                    <div class="flow-diagram">
-                        <div class="flow-box">Raw Data Sources<br><small>(Web, APIs)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box"><b>1. 수집 모듈</b><br><small>(분산 크롤러, API Connector)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box"><b>2. 추출 모듈</b><br><small>(HTML Parser, OCR)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box"><b>3. 정제/표준화 모듈</b><br><small>(Data Cleaning, NER, MDM)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box" style="background-color: #a0d4ff;">Output: 가공 완료 DB<br><small>(VERA Input)</small></div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>7</span>
-            </div>
-        </div>
-
-        <div class="slide" id="slide8">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">2. 연구개발 내용 및 목표 (Technology & Goal)_상세 내용 (2) 처리: VERA 엔진 고도화</div>
-            <div class="message-box">
-                <h4>[핵심기술① 고도화] 기존 '병원 글 판단/리뷰 분석' 기술을 기반 으로 2단계 하이브리드 VERA 엔진 을 '고도화'하여, 환자 경험으로 위장한 바이럴 마케팅 콘텐츠(특히 네이버 카페)까지 95%+ 정확도로 필터링합니다.</h4>
-                <ul>
-                    <li>자체 개발하여 상용화된 기반 기술(BERT, LLM 관련성 판단, 행동 패턴 분석 기초)을 적극 활용하여 고도화 기간을 단축하고 성공률을 높입니다.</li>
-                    <li>본 사업에서는 1단계 경량 필터 와 2단계 LLM/멀티모달 정밀 검증 을 결합한 하이브리드 구조 로 개선하여, 네이버 카페 등 '바이럴 마케팅' 탐지 정확도 향상 및 다국어 처리에 집중합니다.</li>
-                </ul>
-            </div>
-            <div class="content-area">
-                <div class="two-column">
-                    <div class="column">
-                        <h4>VERA 엔진 작동 방식 (2-Track 분석)</h4>
-                        <ul>
-                            <li><b>Track 1: 작성자 행동 패턴 분석:</b> 과거 이력, 계정 정보, <b>카페 활동 패턴</b> 등 분석 강화 (B2B 데이터 활용)</li>
-                            <li><b>Track 2: 언어적 패턴 분석 (2단계 하이브리드):</b>
-                                <ul>
-                                    <li><b>1단계 (경량 필터):</b> 텍스트 + 행동 피처 결합 (XGBoost/LR) (기존 BERT 기술 활용/개선)</li>
-                                    <li><b>2단계 (정밀 검증):</b> 1단계 '불확실' 콘텐츠만 <b>LLM / 멀티모달</b>로 심층 분석 (기존 LLM 기술 활용/개선)</li>
+        
+        <!-- Slide 13: R&D Roadmap -->
+        <div class="slide">
+            <h2 class="slide-title">3. 기술 타당성</h2>
+            <p class="slide-subtitle">연구개발 추진 계획</p>
+            <div class="section-header">24개월간의 기술 개발 로드맵</div>
+            <div class="relative w-full">
+                <!-- Timeline -->
+                <div class="border-l-4 border-blue-500 ml-4 pl-8 py-4 space-y-12">
+                    <!-- Year 1 -->
+                    <div>
+                        <div class="absolute -left-3.5 -mt-2 w-7 h-7 bg-white border-4 border-blue-500 rounded-full"></div>
+                        <h3 class="text-xl font-bold text-blue-800">1차년도: 기반 기술 구축 및 MVP 개발</h3>
+                        <div class="mt-4 grid grid-cols-2 gap-4">
+                            <div class="p-4 bg-blue-50 rounded-md">
+                                <h4 class="font-semibold">1~6개월: 데이터 수집 및 처리</h4>
+                                <ul class="text-sm list-disc list-inside mt-2">
+                                    <li>멀티채널 리뷰 수집 모듈 개발</li>
+                                    <li>리뷰 데이터 정제 및 DB화</li>
+                                    <li>의료법 위반 사례 데이터셋 구축</li>
                                 </ul>
-                            </li>
-                        </ul>
+                            </div>
+                             <div class="p-4 bg-blue-50 rounded-md">
+                                <h4 class="font-semibold">7~12개월: 핵심 AI 모델 및 MVP 개발</h4>
+                                <ul class="text-sm list-disc list-inside mt-2">
+                                    <li>Legal-Tech LLM v1.0 개발</li>
+                                    <li>Review Booster 프로토타입 개발</li>
+                                    <li>플랫폼 MVP 출시 (리뷰 조회/작성)</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="column">
-                        <div class="diagram">
-                            <div class="diagram-title">[도식: 2단계 하이브리드 필터링 아키텍처]</div>
-                            <div class="vertical-flow">
-                                <div class="flow-box">입력 데이터 (리뷰/게시글)</div>
-                                <div class="flow-arrow">↓</div>
-                                <div class="flow-box"><b>1단계: 경량 필터</b><br><small>(BERT 임베딩 + 행동 피처)</small></div>
-                                <div class="flow-arrow">↙ ↘</div>
-                                <div class="flow-diagram" style="gap: 5px;">
-                                    <div class="flow-box" style="flex: 2;"><b>'불확실'</b></div>
-                                    <div class="flow-box" style="flex: 1; background-color: #eee; border-color: #aaa;">'확실' (정상/마케팅)</div>
-                                </div>
-                                <div class="flow-arrow">↓ (불확실만)</div>
-                                <div class="flow-box"><b>2단계: 정밀 검증</b><br><small>(LLM + 멀티모달 모델)</small></div>
-                                <div class="flow-arrow">↓</div>
-                                <div class="flow-box" style="background-color: #a0d4ff;">최종 판별 (정확도 95%+)</div>
+                    <!-- Year 2 -->
+                    <div>
+                        <div class="absolute -left-3.5 -mt-2 w-7 h-7 bg-white border-4 border-blue-500 rounded-full"></div>
+                        <h3 class="text-xl font-bold text-blue-800">2차년도: 기술 고도화 및 서비스 상용화</h3>
+                        <div class="mt-4 grid grid-cols-2 gap-4">
+                            <div class="p-4 bg-green-50 rounded-md">
+                                <h4 class="font-semibold">13~18개월: 서비스 확장 및 고도화</h4>
+                                <ul class="text-sm list-disc list-inside mt-2">
+                                    <li>마이데이터 연동 모듈 개발</li>
+                                    <li>개인화 추천 엔진 v1.0 개발</li>
+                                    <li>MediContents 프로토타입 개발</li>
+                                </ul>
+                            </div>
+                             <div class="p-4 bg-green-50 rounded-md">
+                                <h4 class="font-semibold">19~24개월: 상용화 및 최적화</h4>
+                                <ul class="text-sm list-disc list-inside mt-2">
+                                    <li>B2B SaaS 정식 출시</li>
+                                    <li>Legal-Tech LLM v2.0 (성능 고도화)</li>
+                                    <li>플랫폼 정식 서비스 런칭</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>8</span>
-            </div>
+            <div class="slide-number">13</div>
         </div>
 
-        <div class="slide" id="slide9">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">2. 연구개발 내용 및 목표 (Technology & Goal)_상세 내용 (3) 분석: TEM 엔진 개선</div>
-            <div class="message-box">
-                <h4>[핵심기술② 개선] VERA로 검증된 '진짜 리뷰'(다국어 포함)를 임베딩-클러스터링-스코어링-XAI 의 4단계 파이프라인으로 분석하는 TEM 엔진 을 개선 하여, 환자 경험(PX)을 데이터 기반 토픽으로 정량화하고 설명 가능성을 확보합니다.</h4>
-                <ul>
-                    <li>데이터 기반 토픽 정의: BERTopic 등 비지도 학습으로 초기 토픽 구조를 '발견'하고 전문가 검토를 거쳐 최종 운영 토픽(초기 가설: 7개 내외)을 확정하여, 기존 가설 기반 접근을 보완합니다.</li>
-                    <li>안정적 스코어링 및 설명: 확정된 토픽에 대해 지도 학습 기반 분류/스코어링(기존 모델 개선 활용)을 수행하고, LLM을 활용한 근거 추출(XAI)로 분석 결과의 신뢰도와 활용성을 높입니다.</li>
-                </ul>
-            </div>
-            <div class="content-area">
-                <p>기존 기초 분석을 넘어, 검증된 '진짜 컨텐츠'에서 PX를 정량화하기 위한 <b>개선 작업</b>. <b>데이터 기반 토픽 정의</b> 및 <b>설명 가능한 스코어링</b>이 핵심.</p>
-                <div class="diagram">
-                    <div class="diagram-title">[도식: 하이브리드 TEM 엔진 아키텍처 (4단계)]</div>
-                     <div class="flow-diagram">
-                        <div class="flow-box">'진짜 리뷰' DB<br><small>(from VERA)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box"><b>1. Embedding</b><br><small>(다국어 임베딩)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box"><b>2. Topic Discovery</b><br><small>(BERTopic + 전문가)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box"><b>3. Topic Scoring</b><br><small>(지도학습 분류)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box"><b>4. XAI</b><br><small>(LLM 근거 추출)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box" style="background-color: #a0d4ff;">토픽 스코어 DB</div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>9</span>
-            </div>
-        </div>
-
-        <div class="slide" id="slide10">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">2. 연구개발 내용 및 목표 (Technology & Goal)_상세 내용 (4) 추천: INTRO 엔진</div>
-            <div class="message-box">
-                <h4>[핵심기술③ 개발/개선] LLM 기반 대화형 인터페이스 와 순차적 의도 반영 추천 알고리즘 을 결합하여, 환자의 다양한 검색 니즈를 균형있게 충족시키는 설명 가능한 맞춤형 추천 엔진을 개발합니다.</h4>
-                <ul>
-                    <li>LLM 활용 대화형 추천 : 대화를 통해 환자의 복잡한 의도(증상, 선호, 위치, 언어 등)를 자연스럽게 파악하고, 순차적으로 다양한 니즈를 반영하여 병원을 추천함으로써 특정 요소에 편중되지 않은 균형잡힌 결과를 제공합니다.</li>
-                    <li>의료 도메인 특화 개선 : 검증된 추천 알고리즘을 의료 분야에 맞게 최적화(TEM 7대 토픽 연계, 실시간 처리)하고, XAI 기술을 단계적으로 통합하여 추천 근거를 명확히 제시합니다.</li>
-                </ul>
-            </div>
-            <div class="content-area">
-                <p>단순 평점 정렬을 넘어, 복잡한 니즈(다국어 포함)를 파악하고, 병원 강점(TEM)과 매칭하며, <b>추천 이유를 설명(XAI)</b>하는 차세대 추천 엔진.</p>
-                <div class="diagram">
-                    <div class="diagram-title">[도식: 대화형 INTRO 엔진 - 설명 가능한 추천 시스템]</div>
-                    <div class="flow-diagram">
-                        <div class="flow-box">환자<br><small>(대화/검색, 다국어)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box"><b>① LLM (이해)</b><br><small>(대화 이해, 의도 추출)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box"><b>② 백엔드 (추천)</b><br><small>(후보 검색, <b>순차적 추천</b>)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box"><b>③ LLM (설명)</b><br><small>(<b>추천 이유 설명</b>)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box" style="background-color: #a0d4ff;">환자<br><small>(추천 결과 + 설명)</small></div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>10</span>
-            </div>
-        </div>
-
-        <div class="slide" id="slide11">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">2. 연구개발 내용 및 목표 (Technology & Goal)_상세 내용 (5) 적용 (B2C 서비스)</div>
-            <div class="message-box">
-                <h4>고도화된 엔진 기반의 B2C 서비스는 내/외국인 환자 모두 에게 신뢰 검색부터 다국어 맞춤 추천 , 예약, 후기 작성까지 원스톱 경험을 제공합니다.</h4>
-                <ul>
-                    <li>VERA/TEM 엔진으로 검증되고 분석된 정보를 기반으로 사용자에게 신뢰도 높은 검색 결과 를 제공합니다.</li>
-                    <li>INTRO 엔진을 통해 사용자의 니즈(다국어 인텐트 포함)를 파악하고 설명 가능한 맞춤형 병원 추천 을 제공하여 만족도를 극대화합니다.</li>
-                </ul>
-            </div>
-            <div class="content-area">
-                <div class="two-column">
-                    <div class="column">
-                        <h4>As-is (타 서비스)</h4>
-                        <ul>
-                            <li>광고/마케팅 정보 위주</li>
-                            <li>획일적 평점, 파편화된 정보</li>
-                            <li>추천 기준 불명확</li>
-                        </ul>
-                        <div class="diagram" style="height: 150px;">
-                            <div class="diagram-title">[도식: 기존 병원 정보 앱 화면 예시]</div>
-                            <p style="font-size: 0.9em; color: #777;">(광고 배너, 단순 별점/거리순 정렬)</p>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <h4>To-be (당사 B2C 서비스)</h4>
-                        <ul>
-                            <li><b>신뢰 검색 (VERA/TEM):</b> '진짜 평점순', '토픽별(#친절한순 등)', VERA 인증</li>
-                            <li><b>맞춤 추천 (INTRO):</b> 인텐트 기반 다국어 대화형 추천 + 설명(XAI)</li>
-                            <li><b>통합 정보:</b> 객관적 스펙, 가격, 검증된 평판 비교 (+외국인 특화)</li>
-                        </ul>
-                        <div class="diagram" style="height: 150px;">
-                            <div class="diagram-title">[도식: 당사 B2C 서비스 디자인 목업]</div>
-                            <p style="font-size: 0.9em; color: #777;">('VERA 인증', 'TEM 토픽 스코어', INTRO 추천 이유, 언어 선택 등)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>11</span>
-            </div>
-        </div>
-
-        <div class="slide" id="slide12">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">2. 연구개발 내용 및 목표 (Technology & Goal)_상세 내용 (5) 적용 (B2C 서비스_외국인 사용자 특화 기능)</div>
-            <div class="message-box">
-                <h4>국내 거주 외국인과 의료 관광객의 서로 다른 니즈 를 파악하여, 각 그룹에 특화된 정보와 기능을 제공함으로써 글로벌 의료 정보 접근성을 향상시킵니다.</h4>
-                <ul>
-                    <li>국내 거주 외국인 지원 : 일상적 의료 서비스 이용을 위한 언어 소통 가능 병원 정보, 건강보험 적용 안내, 접근성 중심의 병원 추천을 제공합니다.</li>
-                    <li>의료 관광객 지원 : 전문 치료 목적 방문자를 위한 고품질 의료기관 정보, 해외 보험 청구 지원, 통역/숙박 등 의료 관광 편의 서비스 정보를 통합 제공합니다.</li>
-                </ul>
-            </div>
-            <div class="content-area">
-                <p style="text-align: center; margin-bottom: 5px;">외국인 사용자는 <b>국내 거주 외국인</b>과 <b>의료 관광객</b>으로 구분되며, 니즈가 다름.</p>
-                <div class="diagram">
-                    <div class="diagram-title">[도식: 외국인 사용자 그룹별 차별화 전략]</div>
-                    <div class="diagram-columns">
-                        <div class="diagram-column">
-                            <h5>그룹 1: 국내 거주 외국인</h5>
-                            <ul>
-                                <li><b>니즈:</b> 언어 소통, 건강보험, 접근성, 장기 관계</li>
-                                <li><b>솔루션:</b><br>
-                                - 외국어 응대 가능 병원 (구글맵 리뷰 분석)<br>
-                                - 건강보험 적용 안내<br>
-                                - 접근성 중심 추천</li>
-                            </ul>
-                        </div>
-                        <div class="diagram-column">
-                            <h5>그룹 2: 의료 관광객 (해외 입국)</h5>
-                            <ul>
-                                <li><b>니즈:</b> 전문 치료, 해외 보험, 관광 편의, 사후 관리</li>
-                                <li><b>솔루션:</b><br>
-                                - 전문 의료기관 정보 (TEM)<br>
-                                - 해외 보험 처리 가능 병원<br>
-                                - 통역/숙박 등 편의 정보</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>12</span>
-            </div>
-        </div>
-
-        <div class="slide" id="slide13">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">2. 연구개발 내용 및 목표 (Technology & Goal)_상세 내용 (5) 적용 (B2B 솔루션 고도화)</div>
-            <div class="message-box">
-                <h4>B2C 데이터를 활용하여 기존 B2B 3종 솔루션의 AI 기능을 고도화 (각 100% 목표)함으로써, 병원 고객에게 실질적인 CS 개선 및 마케팅 효율 증대 가치를 제공합니다.</h4>
-                <ul>
-                    <li>B2C 플랫폼에서 축적된 신뢰도 높은 환자 경험 데이터(TEM)와 사용자 인텐트 데이터(INTRO)를 기존 B2B 솔루션(리뷰매니저, 리뷰부스터, 메디컨텐츠)에 연동합니다.</li>
-                    <li>이를 통해 각 솔루션의 분석 정확도, 추천 최적화, 콘텐츠 생성 능력을 향상시켜 병원의 운영 효율성과 경쟁력을 강화합니다.</li>
-                </ul>
-            </div>
-            <div class="content-area">
-                <div class="three-column">
-                    <div class="column diagram" style="padding: 10px;">
-                        <h4>1. 리뷰매니저 (평판 관리)</h4>
-                        <p style="font-size: 0.9em;"><b>고도화 (TEM 연동):</b> B2C의 <b>TEM 토픽 스코어</b>를 대시보드에 시각화. 구체적 CS 개선점 및 경쟁 병원 비교.</p>
-                        <div class="diagram-title" style="font-size: 0.9em; margin-top: 10px;">[도식: 고도화된 리뷰매니저 토픽 분석 대시보드]</div>
-                    </div>
-                    <div class="column diagram" style="padding: 10px;">
-                        <h4>2. 리뷰부스터 (리뷰 확보)</h4>
-                        <p style="font-size: 0.9em;"><b>고도화 (TEM 연동):</b> B2C의 <b>키워드별 고객 검색량</b> 반영. '실제 고객 궁금 키워드' 기반 리뷰 요청 최적화.</p>
-                        <div class="diagram-title" style="font-size: 0.9em; margin-top: 10px;">[도식: 고도화된 리뷰부스터 키워드 최적화 UI]</div>
-                    </div>
-                    <div class="column diagram" style="padding: 10px;">
-                        <h4>3. 메디컨텐츠 (콘텐츠 생성)</h4>
-                        <p style="font-size: 0.9em;"><b>고도화 (INTRO 연동):</b> B2C의 <b>INTRO 환자 검색 인텐트</b> (다국어) 반영. 환자 관심 주제 기반 콘텐츠 생성/SEO.</p>
-                        <div class="diagram-title" style="font-size: 0.9em; margin-top: 10px;">[도식: 고도화된 메디컨텐츠 인텐트 기반 생성 UI]</div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>13</span>
-            </div>
-        </div>
-
-        <div class="slide" id="slide14">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">2. 연구개발 내용 및 목표 (Technology & Goal)_상세 내용 (요약)</div>
-            <div class="message-box">
-                <h4>기보유 B2B/정부 과제 기술을 기반으로 3대 핵심 AI 엔진(VERA/TEM/INTRO) '고도화' 및 '확장 적용'을 통해 B2C 서비스를 구축하고, 다시 B2B를 강화하는 선순환 구조입니다.</h4>
-                <ul>
-                    <li>본 사업은 기확보된 기술력 위에서 핵심 엔진을 '부분적으로 고도화'하고 '확장 적용'(다국어, 추천 등)하는 효율적인 기술 개선 전략입니다.</li>
-                    <li>데이터 파이프라인 개선(수집)부터 3대 엔진 고도화/개발(처리, 분석, 적용) 및 최종 서비스 고도화까지 체계적으로 추진하여 B2C-B2B 생태계를 완성합니다.</li>
-                </ul>
-            </div>
-            <div class="content-area">
-                <div style="background-color: #f5f5f5; padding: 10px; border-radius: 5px;">
-                    <h4>(0) 준비: 데이터 확보 계획 및 기반</h4>
-                    <ul style="margin-top: 0; margin-bottom: 0;">
-                        <li><b>확보 대상 정의:</b> 평판 데이터 (리뷰, 블로그, 카페 - 다국어 포함) 및 객관적 데이터 (병원, 의사, 가격 등)</li>
-                        <li><b>확보 계획:</b> 기 확보 (5,000+) → 1차년도 (전국 치과) → 2차년도 (전국 모든 과목)</li>
-                        <li><b>법적 안정성:</b> 사전 법률 검토 완료</li>
+        <!-- Part 4: 사업화 전략 -->
+        <!-- Slide 14: Business Model -->
+        <div class="slide">
+            <h2 class="slide-title">4. 사업화 전략</h2>
+            <p class="slide-subtitle">수익 모델</p>
+            <div class="section-header">광고가 아닌 가치 제공: B2B SaaS 구독 모델</div>
+            <p class="text-lg mb-6">환자 대상 서비스는 무료로 제공하여 플랫폼을 활성화하고, 병원/의원을 대상으로 정보 생성 및 관리를 돕는 솔루션(SaaS)을 월 구독 방식으로 제공하여 수익을 창출합니다. <strong class="text-red-600">추천 순위 등은 비용이 아닌 오직 데이터(환자 만족도, 전문성 등)에 의해 결정됩니다.</strong></p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
+                <div class="border rounded-lg p-6 shadow-sm">
+                    <h3 class="text-xl font-bold text-gray-800">BASIC</h3>
+                    <p class="text-3xl font-bold my-4">월 99,000원</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>병원 기본 정보 관리</li>
+                        <li>플랫폼 리뷰 알림 및 답변</li>
+                        <li>기본 통계 리포트</li>
                     </ul>
                 </div>
-                <h4>기술 개발 5단계 요약표</h4>
-                <table style="font-size: 0.75em;">
-                    <thead>
-                        <tr>
-                            <th>단계</th>
-                            <th>(1) 수집 (통합 DB화)</th>
-                            <th style="background-color: #e0f2ff;">(2) 처리 (리뷰 필터링)</th>
-                            <th style="background-color: #e0f2ff;">(3) 분석 (경험 정보화)</th>
-                            <th style="background-color: #e0f2ff;">(4) 추천 (맞춤 추천)</th>
-                            <th>(5) 서비스 적용 (B2C/B2B 고도화)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><b>As-is 문제</b></td>
-                            <td>대규모/다채널 수집 및 표준화 한계</td>
-                            <td>교묘한 바이럴 마케팅 (카페 등) 판별 불가</td>
-                            <td>환자 경험(PX)의 다면적/맥락적 분석 부재</td>
-                            <td>의료 도메인 특화 의도 (다국어 포함) 반영 불가, 추천 근거 불명확</td>
-                            <td>투명하고 신뢰도 높은 병원 정보 서비스 부재</td>
-                        </tr>
-                        <tr>
-                            <td><b>Solution</b></td>
-                            <td>B2B 기술 기반 파이프라인 <b>개선/확장</b></td>
-                            <td><b>VERA 엔진</b><br>(마케팅 컨텐츠 필터링)</td>
-                            <td><b>TEM 엔진</b><br>(환자 경험 분석/스코어링)</td>
-                            <td><b>INTRO 엔진</b><br>(인텐트 분석/병원 추천)</td>
-                            <td>B2C 신규 구축 (외국인 포함) + B2B 기능 <b>고도화</b></td>
-                        </tr>
-                        <tr>
-                            <td><b>기보유 기술</b></td>
-                            <td>'리뷰매니저' (수집) + R&D (데이터 구축)</td>
-                            <td>'리뷰매니저' AI (관련성 판단) + R&D (BERT)</td>
-                            <td>'리뷰매니저' AI (키워드/감성) + R&D (RAG)</td>
-                            <td>R&D (LLM 대화형 추천)</td>
-                            <td>리뷰매니저, 리뷰부스터, 메디컨텐츠</td>
-                        </tr>
-                        <tr>
-                            <td><b>To-be/기대 효과</b></td>
-                            <td>고품질 데이터 기반 확보</td>
-                            <td>'진짜 리뷰 DB' 확보로 플랫폼 신뢰도 혁신</td>
-                            <td>PX 정량화 및 설명가능한(XAI) 근거 제시</td>
-                            <td>'설명 가능한' 맞춤형 추천(XAI) 및 글로벌 경험 제공</td>
-                            <td>B2C-B2B 선순환 완성 (지속 성장 기반)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>14</span>
-            </div>
-        </div>
-
-        <div class="slide" id="slide15">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">2. 연구개발 내용 및 목표 (Technology & Goal)_기대 효과</div>
-            <div class="message-box">
-                <h4>'신뢰' 기반의 B2C-B2B 선순환(Flywheel)을 통해 지속 가능한 의료 정보 생태계를 완성하고 글로벌 의료 정보 접근성 을 향상시킵니다.</h4>
-                <ul>
-                    <li>본 사업의 기술 개선/확장 적용은 단순히 B2C 플랫폼을 구축하는 것을 넘어, B2B와 B2C가 상호 데이터를 주고받으며 함께 성장하는 선순환 구조 를 만드는 핵심 동력입니다.</li>
-                    <li>이를 통해 정보 비대칭성을 해소하고, 환자(내/외국인 포함)와 병원 모두에게 긍정적인 가치를 제공하며 지속 가능한 성장을 추구합니다.</li>
-                </ul>
-            </div>
-            <div class="content-area">
-                <div class="diagram">
-                    <div class="diagram-title">[도식: B2C ↔ B2B 상호작용 선순환 구조]</div>
-                    <div class="flow-diagram">
-                        <div class="flow-box"><b>B2B (병원)</b><br><small>B2B 기술/데이터 ('진성 리뷰')</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box"><b>B2C (환자)</b><br><small>B2C 신뢰도 확보</small></div>
-                    </div>
-                    <div class="flow-diagram" style="margin-top: 10px;">
-                        <div class="flow-box"><b>B2C (환자)</b><br><small>B2C '환자 경험 데이터' (TEM)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box"><b>B2B (병원)</b><br><small>B2B AI 솔루션 고도화</small></div>
-                    </div>
+                <div class="border-2 border-blue-600 rounded-lg p-6 shadow-lg relative">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-3 py-1 text-sm font-bold rounded-full">BEST</div>
+                    <h3 class="text-xl font-bold text-blue-700">PRO</h3>
+                    <p class="text-3xl font-bold my-4">월 299,000원</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><strong>Basic 플랜 모든 기능</strong></li>
+                        <li><strong class="text-blue-600">Review Booster</strong> (리뷰 생성 보조)</li>
+                        <li><strong class="text-blue-600">MediContents</strong> (콘텐츠 생성 보조)</li>
+                        <li>심층 통계 분석</li>
+                    </ul>
                 </div>
-                <div class="diagram flywheel">
-                    <div class="diagram-title">[도식: 데이터 기반 B2B-B2C 성장 플라이휠]</div>
-                    <span class="flywheel-step">'B2B 성장' (병원 고객↑)</span>
-                    <span class="flywheel-arrow">→</span>
-                    <span class="flywheel-step">'신뢰도 높은 정보 증가'</span>
-                    <span class="flywheel-arrow">→</span>
-                    <span class="flywheel-step">'B2C 성장' (환자 트래픽↑)</span>
-                    <span class="flywheel-arrow">→</span>
-                    <span class="flywheel-step">'서비스 내 환자 리뷰 증가'</span>
-                    <span class="flywheel-arrow">→</span>
-                    <span class="flywheel-step">'B2B 솔루션 니즈 증가'</span>
-                    <span class="flywheel-arrow">(순환)</span>
+                <div class="border rounded-lg p-6 shadow-sm">
+                    <h3 class="text-xl font-bold text-gray-800">ENTERPRISE</h3>
+                    <p class="text-3xl font-bold my-4">별도 문의</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><strong>Pro 플랜 모든 기능</strong></li>
+                        <li>다수 지점 통합 관리</li>
+                        <li>API 연동 지원</li>
+                        <li>전담 컨설턴트 배정</li>
+                    </ul>
                 </div>
             </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>15</span>
-            </div>
+            <div class="slide-number">14</div>
         </div>
 
-        <div class="slide" id="slide16">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">2. 연구개발 내용 및 목표 (Technology & Goal)_기술 목표 (성능지표)</div>
-            <div class="message-box">
-                <h4>개선/개발할 3대 핵심 AI 엔진은 기보유 자산(B2B 데이터, 정부 과제 기술)을 활용하여 각 분야 SOTA 이상의 성능 달성을 목표로 합니다.</h4>
-                <ul>
-                    <li>본 사업을 통해 개선/개발하는 핵심 AI 엔진(VERA, TEM, INTRO)의 최종 성능 목표를 세계 최고 수준(SOTA) 및 국내 수준과 비교하여 제시합니다.</li>
-                    <li>B2B 운영을 통해 확보한 대규모 도메인 특화 데이터 와 정부 과제 기술 활용을 통해 목표 달성이 가능함을 강조합니다.</li>
-                </ul>
+        <!-- Slide 15: Market Analysis -->
+        <div class="slide">
+            <h2 class="slide-title">4. 사업화 전략</h2>
+            <p class="slide-subtitle">목표 시장 분석</p>
+            <div class="section-header">거대한 비효율 시장의 혁신 기회</div>
+            <div class="flex flex-col items-center space-y-6">
+                <div class="flex items-end space-x-4">
+                    <div class="text-center">
+                        <p class="text-lg font-semibold">TAM</p>
+                        <div class="w-40 h-40 bg-blue-200 rounded-full flex items-center justify-center p-2">
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-blue-900">2.5조원</p>
+                                <p class="text-xs text-blue-800">국내 디지털 헬스케어 시장</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-lg font-semibold">SAM</p>
+                        <div class="w-56 h-56 bg-blue-400 rounded-full flex items-center justify-center p-2">
+                            <div class="text-center">
+                                <p class="text-4xl font-bold text-white">4,500억원</p>
+                                <p class="text-sm text-blue-100">국내 의료 광고/마케팅 시장</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-lg font-semibold">SOM</p>
+                        <div class="w-32 h-32 bg-blue-600 rounded-full flex items-center justify-center p-2">
+                            <div class="text-center">
+                                <p class="text-xl font-bold text-white">500억원</p>
+                                <p class="text-xs text-blue-200">마케팅에 어려움을 겪는 중소형 병의원 대상 초기 목표 시장</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full max-w-3xl text-left space-y-4">
+                    <p><strong>TAM (Total Addressable Market):</strong> 국내 디지털 헬스케어 시장은 2024년 약 2.5조원 규모로, 마이데이터 시행과 함께 빠르게 성장 중입니다.</p>
+                    <p><strong>SAM (Serviceable Available Market):</strong> 직접적으로 혁신하고자 하는 의료 광고/마케팅 시장은 약 4,500억원 규모입니다. 우리는 이 시장의 비효율적인 광고비를 효과적인 정보 생성 솔루션 비용으로 전환시키고자 합니다.</p>
+                    <p><strong>SOM (Serviceable Obtainable Market):</strong> 초기에는 마케팅 인력/예산이 부족하지만 실력 있는 전국 <strong class="highlight">약 35,000개의 의원급 의료기관</strong>을 핵심 타겟으로 하여, 3년 내 시장 점유율 10% 이상, 연매출 500억원 이상 달성을 목표로 합니다.</p>
+                </div>
             </div>
-            <div class="content-area">
-                <h4>핵심 기술 성능지표</h4>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>평가 항목 (주요 성능)</th>
-                            <th>단위</th>
-                            <th>비중(%)</th>
-                            <th>세계 최고수준 (보유국/기관)</th>
-                            <th>연구개발 전 국내 수준 (보유기관)</th>
-                            <th>최종 기술 개선 목표치</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><b>1. VERA 엔진</b> (바이럴 마케팅 컨텐츠 판별)</td>
-                            <td>F1-score</td>
-                            <td>40%</td>
-                            <td>0.877 (미국, 중국/기관 정보 없음)</td>
-                            <td>0.86 (상명대학교)</td>
-                            <td><b>0.88</b></td>
-                        </tr>
-                        <tr>
-                            <td><b>2. TEM 엔진</b> (환자 경험 토픽 분류)</td>
-                            <td>F1-score</td>
-                            <td>30%</td>
-                            <td>0.84 (중국/Fudan Univ.)</td>
-                            <td>89.2% (정확도) (광운대학교)</td>
-                            <td><b>0.85</b></td>
-                        </tr>
-                        <tr>
-                            <td><b>3. INTRO 엔진</b> (맞춤형 추천 순위 정확도)</td>
-                            <td>NDCG</td>
-                            <td>30%</td>
-                            <td>0.57 (미국/USC, Adobe)</td>
-                            <td>86.2% (정확도) (경희대학교)</td>
-                            <td><b>0.60</b></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <h4>주요 평가 지표 설명</h4>
-                <ul>
-                    <li><b>F1-score:</b> 정밀도(Precision)와 재현율(Recall)의 조화 평균. 분류 작업의 균형 잡힌 성능을 측정.</li>
-                    <li><b>NDCG:</b> 순위가 매겨진 목록(추천)의 품질을 평가. 관련성 높은 항목이 상위에 노출될수록 높은 점수.</li>
-                </ul>
-            </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>16</span>
-            </div>
+            <div class="slide-number">15</div>
         </div>
 
-        <div class="slide" id="slide17">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">2. 연구개발 내용 및 목표 (Technology & Goal)_기술 목표 (평가방법 및 환경)</div>
-            <div class="message-box">
-                <h4>개발된 3대 핵심 AI 엔진의 성능은 KOLAS 공인시험기관을 통해 객관적이고 신뢰성 있는 방법으로 검증합니다.</h4>
-                <ul>
-                    <li>각 엔진(VERA, TEM, INTRO)의 목표 성능 달성 여부를 공인된 절차와 표준화된 지표(F1-score, NDCG)를 사용하여 평가합니다.</li>
-                    <li>엔진별 특성에 맞는 자체 구축 테스트 데이터셋과 명확한 평가 기준을 적용하여 평가의 타당성을 확보합니다.</li>
-                </ul>
+        <!-- Slide 16: Go-to-Market -->
+        <div class="slide">
+            <h2 class="slide-title">4. 사업화 전략</h2>
+            <p class="slide-subtitle">시장 진입 및 성장 전략</p>
+            <div class="section-header">단계별 시장 확대 전략 (Go-to-Market)</div>
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Phase 1: 초기 시장 진입 (런칭 후 1년)</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li><strong>기존 B2B 고객 전환:</strong> 현재 운영 중인 B2B 서비스(review_manager 등) 고객사를 대상으로 우선적으로 신규 플랫폼을 소개하고 초기 유저 확보.</li>
+                        <li><strong>콘텐츠 마케팅:</strong> 의료광고 규제, 병원 마케팅 성공/실패 사례 등 병원 경영진에게 유용한 정보를 담은 콘텐츠를 제작/배포하여 잠재고객 확보.</li>
+                        <li><strong>의사 커뮤니티 타겟:</strong> 의사들이 활동하는 온라인 커뮤니티 및 학회와 제휴하여 서비스 인지도 증대.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Phase 2: 시장 확장 (2~3년)</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li><strong>환자 대상 캠페인:</strong> '#슬기로운병원찾기' 등 대국민 캠페인을 통해 B2C 서비스 인지도를 높이고, 플랫폼 트래픽 증대를 통해 B2B 영업의 선순환 구조 구축.</li>
+                        <li><strong>데이터 기반 세일즈:</strong> 플랫폼 데이터를 분석하여 특정 진료과목/지역에서 평판이 좋으나 마케팅이 부족한 '숨은 실력자' 병원을 발굴하여 아웃바운드 세일즈 진행.</li>
+                        <li><strong>파트너십 확장:</strong> 보험사, 헬스케어 앱 등과 제휴하여 서비스 연동 및 공동 마케팅 추진.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Phase 3: 시장 선도 (4년 이후)</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li><strong>데이터 비즈니스:</strong> 비식별화된 의료 데이터를 기반으로 제약사, 연구기관 등에 인사이트를 제공하는 신규 사업 모델 모색.</li>
+                        <li><strong>서비스 영역 확장:</strong> 요양병원, 동물병원 등 유사한 정보 비대칭성 문제를 겪는 분야로 플랫폼 확장 검토.</li>
+                        <li><strong>글로벌 진출:</strong> 국내 성공 모델을 바탕으로 유사한 규제 및 시장 환경을 가진 동남아 등 해외 시장 진출 모색.</li>
+                    </ul>
+                </div>
             </div>
-            <div class="content-area">
-                <h4>핵심 기술 평가방법 및 환경 요약</h4>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>순번</th>
-                            <th>평가항목(성능지표)</th>
-                            <th>평가방법</th>
-                            <th>평가환경</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><b>VERA 엔진</b> (허위/광고성 리뷰 판별)<br>(F1-score)</td>
-                            <td>'허위/광고성' vs '정상' 라벨링된 테스트 데이터셋 (1,000건 이상) 기반 F1-score 측정</td>
-                            <td>KOLAS 국제공인시험기관의 객관적인 시험 평가 실시</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><b>TEM 엔진</b> (환자 경험 토픽 분류)<br>(F1-score)</td>
-                            <td>'7대 토픽' 다중 라벨링된 리뷰 테스트 데이터셋 (1,500건 이상) 기반 F1-score (Macro/Micro Average) 측정</td>
-                            <td>KOLAS 국제공인시험기관의 객관적인 시험 평가 실시</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td><b>INTRO 엔진</b> (맞춤형 추천 순위 정확도)<br>(NDCG)</td>
-                            <td>사용자 컨텍스트(300~500개)별 '실제 관련성 점수'(LLM 초안+전문가 검수)가 부여된 정답셋 기반 NDCG@10 측정</td>
-                            <td>KOLAS 국제공인시험기관의 객관적인 시험 평가 실시</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>17</span>
-            </div>
+            <div class="slide-number">16</div>
+        </div>
+        
+        <!-- Slide 17: Competitors -->
+        <div class="slide">
+            <h2 class="slide-title">4. 사업화 전략</h2>
+            <p class="slide-subtitle">경쟁 환경 분석</p>
+            <div class="section-header">차별화된 경쟁 우위</div>
+            <table class="w-full competitor-table">
+                <thead>
+                    <tr>
+                        <th class="w-1/4">구분</th>
+                        <th class="w-1/4 our-service">자사 플랫폼</th>
+                        <th class="w-1/4">모두닥</th>
+                        <th class="w-1/4">굿닥/기타</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>핵심 가치</th>
+                        <td class="our-service">신뢰성 높은 투명 정보</td>
+                        <td>검증된 리뷰</td>
+                        <td>병원 예약/접수 편의성</td>
+                    </tr>
+                    <tr>
+                        <th>리뷰 검증</th>
+                        <td class="our-service"><i class="fas fa-check-circle text-blue-600"></i><br><strong>LLM 기반 법률 준수 검토</strong></td>
+                        <td><i class="fas fa-check-circle text-green-600"></i><br>영수증 인증</td>
+                        <td><i class="fas fa-times-circle text-red-500"></i><br>상대적으로 미흡</td>
+                    </tr>
+                    <tr>
+                        <th>개인화</th>
+                         <td class="our-service"><i class="fas fa-check-circle text-blue-600"></i><br><strong>의료 마이데이터 연동</strong></td>
+                        <td><i class="fas fa-times-circle text-red-500"></i><br>제한적</td>
+                        <td><i class="fas fa-times-circle text-red-500"></i><br>제한적</td>
+                    </tr>
+                     <tr>
+                        <th>수익 모델</th>
+                         <td class="our-service">B2B SaaS (솔루션)</td>
+                        <td>광고, 중개 수수료</td>
+                        <td>광고, 중개 수수료</td>
+                    </tr>
+                    <tr>
+                        <th>병원 지원</th>
+                         <td class="our-service"><i class="fas fa-check-circle text-blue-600"></i><br><strong>정보 생성 보조 (SaaS)</strong></td>
+                        <td><i class="fas fa-times-circle text-red-500"></i><br>광고 상품 판매</td>
+                        <td><i class="fas fa-times-circle text-red-500"></i><br>광고 상품 판매</td>
+                    </tr>
+                     <tr>
+                        <th>경쟁 우위</th>
+                         <td class="our-service font-bold">리걸테크 기반 신뢰성,<br>마이데이터 기반 개인화,<br>상생의 BM 구조</td>
+                        <td class="text-sm">초기 시장 선점 및 리뷰 수</td>
+                        <td class="text-sm">높은 인지도 및 트래픽</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="slide-number">17</div>
         </div>
 
-        <div class="slide" id="slide18">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">3. 연구개발 현황 (Preparation Status)_선행연구 및 보유 지식재산권 현황</div>
-            <div class="message-box">
-                <h4>이미 확보된 B2B 서비스 기술력과 정부 R&D 역량을 바탕으로 본 과제 기술 개발의 상당 부분을 선행 완료했습니다.</h4>
-                <ul>
-                    <li>기반 기술 확보 현황: B2B 서비스 운영 및 정부 R&D 과제 수행을 통해 본 과제에 필요한 핵심 AI 기술(데이터 수집/분석, LLM/RAG, 다국어 처리 등)을 이미 확보하였고...</li>
-                    <li>보유 지식재산권 현황: 본 과제와 관련하여 ‘진료 매칭 방법 및 이를 수행하는 전자 장치’ 등 3건의 등록 특허를 보유하고 있습니다.</li>
-                </ul>
+        <!-- Part 5: Team & Vision -->
+        <!-- Slide 18: Team -->
+        <div class="slide">
+            <h2 class="slide-title">5. 창업기업 소개</h2>
+            <p class="slide-subtitle">우리는 이 문제를 해결할 최적의 팀입니다</p>
+            <div class="section-header">법률과 기술, 의료 산업을 이해하는 전문가 집단</div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-4">
+                    <img src="https://placehold.co/150x150/e0e7ff/3730a3?text=CEO" class="rounded-full mx-auto mb-4 border-4 border-white shadow-lg">
+                    <h3 class="text-xl font-bold">홍길동 CEO</h3>
+                    <p class="text-blue-600 font-semibold">의료법 전문 변호사</p>
+                    <p class="mt-2 text-gray-600">의료 소송 및 의료광고 규제 자문 경력 10년. 다수의 의료 스타트업 법률 자문을 통해 산업에 대한 깊은 이해도 보유. 리걸테크를 통해 사회 문제를 해결하고자 창업.</p>
+                </div>
+                 <div class="text-center p-4">
+                    <img src="https://placehold.co/150x150/d1fae5/065f46?text=CTO" class="rounded-full mx-auto mb-4 border-4 border-white shadow-lg">
+                    <h3 class="text-xl font-bold">김철수 CTO</h3>
+                    <p class="text-green-600 font-semibold">AI / LLM 전문가</p>
+                    <p class="mt-2 text-gray-600">KAIST AI 대학원 석사. 국내 대표 IT 기업에서 자연어처리(NLP) 모델 개발 경력 8년. B2B 리뷰 관리 솔루션 개발 총괄 경험.</p>
+                </div>
+                 <div class="text-center p-4">
+                    <img src="https://placehold.co/150x150/fee2e2/991b1b?text=CSO" class="rounded-full mx-auto mb-4 border-4 border-white shadow-lg">
+                    <h3 class="text-xl font-bold">이영희 CSO</h3>
+                    <p class="text-red-600 font-semibold">헬스케어 사업 전략 전문가</p>
+                    <p class="mt-2 text-gray-600">글로벌 컨설팅 펌 출신. 국내 대형 병원 및 디지털 헬스케어 기업의 중장기 성장 전략 수립 프로젝트 다수 수행. 시장과 고객에 대한 날카로운 통찰력 보유.</p>
+                </div>
             </div>
-            <div class="content-area">
-                <h4>1. 선행 연구 개발 현황</h4>
-                <ul>
-                    <li><b>병원 평판 데이터 수집:</b> 전국 5,000개 이상 병원, 수백만 건 데이터 확보/운영 중</li>
-                    <li><b>B2B 서비스 기반 기술:</b>
-                        <ul>
-                            <li><b>리뷰 매니저:</b> 멀티소스 수집/ETL, BERT/LLM 기반 분석(긍부정, 관련성), LLM 답변 생성</li>
-                            <li><b>리뷰 부스터:</b> EMR 연동 자동 요청, 키워드 추천, LLM 리뷰 초안 생성</li>
-                            <li><b>메디컨텐츠:</b> 의료법 준수(RAG) 콘텐츠 AI 생성</li>
-                        </ul>
-                    </li>
-                    <li><b>정부 R&D 기반 기술:</b> 초거대 AI 데이터 구축 (법률), 생성형 AI 플랫폼 (LLM 멀티에이전트, MRC, 다국어 처리)</li>
-                </ul>
-                <h4>2. 본 과제 기술개발 단계별 진행 현황</h4>
-                <table style="font-size: 0.8em;">
-                    <thead>
-                        <tr><th>단계</th><th>개발 내용</th><th>진행도 (%)</th><th>내용 상세 (기반 기술)</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>(1) 수집</td><td>데이터 파이프라인 구축/고도화</td><td>70%</td><td>리뷰 매니저 수집 기술 기반. B2C 확장 및 객관적 데이터 수집 모듈 추가 필요.</td></tr>
-                        <tr><td>(2) 처리</td><td>VERA 엔진 고도화</td><td>60%</td><td>기초 분석 AI 기확보. 2단계 하이브리드 아키텍처, 멀티모달, 다국어 고도화 필요.</td></tr>
-                        <tr><td>(3) 분석</td><td>TEM 엔진 개선</td><td>50%</td><td>키워드/감성 분석 기확보. 4단계 하이브리드 파이프라인, 토픽 정의, XAI 등 개선 필요.</td></tr>
-                        <tr><td>(4) 추천</td><td>INTRO 엔진 개발/개선</td><td>40%</td><td>LLM 대화형/다국어/MRC 기술 기반 확보. '순차적 의도' 알고리즘 신규 개발/적용 필요.</td></tr>
-                        <tr><td>(5) 서비스</td><td>B2C 신규 구축 / B2B 고도화</td><td>30%</td><td>B2C 신규 개발 필요. B2B는 운영 중이며 B2C 데이터 연동 및 AI 고도화 필요.</td></tr>
-                    </tbody>
-                </table>
+            <div class="mt-8 bg-gray-100 p-4 rounded-lg">
+                <p class="text-center font-semibold">이 외에도 B2B SaaS 개발, 서비스 기획, 병원 영업/마케팅 등 각 분야 전문가 5인으로 구성된 초기팀이 사업을 리드하고 있습니다.</p>
             </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>18</span>
-            </div>
+            <div class="slide-number">18</div>
         </div>
 
-        <div class="slide" id="slide19">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">3. 연구개발 현황 (Preparation Status)_지식재산권 확보 및 회피 방안</div>
-            <div class="message-box">
-                <h4>핵심 기술(VERA, TEM, INTRO)의 독창성을 기반으로 선행 특허와의 차별성을 확보하고, 신규 지식재산권 확보를 통해 기술 경쟁 우위를 공고히 합니다.</h4>
-                <ul>
-                    <li>유사 특허 분석: 본 과제 핵심 기술과 관련하여 국내 등록 특허를 분석하여 유사도가 높은 선행 특허 3건을 식별하고, 중복 우려 영역을 파악하였습니다.</li>
-                    <li>회피 및 확보 방안: 식별된 유사 특허와의 차별화 전략(도메인 특화, 엔진 융합 등)을 수립하여, 본 과제만의 고유 기술에 대한 신규 특허 출원 계획을 통해 지식재산권을 확보하겠습니다.</li>
-                </ul>
+        <!-- Slide 19: Why TIPS -->
+        <div class="slide">
+            <h2 class="slide-title">5. 창업기업 소개</h2>
+            <p class="slide-subtitle">TIPS 프로그램 지원 당위성 및 기대효과</p>
+            <div class="section-header">TIPS와 함께 딥테크 기반 사회 혁신을 만들겠습니다</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="solution-box p-6">
+                    <h3 class="text-xl font-bold text-blue-800 mb-3">TIPS 프로그램 적합성</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>딥테크 분야 부합:</strong> AI/빅데이터는 TIPS가 집중 지원하는 딥테크 분야이며, 2024년 딥테크 투자 중 가장 높은 성장률(+75.1%)을 기록한 핵심 영역입니다.</li>
+                        <li><strong>사회적 문제 해결:</strong> 본 과제는 국민 건강과 직결된 의료 정보 비대칭성이라는 중요한 사회적 문제를 기술을 통해 해결하고자 합니다.</li>
+                         <li><strong>시장 혁신 잠재력:</strong> 기존 4,500억 원 규모의 비효율적인 광고 시장을 혁신하고, 새로운 데이터 기반 헬스케어 시장을 창출할 잠재력이 높습니다.</li>
+                        <li><strong>우수한 팀 역량:</strong> 법률, AI 기술, 사업 전략 등 각 분야 최고 수준의 전문성을 갖춘 팀으로, 과제 성공 가능성이 매우 높습니다.</li>
+                    </ul>
+                </div>
+                <div class="chart-container p-6">
+                    <h3 class="text-xl font-bold mb-3">TIPS 선정 후 기대효과</h3>
+                    <ul class="list-disc list-inside space-y-4">
+                        <li><strong>기술 개발 가속화:</strong> 지원금을 통해 AI 모델 고도화 및 마이데이터 연동 시스템 개발에 필요한 우수 연구인력을 신속하게 채용하여 기술 개발 마일스톤을 조기 달성하겠습니다.</li>
+                        <li><strong>고용 창출:</strong> 과제 기간 2년 동안 AI 개발자, 데이터 분석가, 서비스 기획자 등 15명 이상의 신규 전문 인력을 고용할 계획입니다.</li>
+                        <li><strong>후속 투자 유치:</strong> TIPS 선정을 통해 기술력과 성장성을 공식적으로 인정받아, 사업 확장을 위한 Series A 후속 투자를 성공적으로 유치하겠습니다. (목표 50억 원)</li>
+                        <li><strong>사회적 가치 실현:</strong> 투명하고 신뢰도 높은 의료 정보 생태계를 구축하여 국민 건강 증진에 기여하고, 실력 있는 중소 병의원의 동반 성장을 지원하겠습니다.</li>
+                    </ul>
+                </div>
             </div>
-            <div class="content-area">
-                <h4>1. 유사 특허 분석 결과</h4>
-                <table style="font-size: 0.85em;">
-                    <thead><tr><th>순번</th><th>특허명</th><th>유사·중복 우려 영역</th></tr></thead>
-                    <tbody>
-                        <tr><td>1</td><td>큐레이션엔진을 이용한 추천음식콘텐츠...</td><td>콘텐츠 큐레이션, 개인화 추천, 메타데이터 처리</td></tr>
-                        <tr><td>2</td><td>생성형 AI를 활용한 소비자 내면 성향 유형화...</td><td>AI 기반 콘텐츠 분석, 소비자 성향 분석, 개인화</td></tr>
-                        <tr><td>3</td><td>인공지능을 활용하여 공공기관 빅데이터 포털의...</td><td>빅데이터 콘텐츠 분석, 자동 관리, 텍스트 마이닝</td></tr>
-                    </tbody>
-                </table>
-                <h4>2. 지식재산권 확보 및 회피 방안</h4>
-                <h5>유사 특허별 회피 방안</h5>
-                <ul>
-                    <li><b>① 의료/병원 도메인 특화:</b> 기술 적용 범위를 명확히 한정 (공통)</li>
-                    <li><b>② VERA 엔진:</b> 허위/광고/바이럴 탐지 기능 (선행 특허 미포함)</li>
-                    <li><b>③ TEM 엔진:</b> 의료 특화 7대 토픽 및 XAI (단순 메타/성향 분석과 상이)</li>
-                    <li><b>④ INTRO 엔진:</b> 복합 의도 반영 '순차적' 추천 (선행 특허 미포함)</li>
-                    <li><b>⑤ 3개 엔진 통합 시너지 및 예약 데이터 연동</b></li>
-                </ul>
-                <h5>신규 지식재산권 확보 계획</h5>
-                <p>상기 차별화 요소(3개 엔진 통합 시스템, 각 엔진의 고유 아키텍처/알고리즘 등) 중심 신규 특허 출원 예정.</p>
-            </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>19</span>
-            </div>
+            <div class="slide-number">19</div>
         </div>
 
-        <div class="slide" id="slide20">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">4. 표준화 전략</div>
-            <div class="message-box">
-                <h4>독자 개발 AI 기술(VERA, TEM) 기반의 'Trust-Score' 및 'PX 분석'을 국가 및 국제 표준으로 제정하여 의료 정보 신뢰성 및 환자 경험 평가의 새로운 기준을 제시합니다.</h4>
-                <ul>
-                    <li>'Trust-Score' 표준화: VERA 엔진의 허위 리뷰 탐지 기술을 기반으로, 온라인 의료 정보의 신뢰도를 평가하는 표준 지표(Trust-Score)를 NP 제안부터 국제 표준화까지 단계적으로 추진함.</li>
-                    <li>'PX 분석' 표준화: TEM 엔진의 환자 경험 토픽 분석 기술을 활용하여, 비정형 리뷰 데이터 기반의 환자 경험(PX) 분석 및 평가 표준을 국가표준(NP) 제안 및 국제 표준(HL7, ISO 등) 연계 중심으로 추진함.</li>
-                </ul>
+        <!-- Slide 20: Thank You -->
+        <div class="slide flex flex-col justify-center items-center text-center">
+            <h2 class="text-5xl font-extrabold text-blue-900">감사합니다</h2>
+            <p class="text-2xl text-gray-600 mt-4">질의응답</p>
+            <div class="mt-16 border-t pt-8 w-full max-w-md">
+                 <p class="text-lg font-semibold">Company Name</p>
+                 <p class="text-gray-500">contact@company.com</p>
+                 <p class="text-gray-500">www.company.com</p>
             </div>
-            <div class="content-area">
-                <h4>표준화 전략</h4>
-                <table style="font-size: 0.8em;">
-                    <thead><tr><th>‘Trust Score’ 프로세스 표준화</th><th>환자 경험(PX) 분석 표준화</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td><b>NP 제안 (1-2년차)</b><br>• VERA 엔진 기반 Trust-Score 알고리즘 고도화<br>• 신뢰도 점수, 탐지 근거 등 메타데이터 정의</td>
-                            <td><b>NP 제안 (1-2년차)</b><br>• 4대 Dimension 기반 PX 표준 토픽 정의<br>• HL7 FHIR 기반 PX 리소스 확장 제안<br>• TEM 성능(F1≥0.85), PEA 결과와 상관관계 분석</td>
-                        </tr>
-                        <tr>
-                            <td><b>사실상 표준 (2-3년차)</b><br>• 주요 플랫폼(네이버 등) 협력, API 생태계 구축<br>• 기술 우위(SOTA, 특허) 확보, 인증제 운영</td>
-                            <td><b>사실상 표준 (2-3년차)</b><br>• 심평원 PEA 연계 협의<br>• PX 분석 리포팅 표준 템플릿 개발/보급<br>• 의료기관 QI 활동 활용 가이드라인 제시</td>
-                        </tr>
-                        <tr>
-                            <td><b>국제 표준화 (3-4년차)</b><br>• ISO/IEC JTC1 SC42 (AI) - 신뢰성 평가 표준 제안<br>• W3C Verifiable Credential 연동</td>
-                            <td><b>국제 표준화 (3-5년차)</b><br>• HL7 협력 (KR Core 확장, Connectathon)<br>• ISO TC215 (Health Informatics) - 환자경험 평가 표준 기여</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <h4>기대 효과</h4>
-                <ul>
-                    <li><b>산업적:</b> 의료 리뷰 신뢰성 향상, 환자 중심 의료 서비스 품질 개선, 데이터 기반 신규 서비스 창출</li>
-                    <li><b>기술적:</b> AI 신뢰성/PX 분석 국제 표준화 선도, 한국형 의료정보 표준 글로벌 확산, 상호운용성 확보</li>
-                    <li><b>사회적:</b> 환자 알 권리 보장, 의료기관 서비스 품질 개선 유도, 공정한 평가 체계로 사회적 신뢰 제고</li>
-                </ul>
-            </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>20</span>
-            </div>
+            <div class="slide-number">20</div>
         </div>
-
-        <div class="slide" id="slide21">
-            <div class="top-title">(II. 해결방안 및 세부내용)</div>
-            <div class="sub-title">5. 업무분장 및 추진일정</div>
-            <div class="message-box">
-                <h4>주관기관의 단독 수행으로 책임 있는 기술 개발을 추진하며, 2개년 24개월간 체계적인 일정 계획하에 사업 목표를 달성합니다.</h4>
-                <ul>
-                    <li>업무 분장: 본 과제의 모든 기술 개발(AI 엔진 고도화, 플랫폼 구축 등)은 주관기관인 당사가 100% 책임지고 수행합니다.</li>
-                    <li>추진 일정: 데이터 확보부터 엔진 개발, 서비스 적용, 최종 평가까지 2개년(24개월)간의 단계별 세부 추진 계획 및 일정에 맞춰 성공적으로 수행하겠습니다.</li>
-                </ul>
-            </div>
-            <div class="content-area">
-                <h4>1. 수행기관별 업무 분장</h4>
-                <table>
-                    <thead><tr><th>수행기관</th><th>담당 기술개발 내용</th><th>기술개발 비중(%)</th></tr></thead>
-                    <tbody>
-                        <tr>
-                            <td><b>당사(주관기관)</b></td>
-                            <td>• 핵심 AI 엔진(VERA, TEM, INTRO) 고도화 및 신규 개발<br>• 데이터 수집/처리 파이프라인 구축 및 운영<br>• B2C 플랫폼 신규 구축 및 외국인 특화 기능 개발<br>• 기존 B2B 솔루션 연동 및 고도화</td>
-                            <td><b>100%</b></td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                <h4>2. 기술개발 추진 일정</h4>
-                <table class="gantt-table">
-                    <thead>
-                        <tr>
-                            <th>차수</th>
-                            <th>세부 추진내용</th>
-                            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th>
-                            <th>비고</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td rowspan="10"><b>1차<br>(2026)</b></td>
-                            <td>(0) 준비</td>
-                            <td class="bar">■</td><td class="bar">■</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>- 데이터 확보 계획 구체화/검증</td>
-                            <td class="bar">■</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>(1) 수집 (1차 데이터 확보)</td>
-                            <td></td><td></td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td></td><td></td><td></td><td></td><td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>(2) 처리 (VERA 1차)</td>
-                            <td></td><td></td><td></td><td></td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td></td><td></td><td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>- 1차 모델 학습/평가</td>
-                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="bar">■</td><td class="bar">■</td><td></td><td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>(3) 분석 (TEM 1차)</td>
-                            <td></td><td></td><td></td><td></td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td></td><td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>(4) 추천 (INTRO)</td>
-                            <td></td><td></td><td></td><td></td><td></td><td></td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>(5) 적용 (B2C 기본, B2B 연동)</td>
-                            <td></td><td></td><td></td><td></td><td></td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td rowspan="10"><b>2차<br>(2027)</b></td>
-                            <td>(1) 수집 (2차 데이터 확보)</td>
-                            <td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>(2) 처리 (VERA 최종)</td>
-                            <td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>- 최종 성능 평가 (KOLAS)</td>
-                            <td></td><td></td><td></td><td></td><td></td><td class="bar">■</td><td class="bar">■</td><td></td><td></td><td></td><td></td><td></td>
-                            <td class="note">KOLAS</td>
-                        </tr>
-                        <tr>
-                            <td>(3) 분석 (TEM 최종)</td>
-                            <td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td></td><td></td><td></td><td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>- 최종 성능 평가 (KOLAS)</td>
-                            <td></td><td></td><td></td><td></td><td></td><td></td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td></td><td></td><td></td>
-                            <td class="note">KOLAS</td>
-                        </tr>
-                        <tr>
-                            <td>(4) 추천 (INTRO 최종)</td>
-                            <td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td></td><td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>- 최종 성능 평가 (KOLAS)</td>
-                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td></td>
-                            <td class="note">KOLAS</td>
-                        </tr>
-                        <tr>
-                            <td>(5) 적용 (B2C 완성, 외국인)</td>
-                            <td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>- 최종 서비스 론칭</td>
-                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="bar">■</td><td class="bar">■</td><td class="bar">■</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="footer">
-                <span class="logo">TECH INCUBATOR PROGRAM FOR STARTUP</span>
-                <span>21</span>
-            </div>
-        </div>
-
     </div>
 
 </body>
