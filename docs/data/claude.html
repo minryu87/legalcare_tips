@@ -3,2877 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>투명한 의료 정보 생태계 구축을 위한 기술 전략</title>
+    <title>메디컨텐츠(MediContents) - 심미치료 특화 솔루션</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+        :root {
+            --primary-color: #5D3FD3; /* 심미치료에 어울리는 고급스러운 퍼플/바이올렛 */
+            --secondary-color: #4B0082;
+            --accent-color: #E0B0FF; /* 라일락 포인트 */
+            --text-color: #333333;
+            --white: #ffffff;
+            --risk-color: #e53e3e;
         }
-        
+
         body {
-            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #f5f5f5;
-            overflow-x: hidden;
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            margin: 0;
+            background-color: var(--white);
         }
-        
-        .slide {
-            width: 100vw;
-            height: 100vh;
-            background: white;
-            display: none;
-            flex-direction: column;
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3.2em;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        header p.subtitle {
+            font-size: 1.4em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        section h2 {
+            font-size: 2.4em;
+            color: var(--primary-color);
+            text-align: center;
+            font-weight: 800;
+            margin-bottom: 50px;
             position: relative;
-            page-break-after: always;
         }
         
-        .slide.active {
+        section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 20px auto 0;
+        }
+
+        .section-desc {
+            text-align: center;
+            font-size: 1.2em;
+            color: #555;
+            max-width: 800px;
+            margin: -30px auto 50px;
+            word-break: keep-all;
+        }
+
+        /* Comparison Grid */
+        .compare-container {
             display: flex;
+            gap: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
-        
-        .slide-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px 60px;
-            color: white;
-        }
-        
-        .major-category {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
-        
-        .minor-category {
-            font-size: 18px;
-            font-weight: 400;
-            opacity: 0.95;
-        }
-        
-        .slide-content {
+
+        .compare-box {
             flex: 1;
-            padding: 50px 60px 40px;
-            overflow-y: auto;
+            padding: 50px;
+            text-align: center;
         }
-        
-        .governing-message {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 25px 30px;
-            border-radius: 12px;
-            margin-bottom: 35px;
-            border-left: 5px solid #667eea;
+
+        .compare-bad {
+            background-color: #f1f1f1;
+            color: #777;
         }
-        
-        .gov-msg-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 12px;
-            line-height: 1.4;
-        }
-        
-        .gov-msg-content {
-            font-size: 16px;
-            color: #4a5568;
-            line-height: 1.7;
-        }
-        
-        .gov-msg-content ul {
-            margin-top: 10px;
-            padding-left: 20px;
-        }
-        
-        .gov-msg-content li {
-            margin-bottom: 8px;
-        }
-        
-        .content-section {
-            margin-bottom: 30px;
-        }
-        
-        .section-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #667eea;
-        }
-        
-        .content-text {
-            font-size: 15px;
-            line-height: 1.8;
-            color: #4a5568;
-            margin-bottom: 15px;
-        }
-        
-        .bullet-list {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .bullet-list li {
-            padding-left: 25px;
-            margin-bottom: 12px;
+
+        .compare-good {
+            background-color: #f3e5f5; /* 연한 퍼플 배경 */
+            color: var(--primary-color);
             position: relative;
-            font-size: 15px;
-            line-height: 1.7;
-            color: #4a5568;
+            border: 2px solid var(--primary-color);
+            z-index: 1;
         }
-        
-        .bullet-list li:before {
-            content: "▪";
-            position: absolute;
-            left: 0;
-            color: #667eea;
-            font-size: 18px;
-        }
-        
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 14px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .data-table th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 12px;
-            text-align: left;
-            font-weight: 600;
-        }
-        
-        .data-table td {
-            padding: 12px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        
-        .data-table tr:hover {
-            background: #f7fafc;
-        }
-        
-        .slide-nav {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            gap: 10px;
-            z-index: 1000;
-        }
-        
-        .nav-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        }
-        
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
-        }
-        
-        .nav-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        
-        .slide-counter {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 8px 16px;
+
+        .compare-badge {
+            display: inline-block;
+            padding: 5px 15px;
             border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            z-index: 1000;
-        }
-        
-        .two-column {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin: 20px 0;
-        }
-        
-        .column {
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-        
-        .process-box {
-            background: white;
-            border: 2px solid #667eea;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 15px 0;
-        }
-        
-        .process-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-        
-        .ecosystem-diagram {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 12px;
-            padding: 40px;
-            margin: 20px 0;
-            position: relative;
-            min-height: 350px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .diagram-node {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            text-align: center;
-            flex: 1;
-            max-width: 200px;
-        }
-        
-        .diagram-node.platform {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            max-width: 220px;
-        }
-        
-        .node-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-        
-        .node-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-        
-        .node-items {
-            text-align: left;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-        
-        .arrow-right, .arrow-left {
-            font-size: 36px;
-            color: #667eea;
             font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 20px;
         }
-        
-        .tech-pipeline {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 30px;
-            margin: 20px 0;
-        }
-        
-        .pipeline-flow {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .pipeline-step {
-            background: white;
-            border: 2px solid #667eea;
-            border-radius: 8px;
-            padding: 20px;
-            flex: 1;
-            min-width: 150px;
-            text-align: center;
-        }
-        
-        .pipeline-step .step-num {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            line-height: 30px;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-        
-        .pipeline-step .step-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 8px;
-        }
-        
-        .pipeline-step .step-desc {
-            font-size: 13px;
-            color: #4a5568;
-            line-height: 1.5;
-        }
-        
-        .pipeline-arrow {
-            font-size: 24px;
-            color: #667eea;
-        }
-        
-        .five-stage-diagram {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 12px;
-            padding: 40px;
-            margin: 20px 0;
-        }
-        
-        .stage-center {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .stage-center-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #667eea;
-            background: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            display: inline-block;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        
-        .stage-innovations {
+
+        .badge-bad { background: #ddd; color: #555; }
+        .badge-good { background: var(--primary-color); color: white; }
+
+        /* Cards */
+        .grid-box {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: var(--primary-color);
+        }
+
+        .card-icon {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        /* CEO Section */
+        .ceo-section {
+            background-color: #f8f4fc;
+            border-radius: 20px;
+            padding: 60px;
+        }
+        .ceo-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
             margin-bottom: 30px;
         }
-        
-        .innovation-box {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        .ceo-badge {
+            background: var(--white);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 800;
+            color: var(--primary-color);
+            box-shadow: 0 5px 15px rgba(93, 63, 211, 0.2);
         }
-        
-        .innovation-box.trust {
-            border-left: 5px solid #4caf50;
+        .ceo-highlight {
+            font-weight: bold;
+            background: linear-gradient(180deg, rgba(255,255,255,0) 60%, rgba(224, 176, 255, 0.4) 60%);
         }
-        
-        .innovation-box.utility {
-            border-left: 5px solid #2196f3;
-        }
-        
-        .stage-flow {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        .stage-item {
-            background: white;
-            border-radius: 8px;
-            padding: 15px;
-            flex: 1;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .stage-item .stage-number {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            line-height: 25px;
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        
-        .stage-item .stage-name {
-            font-size: 14px;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 5px;
-        }
-        
-        .stage-item .stage-tech {
-            font-size: 12px;
-            color: #4a5568;
-        }
-        
-        .service-mockup {
-            background: #f8f9fa;
-            border: 2px dashed #cbd5e0;
-            border-radius: 12px;
-            padding: 30px;
-            margin: 15px 0;
+
+        footer {
+            background: #2c3e50;
+            color: #ccc;
+            padding: 50px 0;
             text-align: center;
         }
-        
-        .mockup-screen {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 10px 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        
-        .mockup-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px;
-            border-radius: 8px 8px 0 0;
-            font-weight: 700;
-        }
-        
-        .mockup-content {
-            padding: 20px;
-            text-align: left;
-        }
-        
-        .feature-badge {
+
+        .btn-cta {
             display: inline-block;
-            background: #4caf50;
+            background-color: var(--primary-color);
             color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 12px;
-            margin: 5px;
-        }
-        
-        .b2b-solution {
-            background: white;
-            border: 2px solid #667eea;
+            padding: 15px 40px;
             border-radius: 8px;
-            padding: 20px;
-            margin: 10px 0;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 30px;
+            transition: 0.3s;
         }
-        
-        .solution-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #667eea;
-            margin-bottom: 10px;
+        .btn-cta:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.05);
         }
-        
-        @media print {
-            .slide {
-                display: flex !important;
-                page-break-after: always;
-            }
-            .slide-nav, .slide-counter {
-                display: none;
-            }
+
+        @media (max-width: 768px) {
+            .compare-container { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
-<!-- 슬라이드 1: 필요 서비스 -->
-<div class="slide active">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">1. 연구개발 요약 (Solution) - 필요 서비스</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">환자(내/외국인)와 병원 모두를 위한 '투명한 의료정보 선순환 생태계' 구축</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li>환자에게는 신뢰 기반의 맞춤형 정보 접근성(다국어 포함)을 높이고, 병원에게는 효율적인 평판 관리 및 공정한 홍보 기회를 제공합니다.</li>
-                    <li>플랫폼은 AI 기반 검증, 데이터 통합, B2B SaaS 제공을 통해 이러한 선순환 생태계를 구현하고 지원합니다.</li>
-                </ul>
-            </div>
+    <header>
+        <div class="container">
+            <p style="font-weight: 500; color: #E0B0FF; margin-bottom: 10px;">High-End Aesthetic Marketing Solution</p>
+            <h1>메디컨텐츠 : Aesthetic</h1>
+            <p class="subtitle">"우리 시술이 더 우월하니까."<br>기술적 우위를 증명하는 프리미엄 브랜딩 솔루션</p>
         </div>
-        
-        <div class="ecosystem-diagram">
-            <div class="diagram-node">
-                <div class="node-icon">👥</div>
-                <div class="node-title">환자<br>(내/외국인)</div>
-                <div class="node-items">
-                    • 신뢰 정보 탐색<br>
-                    • 맞춤형 추천<br>
-                    • 후기 작성<br>
-                    • 비용 확인
-                </div>
-            </div>
-            
-            <div class="arrow-right">⟹</div>
-            
-            <div class="diagram-node platform">
-                <div class="node-icon">🛡️</div>
-                <div class="node-title">플랫폼</div>
-                <div class="node-items">
-                    • AI 리뷰 검증<br>
-                    • 데이터 통합<br>
-                    • 마이데이터 연동<br>
-                    • B2B SaaS 제공
-                </div>
-            </div>
-            
-            <div class="arrow-left">⟸</div>
-            
-            <div class="diagram-node">
-                <div class="node-icon">🏥</div>
-                <div class="node-title">병원/의원</div>
-                <div class="node-items">
-                    • 공정한 홍보<br>
-                    • 비용 절감<br>
-                    • 후기 관리<br>
-                    • 콘텐츠 생성
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    </header>
 
-<!-- 슬라이드 2: 필요 기술 -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">1. 연구개발 요약 (Solution) - 필요 기술</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">다양한 의료 데이터를 기보유 기술 기반 '개선 및 고도화'(VERA/TEM/INTRO)를 통해 가공하여 B2C/B2B 서비스 전반에 핵심 가치를 제공합니다.</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li>기존 B2B 솔루션 및 정부 과제 수행 역량을 활용하여 핵심 AI 엔진을 개선하고 서비스 적용 범위를 확장합니다.</li>
-                    <li>이를 통해 사용자(내/외국인)에게 더욱 신뢰성 높고 유용한 맞춤형 의료 정보를 제공합니다.</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="tech-pipeline">
-            <div class="pipeline-flow">
-                <div class="pipeline-step">
-                    <div class="step-title">데이터 소스</div>
-                    <div class="step-desc">공개 데이터 + 평판 데이터</div>
-                </div>
-                
-                <div class="pipeline-arrow">→</div>
-                
-                <div class="pipeline-step">
-                    <div class="step-title">수집/표준화</div>
-                    <div class="step-desc">대량 수집 및 가공</div>
-                </div>
-                
-                <div class="pipeline-arrow">→</div>
-                
-                <div class="pipeline-step" style="background: #fff3e0;">
-                    <div class="step-title">VERA</div>
-                    <div class="step-desc">필터링 및 검증</div>
-                </div>
-                
-                <div class="pipeline-arrow">→</div>
-                
-                <div class="pipeline-step" style="background: #e3f2fd;">
-                    <div class="step-title">TEM</div>
-                    <div class="step-desc">토픽 분석</div>
-                </div>
-                
-                <div class="pipeline-arrow">→</div>
-                
-                <div class="pipeline-step">
-                    <div class="step-title">마스터 DB</div>
-                    <div class="step-desc">병원별 통합</div>
-                </div>
-                
-                <div class="pipeline-arrow">→</div>
-                
-                <div class="pipeline-step" style="background: #f3e5f5;">
-                    <div class="step-title">INTRO</div>
-                    <div class="step-desc">맞춤 추천</div>
-                </div>
-                
-                <div class="pipeline-arrow">→</div>
-                
-                <div class="pipeline-step">
-                    <div class="step-title">서비스 제공</div>
-                    <div class="step-desc">B2C / B2B</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="two-column">
-            <div class="column">
-                <h3 style="color: #667eea; margin-bottom: 15px;">📱 B2C 서비스 화면 예시</h3>
-                <div class="mockup-screen" style="font-size: 12px;">
-                    <div style="background: #667eea; color: white; padding: 8px; margin: -20px -20px 10px; border-radius: 8px 8px 0 0;">
-                        병원 검색 결과
-                    </div>
-                    <div style="border: 1px solid #e0e0e0; padding: 10px; margin: 5px 0; border-radius: 4px;">
-                        <strong>○○치과</strong>
-                        <span class="feature-badge" style="font-size: 10px;">VERA 인증</span>
-                        <div style="font-size: 11px; color: #666; margin-top: 5px;">
-                            친절도 ⭐⭐⭐⭐⭐ | 통증관리 ⭐⭐⭐⭐
-                        </div>
-                    </div>
-                    <div style="border: 1px solid #e0e0e0; padding: 10px; margin: 5px 0; border-radius: 4px;">
-                        <strong>△△치과</strong>
-                        <span class="feature-badge" style="font-size: 10px; background: #2196f3;">영어 가능</span>
-                        <div style="font-size: 11px; color: #666; margin-top: 5px;">
-                            위생관리 ⭐⭐⭐⭐⭐ | 설명성 ⭐⭐⭐⭐
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="column">
-                <h3 style="color: #667eea; margin-bottom: 15px;">💼 B2B 솔루션</h3>
-                <div class="b2b-solution">
-                    <div class="solution-title">리뷰매니저</div>
-                    <div style="font-size: 13px; color: #666;">다채널 리뷰 통합 관리 및 분석</div>
-                </div>
-                <div class="b2b-solution">
-                    <div class="solution-title">리뷰부스터</div>
-                    <div style="font-size: 13px; color: #666;">진성 리뷰 확보 자동화</div>
-                </div>
-                <div class="b2b-solution">
-                    <div class="solution-title">메디컨텐츠</div>
-                    <div style="font-size: 13px; color: #666;">의료법 준수 콘텐츠 생성</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- 슬라이드 3: 개요 -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">2. 연구개발 내용 및 목표 (Technology & Goal) - 개요</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">이미 검증된 B2B 기술과 정부 과제 역량을 바탕으로, 데이터 확보부터 3대 핵심 AI 엔진(VERA/TEM/INTRO) 고도화 및 서비스 확장 적용까지 5단계 기술 전략을 추진합니다.</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li>본 과제는 기확보/검증된 기술의 부분적 고도화(AI 엔진) 및 신규 분야 적용(다국어 기능 등)에 집중하여 사업 경쟁력을 강화합니다.</li>
-                    <li>5단계(준비-수집-처리-분석-적용)를 통해 AI 엔진 성능을 SOTA 이상으로 개선하고, B2C/B2B 서비스 완성도를 높입니다.</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="five-stage-diagram">
-            <div class="stage-center">
-                <div class="stage-center-title">AI 기반 의료정보 분석 엔진 개선 및 확장</div>
-            </div>
+    <section>
+        <div class="container">
+            <h2>'예뻐지기 위한 선택'은 다릅니다</h2>
+            <p class="section-desc">
+                환자는 아파서 병원을 찾는 것이 아닙니다. 더 나은 자신이 되기 위해 병원을 쇼핑(Shopping)합니다.<br>
+                그들은 이미 A병원과 B병원의 시술법 차이까지 공부한 <strong>똑똑한 소비자</strong>입니다.
+            </p>
             
-            <div class="stage-innovations">
-                <div class="innovation-box trust">
-                    <div style="font-size: 16px; font-weight: 700; color: #4caf50; margin-bottom: 10px;">✓ 신뢰성 혁신</div>
-                    <div style="font-size: 14px; color: #666;">VERA 엔진 고도화를 통한<br>허위/광고 필터링</div>
-                </div>
-                <div class="innovation-box utility">
-                    <div style="font-size: 16px; font-weight: 700; color: #2196f3; margin-bottom: 10px;">✓ 유용성 혁신</div>
-                    <div style="font-size: 14px; color: #666;">TEM/INTRO 엔진 고도화를 통한<br>맞춤 분석/추천</div>
-                </div>
-            </div>
-            
-            <div class="stage-flow">
-                <div class="stage-item">
-                    <div class="stage-number">0</div>
-                    <div class="stage-name">준비</div>
-                    <div class="stage-tech">Data Acquisition</div>
-                </div>
-                <div style="font-size: 20px; color: #667eea;">→</div>
-                <div class="stage-item">
-                    <div class="stage-number">1</div>
-                    <div class="stage-name">수집</div>
-                    <div class="stage-tech">Data Pipeline</div>
-                </div>
-                <div style="font-size: 20px; color: #667eea;">→</div>
-                <div class="stage-item" style="background: #fff3e0;">
-                    <div class="stage-number">2</div>
-                    <div class="stage-name">처리</div>
-                    <div class="stage-tech">VERA Engine</div>
-                </div>
-                <div style="font-size: 20px; color: #667eea;">→</div>
-                <div class="stage-item" style="background: #e3f2fd;">
-                    <div class="stage-number">3</div>
-                    <div class="stage-name">분석</div>
-                    <div class="stage-tech">TEM Engine</div>
-                </div>
-                <div style="font-size: 20px; color: #667eea;">→</div>
-                <div class="stage-item" style="background: #f3e5f5;">
-                    <div class="stage-number">4</div>
-                    <div class="stage-name">적용</div>
-                    <div class="stage-tech">INTRO & Service</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="content-section">
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th style="width: 15%;">단계</th>
-                        <th style="width: 35%;">개발 내용</th>
-                        <th style="width: 50%;">핵심 기술</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>(0) 준비</strong></td>
-                        <td>Data Acquisition</td>
-                        <td>B2B 기반 데이터 확보 계획 (전국 5,000+ 병원)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>(1) 수집</strong></td>
-                        <td>Data Pipeline</td>
-                        <td>B2B 기술 기반 고도화 (멀티채널, 대규모 처리)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>(2) 처리</strong></td>
-                        <td>VERA Engine</td>
-                        <td>AI 고도화 ①: 허위/광고 필터링 (F1≥0.88)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>(3) 분석</strong></td>
-                        <td>TEM Engine</td>
-                        <td>AI 고도화 ②: 환자 경험 분석 (F1≥0.85)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>(4) 적용</strong></td>
-                        <td>INTRO Engine & Service</td>
-                        <td>AI 개발/고도화 ③: 맞춤 추천 (NDCG≥0.60) + 다국어 기능 적용</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<!-- 슬라이드 4: 서비스 예시 -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">2. 연구개발 내용 및 목표 - 서비스 예시</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">신규 B2C 서비스는 사용자 친화적 디자인(다국어 지원 포함)으로 구현되며, 기존 B2B 솔루션은 이미 안정적으로 운영 중입니다.</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li><strong>(신규 B2C 서비스)</strong> 신뢰도 높은 정보 검색 및 맞춤 추천 기능을 사용자 친화적인 UI/UX 디자인(목업)으로 구현합니다.</li>
-                    <li><strong>(기존 B2B 솔루션)</strong> 현재 안정적으로 운영 중인 리뷰매니저, 리뷰부스터, 메디컨텐츠 서비스는, 본 과제를 통해 확보될 데이터와 개선될 AI 기능을 적용하여 더욱 고도화될 것입니다.</li>
-                </ul>
-            </div>
-        </div>
-		<div class="two-column">
-        <div class="column">
-            <h3 style="color: #667eea; margin-bottom: 15px;">🆕 (신규) B2C 서비스 - 디자인 목업</h3>
-            <div class="service-mockup">
-                <div class="mockup-screen">
-                    <div class="mockup-header">
-                        🔍 병원 검색
-                        <span style="float: right; font-size: 14px;">🌐 한국어 ▼</span>
-                    </div>
-                    <div class="mockup-content">
-                        <div style="background: #f0f4f8; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-                            <div style="font-weight: 700; margin-bottom: 10px;">🏥 ○○치과의원</div>
-                            <div style="display: flex; gap: 5px; margin-bottom: 10px;">
-                                <span class="feature-badge">✓ VERA 인증</span>
-                                <span class="feature-badge" style="background: #2196f3;">영어 가능</span>
-                            </div>
-                            <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
-                                <strong>친절도:</strong> ⭐⭐⭐⭐⭐ (4.8/5.0)<br>
-                                <strong>통증관리:</strong> ⭐⭐⭐⭐ (4.2/5.0)
-                            </div>
-                            <div style="font-size: 12px; background: #e8f5e9; padding: 8px; border-radius: 4px;">
-                                💡 <strong>추천 이유:</strong> 귀하가 중시하는 친절도가 상위 5%입니다
-                            </div>
-                        </div>
-                        
-                        <div style="background: #f0f4f8; padding: 15px; border-radius: 8px;">
-                            <div style="font-weight: 700; margin-bottom: 10px;">🏥 △△치과의원</div>
-                            <div style="display: flex; gap: 5px; margin-bottom: 10px;">
-                                <span class="feature-badge">✓ VERA 인증</span>
-                                <span class="feature-badge" style="background: #ff9800;">보험 적용</span>
-                            </div>
-                            <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
-                                <strong>위생관리:</strong> ⭐⭐⭐⭐⭐ (4.9/5.0)<br>
-                                <strong>설명성:</strong> ⭐⭐⭐⭐ (4.3/5.0)
-                            </div>
-                            <div style="font-size: 12px; background: #e3f2fd; padding: 8px; border-radius: 4px;">
-                                💡 <strong>추천 이유:</strong> 위생관리 경험이 우수하고 2km 거리입니다
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="column">
-            <h3 style="color: #667eea; margin-bottom: 15px;">✅ (기존) B2B 솔루션 - 실제 운영 화면</h3>
-            
-            <div class="b2b-solution" style="margin-bottom: 15px;">
-                <div class="solution-title">📊 리뷰매니저</div>
-                <div style="background: #f8f9fa; padding: 12px; border-radius: 4px; margin-top: 10px;">
-                    <div style="font-size: 12px; color: #666; margin-bottom: 8px;">다채널 리뷰 통합 대시보드</div>
-                    <div style="display: flex; justify-content: space-between; font-size: 11px;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 18px; font-weight: 700; color: #4caf50;">152</div>
-                            <div style="color: #666;">네이버</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 18px; font-weight: 700; color: #ff9800;">89</div>
-                            <div style="color: #666;">카카오</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 18px; font-weight: 700; color: #2196f3;">67</div>
-                            <div style="color: #666;">구글</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="b2b-solution" style="margin-bottom: 15px;">
-                <div class="solution-title">🚀 리뷰부스터</div>
-                <div style="background: #f8f9fa; padding: 12px; border-radius: 4px; margin-top: 10px;">
-                    <div style="font-size: 12px; color: #666; margin-bottom: 8px;">환자 리뷰 요청 자동화</div>
-                    <div style="font-size: 11px; background: white; padding: 8px; border-radius: 4px; border: 1px solid #e0e0e0;">
-                        📱 <strong>알림톡 발송:</strong> 진료 후 24시간<br>
-                        ✍️ <strong>리뷰 작성률:</strong> 34% → 68% 개선<br>
-                        ⭐ <strong>평균 평점:</strong> 4.6 / 5.0
-                    </div>
-                </div>
-            </div>
-            
-            <div class="b2b-solution">
-                <div class="solution-title">📝 메디컨텐츠</div>
-                <div style="background: #f8f9fa; padding: 12px; border-radius: 4px; margin-top: 10px;">
-                    <div style="font-size: 12px; color: #666; margin-bottom: 8px;">AI 기반 의료 콘텐츠 생성</div>
-                    <div style="font-size: 11px; background: white; padding: 8px; border-radius: 4px; border: 1px solid #e0e0e0;">
-                        🤖 <strong>AI 생성:</strong> 의료법 준수 콘텐츠<br>
-                        ⚖️ <strong>법률 검토:</strong> RAG 기반 자동 검증<br>
-                        📈 <strong>SEO 최적화:</strong> 자동 키워드 추출
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<!-- 슬라이드 5: 데이터 확보 (평판 데이터) -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">2. 연구개발 내용 및 목표 - (0) 준비 ① 대량의 평판 데이터 확보</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">법적 검토 완료된 기반 위에서, 전국 5,000개 이상 병원의 기보유 데이터를 시작으로 2년간 전국 모든 병원의 평판 데이터(다국어 리뷰 포함)를 확보합니다.</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li>'리뷰매니저'를 통해 <strong>이미 전국 5,000개 이상 병원</strong>의 평판 데이터를 확보했으며, 이를 기반으로 1차년도에는 전국 치과, 2차년도에는 전국 모든 과목으로 신속하게 확장합니다.</li>
-                    <li>모든 데이터 수집 및 활용은 사전 법률 검토를 완료하여 안정적인 사업 추진 기반을 마련했습니다.</li>
-                </ul>
-            </div>
-        </div>
-		<div class="content-section">
-        <div class="section-title">수집 대상 데이터</div>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0;">
-            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px; text-align: center;">
-                <div style="font-size: 32px; margin-bottom: 10px;">⭐</div>
-                <div style="font-weight: 700; margin-bottom: 5px;">환자 리뷰</div>
-                <div style="font-size: 13px; opacity: 0.9;">네이버, 카카오, 구글</div>
-            </div>
-            <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 20px; border-radius: 8px; text-align: center;">
-                <div style="font-size: 32px; margin-bottom: 10px;">📝</div>
-                <div style="font-weight: 700; margin-bottom: 5px;">블로그 포스트</div>
-                <div style="font-size: 13px; opacity: 0.9;">네이버 블로그</div>
-            </div>
-            <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 20px; border-radius: 8px; text-align: center;">
-                <div style="font-size: 32px; margin-bottom: 10px;">💬</div>
-                <div style="font-weight: 700; margin-bottom: 5px;">커뮤니티 게시글</div>
-                <div style="font-size: 13px; opacity: 0.9;">네이버 카페</div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="content-section">
-        <div class="section-title">2개년 평판 데이터 확보 로드맵 (누적 목표)</div>
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>연도</th>
-                    <th>대상 범위</th>
-                    <th>대상 병원 수</th>
-                    <th>리뷰 데이터</th>
-                    <th>블로그/카페 데이터</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>1차년도(2026)</strong></td>
-                    <td>전국 치과<br><span style="font-size: 12px; color: #666;">(기확보 5,000+ 병원 포함)</span></td>
-                    <td><strong>약 19,458개</strong></td>
-                    <td><strong>2,000만 건</strong></td>
-                    <td><strong>200만 건</strong></td>
-                </tr>
-                <tr>
-                    <td><strong>2차년도(2027)</strong></td>
-                    <td>전국 모든 과목</td>
-                    <td><strong>약 75,485개</strong></td>
-                    <td><strong>8,000만 건</strong></td>
-                    <td><strong>800만 건</strong></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-    <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 20px; border-radius: 4px; margin-top: 20px;">
-        <div style="display: flex; align-items: center; margin-bottom: 10px;">
-            <div style="font-size: 24px; margin-right: 10px;">⚖️</div>
-            <div style="font-size: 18px; font-weight: 700; color: #2e7d32;">법적 안정성 확보</div>
-        </div>
-        <div style="font-size: 14px; color: #1b5e20; line-height: 1.6;">
-            모든 데이터 수집 및 활용 계획에 대해 <strong>사전 법률 검토를 완료</strong>했음을 강조합니다. 공개된 정보의 수집 및 분석은 정보통신망법, 개인정보보호법, 저작권법상 법적 리스크가 매우 낮다고 판단되었습니다.
-        </div>
-    </div>
-</div>
-</div>
-<!-- 슬라이드 6: 객관적 데이터 확보 -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">2. 연구개발 내용 및 목표 - (0) 준비 ② 다양한 객관적 데이터 확보</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">평판 외 병원/의사/가격 등 필수 객관적 데이터를 다중 소스에서 연차별 계획에 따라 확보하여 정보의 완성도를 높입니다. (외국인 진료 가능 여부 등 포함)</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li>환자의 합리적 병원 선택을 돕기 위해, 평판 정보 외에도 병원/의사/시술/가격 등 객관적이고 검증 가능한 정보를 체계적으로 수집하여 통합 제공합니다.</li>
-                    <li>공공 API와 웹 크롤링을 병행하여 데이터를 확보하며, 1차년도에는 필수 정보 중심으로, 2차년도에는 심층 정보까지 범위를 확대합니다.</li>
-                </ul>
-            </div>
-        </div>
-		<div class="content-section">
-        <div class="section-title">주요 객관적 데이터 수집 목록</div>
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th style="width: 20%;">대분류</th>
-                    <th style="width: 25%;">중분류</th>
-                    <th style="width: 35%;">주요 수집 항목</th>
-                    <th style="width: 20%;">주요 소스</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td rowspan="3"><strong>🏥 병원</strong></td>
-                    <td>기본/운영</td>
-                    <td>진료시간, 휴무일, 주차 가능, 예약 방법</td>
-                    <td>심평원 API, 홈페이지</td>
-                </tr>
-                <tr>
-                    <td>시설/장비</td>
-                    <td>진료실 수, 의료장비, 편의시설</td>
-                    <td>홈페이지 크롤링</td>
-                </tr>
-                <tr>
-                    <td>전문성</td>
-                    <td>전문의 수, 인증/수상, <strong>외국어 진료 가능</strong></td>
-                    <td>심평원 API, 홈페이지</td>
-                </tr>
-                <tr>
-                    <td rowspan="2"><strong>👨‍⚕️ 의사</strong></td>
-                    <td>기본</td>
-                    <td>전문의 자격, 진료 과목, 경력 연수</td>
-                    <td>의협 정보, 홈페이지</td>
-                </tr>
-                <tr>
-                    <td>상세</td>
-                    <td>학력, 주요 경력, 전문 분야, 논문/저서</td>
-                    <td>홈페이지 크롤링</td>
-                </tr>
-                <tr>
-                    <td><strong>💰 시술/가격</strong></td>
-                    <td>비급여 정보</td>
-                    <td>항목별 가격, 최소/최대 금액, 업데이트 일자</td>
-                    <td>심평원 API, 비급여 고지</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-    <div class="content-section">
-        <div class="section-title">연차별 수집 전략</div>
-        <div class="two-column">
-            <div class="column" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
-                <h4 style="color: #1565c0; margin-bottom: 15px;">📅 1차년도 (2026)</h4>
-                <div style="font-size: 14px; color: #0d47a1; line-height: 1.7;">
-                    <strong>필수 & 수집 용이 데이터 우선 확보</strong><br><br>
-                    • 병원 기본/운영 정보<br>
-                    • 비급여 가격 정보<br>
-                    • 심평원 기초 정보<br>
-                    • <strong>외국어 진료 가능 여부 (기본)</strong>
-                </div>
-            </div>
-            <div class="column" style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);">
-                <h4 style="color: #7b1fa2; margin-bottom: 15px;">📅 2차년도 (2027)</h4>
-                <div style="font-size: 14px; color: #4a148c; line-height: 1.7;">
-                    <strong>심층 데이터 확보로 확장</strong><br><br>
-                    • 의사 상세 경력/전문 분야<br>
-                    • 병원 시설/장비 정보<br>
-                    • 심평원 전문성 상세 지표<br>
-                    • <strong>외국인 특화 서비스 정보 (심화)</strong>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<!-- 슬라이드 7: 수집 시스템 고도화 -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">2. 연구개발 내용 및 목표 - (1) 수집 시스템 고도화</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">기보유된 리뷰매니저 수집 기술을 바탕으로, 대용량/다채널 데이터를 안정적으로 수집-추출-정제-통합하는 고도화된 데이터 파이프라인을 구축합니다.</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li>이미 B2B 서비스 '리뷰매니저' 운영으로 검증된 안정적인 멀티채널 리뷰 수집 기술을 기반으로 합니다.</li>
-                    <li>본 사업에서는 수집 대상(블로그/카페/병원 홈페이지/공공 API) 및 데이터 유형(객관적 정보, 다국어 텍스트)을 확장하고, 전체 파이프라인(수집-추출-정제-통합)의 효율성과 안정성을 고도화하는 데 집중합니다.</li>
-                </ul>
-            </div>
-        </div>
-		<div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; padding: 30px; margin: 20px 0;">
-        <div style="text-align: center; margin-bottom: 30px;">
-            <div style="font-size: 20px; font-weight: 700; color: #667eea;">고도화된 데이터 파이프라인 아키텍처</div>
-        </div>
-        
-        <div style="display: flex; align-items: center; justify-content: space-between; gap: 15px; flex-wrap: wrap;">
-            <div style="background: white; border-radius: 8px; padding: 20px; flex: 1; min-width: 150px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <div style="font-size: 16px; font-weight: 700; color: #2d3748; margin-bottom: 10px; text-align: center;">📡 Raw Data Sources</div>
-                <div style="font-size: 13px; color: #666; text-align: center;">
-                    Web Pages<br>Public APIs
-                </div>
-            </div>
-            
-            <div style="font-size: 24px; color: #667eea;">→</div>
-            
-            <div style="background: #fff3e0; border: 2px solid #ff9800; border-radius: 8px; padding: 20px; flex: 1; min-width: 180px;">
-                <div style="font-size: 16px; font-weight: 700; color: #e65100; margin-bottom: 10px; text-align: center;">1️⃣ 수집 모듈</div>
-                <div style="font-size: 12px; color: #666; text-align: center; line-height: 1.6;">
-                    <strong>분산/동적 크롤러</strong><br>
-                    Scrapy, Selenium<br>
-                    <strong>API Connector</strong><br>
-                    Requests
-                </div>
-            </div>
-            
-            <div style="font-size: 24px; color: #667eea;">→</div>
-            
-            <div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 8px; padding: 20px; flex: 1; min-width: 180px;">
-                <div style="font-size: 16px; font-weight: 700; color: #0d47a1; margin-bottom: 10px; text-align: center;">2️⃣ 추출 모듈</div>
-                <div style="font-size: 12px; color: #666; text-align: center; line-height: 1.6;">
-                    <strong>HTML Parser</strong><br>
-                    BeautifulSoup<br>
-                    <strong>OCR</strong><br>
-                    Tesseract
-                </div>
-            </div>
-            
-            <div style="font-size: 24px; color: #667eea;">→</div>
-            
-            <div style="background: #f3e5f5; border: 2px solid #9c27b0; border-radius: 8px; padding: 20px; flex: 1; min-width: 180px;">
-                <div style="font-size: 16px; font-weight: 700; color: #6a1b9a; margin-bottom: 10px; text-align: center;">3️⃣ 정제/표준화 모듈</div>
-                <div style="font-size: 12px; color: #666; text-align: center; line-height: 1.6;">
-                    <strong>Data Cleaning</strong><br>
-                    Pandas<br>
-                    <strong>NER</strong><br>
-                    KoBERT + 다국어
-                </div>
-            </div>
-            
-            <div style="font-size: 24px; color: #667eea;">→</div>
-            
-            <div style="background: white; border-radius: 8px; padding: 20px; flex: 1; min-width: 150px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <div style="font-size: 16px; font-weight: 700; color: #2d3748; margin-bottom: 10px; text-align: center;">💾 가공 완료 DB</div>
-                <div style="font-size: 13px; color: #666; text-align: center;">
-                    (VERA Input)
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="content-section">
-        <div class="section-title">주요 고도화 내용</div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div style="background: #f8f9fa; border-left: 4px solid #667eea; padding: 20px; border-radius: 4px;">
-                <div style="font-size: 16px; font-weight: 700; color: #667eea; margin-bottom: 10px;">⚡ 확장성 강화</div>
-                <div style="font-size: 14px; color: #666; line-height: 1.6;">
-                    • 분산 크롤링 도입으로 수집 속도 및 규모 확장<br>
-                    • 멀티채널 동시 처리 시스템 구축<br>
-                    • 클라우드 기반 확장 가능 아키텍처
-                </div>
-            </div>
-            <div style="background: #f8f9fa; border-left: 4px solid #4caf50; padding: 20px; border-radius: 4px;">
-                <div style="font-size: 16px; font-weight: 700; color: #4caf50; margin-bottom: 10px;">🎯 정확도 향상</div>
-                <div style="font-size: 14px; color: #666; line-height: 1.6;">
-                    • OCR 도입으로 이미지 내 텍스트 추출<br>
-                    • 다국어 NER 모델 통합<br>
-                    • 병원/의사명 동명이인 처리 고도화
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<!-- 슬라이드 8: VERA 엔진 고도화 -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">2. 연구개발 내용및 목표 - (2) 처리: VERA 엔진 고도화</div>
-</div>
-<div class="slide-content">
-<div class="governing-message">
-<div class="gov-msg-title">[핵심기술① 고도화] 기존 '병원 글 판단/리뷰 분석' 기술을 기반으로 2단계 하이브리드 VERA 엔진을 고도화하여, 환자 경험으로 위장한 바이럴 마케팅 콘텐츠(특히 네이버 카페)까지 95%+ 정확도로 필터링합니다.</div>
-<div class="gov-msg-content">
-<ul>
-<li>자체 개발하여 상용화된 기반 기술(의료 분야 텍스트 분류 BERT, LLM 기반 병원 관련성 판단, 행동 패턴 분석 기초)을 적극 활용하여 고도화 기간을 단축하고 성공률을 높입니다.</li>
-<li>본 사업에서는 1단계 경량 필터와 2단계 LLM/멀티모달 정밀 검증을 결합한 하이브리드 구조로 개선하여, 네이버 카페 등 커뮤니티 내 '바이럴 마케팅' 탐지 정확도 향상(SOTA 이상) 및 다국어 처리에 집중합니다.</li>
-</ul>
-</div>
-</div>
-<div class="two-column">
-        <div class="column">
-            <h3 style="color: #667eea; margin-bottom: 15px;">🔍 VERA 엔진 작동 방식</h3>
-            
-            <div style="background: white; border: 2px solid #ff9800; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
-                <div style="font-size: 15px; font-weight: 700; color: #e65100; margin-bottom: 10px;">Track 1: 작성자 행동 패턴 분석</div>
-                <div style="font-size: 13px; color: #666; line-height: 1.6;">
-                    • 과거 작성 이력 (대상 업체/위치 분포)<br>
-                    • 계정 정보 (생성 시기, 활동 패턴)<br>
-                    • <strong>커뮤니티 활동 기반 어뷰징 패턴 분석</strong>
-                </div>
-            </div>
-            
-            <div style="background: white; border: 2px solid #2196f3; border-radius: 8px; padding: 15px;">
-                <div style="font-size: 15px; font-weight: 700; color: #0d47a1; margin-bottom: 10px;">Track 2: 언어적 패턴 분석</div>
-                <div style="font-size: 13px; color: #666; line-height: 1.6;">
-                    <strong>1단계 (경량 필터):</strong><br>
-                    • BERT 기반 텍스트 분류<br>
-                    • 행동 패턴 피처 결합<br>
-                    • XGBoost/LR 모델로 고속 필터링<br><br>
-                    
-                    <strong>2단계 (정밀 검증):</strong><br>
-                    • 불확실 콘텐츠만 처리<br>
-                    • LLM 문맥/뉘앙스 분석<br>
-                    • 멀티모달 모델 (이미지 분석)<br>
-                    • Late-fusion 최종 판별
-                </div>
-            </div>
-        </div>
-        
-        <div class="column">
-            <h3 style="color: #667eea; margin-bottom: 15px;">🏗️ 2단계 하이브리드 아키텍처</h3>
-            
-            <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 8px; padding: 20px;">
-                <div style="background: white; border: 2px solid #4caf50; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
-                    <div style="font-size: 14px; font-weight: 700; color: #2e7d32; margin-bottom: 10px;">📥 입력 데이터</div>
-                    <div style="font-size: 12px; color: #666;">리뷰 / 게시글 / 댓글</div>
-                </div>
-                
-                <div style="text-align: center; margin: 15px 0;">↓</div>
-                
-                <div style="background: #fff3e0; border: 2px solid #ff9800; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
-                    <div style="font-size: 14px; font-weight: 700; color: #e65100; margin-bottom: 10px;">1️⃣ 경량 필터</div>
-                    <div style="font-size: 12px; color: #666; line-height: 1.5;">
-                        BERT 임베딩 + 행동 피처<br>
-                        ↓<br>
-                        XGBoost/LR 모델<br><br>
-                        <span style="background: #4caf50; color: white; padding: 2px 8px; border-radius: 10px; font-size: 11px;">확실한 정상</span>
-                        <span style="background: #f44336; color: white; padding: 2px 8px; border-radius: 10px; font-size: 11px;">확실한 마케팅</span><br>
-                        <span style="background: #ff9800; color: white; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-top: 5px; display: inline-block;">불확실 → 2단계로</span>
-                    </div>
-                </div>
-                
-                <div style="text-align: center; margin: 15px 0;">↓</div>
-                
-                <div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
-                    <div style="font-size: 14px; font-weight: 700; color: #0d47a1; margin-bottom: 10px;">2️⃣ 정밀 검증</div>
-                    <div style="font-size: 12px; color: #666; line-height: 1.5;">
-                        🤖 LLM (문맥 분석)<br>
-                        +<br>
-                        👁️ 비전 모델 (이미지 분석)<br>
-                        ↓<br>
-                        Late-fusion 종합 판별
-                    </div>
-                </div>
-                
-                <div style="text-align: center; margin: 15px 0;">↓</div>
-                
-                <div style="background: white; border: 2px solid #9c27b0; border-radius: 8px; padding: 15px;">
-                    <div style="font-size: 14px; font-weight: 700; color: #6a1b9a; margin-bottom: 10px;">📤 최종 출력</div>
-                    <div style="font-size: 12px; color: #666;">
-                        ✅ 클린 콘텐츠 → 진짜 경험 DB<br>
-                        ❌ 마케팅 콘텐츠 → 필터링
-                    </div>
-                </div>
-                
-                <div style="text-align: center; margin-top: 15px; padding: 10px; background: #4caf50; color: white; border-radius: 4px; font-weight: 700;">
-                    🎯 목표 정확도: F1-score ≥ 0.88
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div style="background: #fff8e1; border-left: 4px solid #ffc107; padding: 20px; border-radius: 4px; margin-top: 20px;">
-        <div style="font-size: 16px; font-weight: 700; color: #f57c00; margin-bottom: 10px;">💡 기술 고도화 필요성</div>
-        <div style="font-size: 14px; color: #e65100; line-height: 1.7;">
-            기존 기술은 명시적 광고 탐지 및 관련도 판단에는 효과적이나, <strong>네이버 카페 등 커뮤니티의 교묘한 바이럴 마케팅</strong> 탐지에는 정확도와 효율성 모두 개선이 필요합니다. 1단계 경량 필터는 기존 BERT/행동 분석 기술을 개선/통합하여 비용 효율적으로 대량 처리를 담당하고, 2단계 정밀 검증은 기존 LLM 관련성 판단 기술을 고도화/적용하거나 경량 멀티모달 모델을 신규 도입하여 탐지 어려운 케이스의 정확도를 높이는 하이브리드 방식의 고도화가 필수적입니다.
-        </div>
-    </div>
-</div>
-</div>
-<!-- 슬라이드 9: TEM 엔진 개선 -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">2. 연구개발 내용 및 목표 - (3) 분석: TEM 엔진 개선</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">[핵심기술② 개선] VERA로 검증된 '진짜 리뷰'(다국어 포함)를 임베딩-클러스터링-스코어링-XAI의 4단계 파이프라인으로 분석하는 TEM 엔진을 개선하여, 환자 경험(PX)을 데이터 기반 토픽으로 정량화하고 설명 가능성을 확보합니다.</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li><strong>데이터 기반 토픽 정의:</strong> BERTopic 등 비지도 학습으로 초기 토픽 구조를 '발견'하고 전문가 검토를 거쳐 최종 운영 토픽(초기 가설: 7개 내외)을 확정하여, 기존 가설 기반 접근을 보완합니다.</li>
-                    <li><strong>안정적 스코어링 및 설명:</strong> 확정된 토픽에 대해 지도 학습 기반 분류/스코어링(기존 감성/스코어링 모델 개선 활용)을 수행하고, LLM을 활용한 근거 추출(XAI)로 분석 결과의 신뢰도와 활용성을 높입니다.</li>
-                </ul>
-            </div>
-        </div>
-		<div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; padding: 30px; margin: 20px 0;">
-        <div style="text-align: center; margin-bottom: 30px;">
-            <div style="font-size: 20px; font-weight: 700; color: #667eea;">TEM 엔진 데이터 플로우 (4단계)</div>
-        </div>
-        
-        <div style="display: flex; align-items: center; justify-content: space-between; gap: 15px; flex-wrap: wrap;">
-            <div style="background: white; border-radius: 8px; padding: 20px; flex: 1; min-width: 150px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <div style="font-size: 16px; font-weight: 700; color: #2d3748; margin-bottom: 10px; text-align: center;">📥 Input</div>
-                <div style="font-size: 13px; color: #666; text-align: center;">
-                    '진짜 리뷰' DB<br>
-                    (from VERA)<br>
-                    다국어 포함
-                </div>
-            </div>
-            
-            <div style="font-size: 24px; color: #667eea;">→</div>
-            
-            <div style="background: #fff3e0; border: 2px solid #ff9800; border-radius: 8px; padding: 20px; flex: 1; min-width: 180px;">
-                <div style="font-size: 16px; font-weight: 700; color: #e65100; margin-bottom: 10px; text-align: center;">1️⃣ Embedding</div>
-                <div style="font-size: 12px; color: #666; text-align: center; line-height: 1.6;">
-                    리뷰 텍스트 →<br>
-                    <strong>다국어 임베딩 벡터</strong><br>
-                    (KR-SBERT 활용/확장)
-                </div>
-            </div>
-            
-            <div style="font-size: 24px; color: #667eea;">→</div>
-            
-            <div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 8px; padding: 20px; flex: 1; min-width: 180px;">
-                <div style="font-size: 16px; font-weight: 700; color: #0d47a1; margin-bottom: 10px; text-align: center;">2️⃣ Topic Discovery</div>
-                <div style="font-size: 12px; color: #666; text-align: center; line-height: 1.6;">
-                    <strong>BERTopic</strong><br>
-                    초기 토픽 발견<br>
-                    ↓<br>
-                    전문가 검토<br>
-                    ↓<br>
-                    최종 토픽 확정<br>
-                    (예: 7대 토픽)
-                </div>
-            </div>
-            
-            <div style="font-size: 24px; color: #667eea;">→</div>
-            
-            <div style="background: #f3e5f5; border: 2px solid #9c27b0; border-radius: 8px; padding: 20px; flex: 1; min-width: 180px;">
-                <div style="font-size: 16px; font-weight: 700; color: #6a1b9a; margin-bottom: 10px; text-align: center;">3️⃣ Scoring</div>
-                <div style="font-size: 12px; color: #666; text-align: center; line-height: 1.6;">
-                    <strong>Multi-label Classifier</strong><br>
-                    Fine-tuned BERT<br>
-                    ↓<br>
-                    토픽 분류 + 스코어링<br>
-                    ↓<br>
-                    병원별 집계
-                </div>
-            </div>
-            
-            <div style="font-size: 24px; color: #667eea;">→</div>
-            
-            <div style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 8px; padding: 20px; flex: 1; min-width: 180px;">
-                <div style="font-size: 16px; font-weight: 700; color: #2e7d32; margin-bottom: 10px; text-align: center;">4️⃣ XAI</div>
-                <div style="font-size: 12px; color: #666; text-align: center; line-height: 1.6;">
-                    <strong>LLM 활용</strong><br>
-                    근거 추출<br>
-                    ↓<br>
-                    핵심 문장/<br>
-                    키워드 제공
-                </div>
-            </div>
-            
-            <div style="font-size: 24px; color: #667eea;">→</div>
-            
-            <div style="background: white; border-radius: 8px; padding: 20px; flex: 1; min-width: 150px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <div style="font-size: 16px; font-weight: 700; color: #2d3748; margin-bottom: 10px; text-align: center;">📤 Output</div>
-                <div style="font-size: 13px; color: #666; text-align: center;">
-                    병원별<br>
-                    토픽 스코어 DB<br>
-                    + 근거 문장
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="content-section">
-        <div class="section-title">환자 경험(PX) 7대 토픽 (초기 가설)</div>
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 20px 0;">
-            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; border-radius: 8px; text-align: center;">
-                <div style="font-size: 24px; margin-bottom: 5px;">😊</div>
-                <div style="font-size: 14px; font-weight: 700;">친절도</div>
-            </div>
-            <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 15px; border-radius: 8px; text-align: center;">
-                <div style="font-size: 24px; margin-bottom: 5px;">🩹</div>
-                <div style="font-size: 14px; font-weight: 700;">통증관리</div>
-            </div>
-            <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 15px; border-radius: 8px; text-align: center;">
-                <div style="font-size: 24px; margin-bottom: 5px;">🧼</div>
-                <div style="font-size: 14px; font-weight: 700;">위생관리</div>
-            </div>
-            <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; padding: 15px; border-radius: 8px; text-align: center;">
-                <div style="font-size: 24px; margin-bottom: 5px;">💬</div>
-                <div style="font-size: 14px; font-weight: 700;">설명성</div>
-            </div>
-            <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; padding: 15px; border-radius: 8px; text-align: center;">
-                <div style="font-size: 24px; margin-bottom: 5px;">⏱️</div>
-                <div style="font-size: 14px; font-weight: 700;">대기시간</div>
-            </div>
-            <div style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); color: white; padding: 15px; border-radius: 8px; text-align: center;">
-                <div style="font-size: 24px; margin-bottom: 5px;">✅</div>
-                <div style="font-size: 14px; font-weight: 700;">치료결과</div>
-            </div>
-            <div style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #333; padding: 15px; border-radius: 8px; text-align: center;">
-                <div style="font-size: 24px; margin-bottom: 5px;">💰</div>
-                <div style="font-size: 14px; font-weight: 700;">가격투명성</div>
-            </div>
-            <div style="background: #e0e0e0; color: #333; padding: 15px; border-radius: 8px; text-align: center; display: flex; align-items: center; justify-content: center;">
-                <div style="font-size: 12px;">+ 전문가 검토 후<br>최종 확정</div>
-            </div>
-        </div>
-    </div>
-    
-    <div style="text-align: center; padding: 15px; background: #4caf50; color: white; border-radius: 4px; font-weight: 700; margin-top: 20px;">
-        🎯 목표 성능: F1-score ≥ 0.85
-    </div>
-</div>
-</div>
-<!-- 슬라이드 10: INTRO 엔진 -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">2. 연구개발 내용 및 목표 - (4) 추천: INTRO 엔진</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">[핵심기술③ 개발/개선] LLM 기반 대화형 인터페이스와 순차적 의도 반영 추천 알고리즘을 결합하여, 환자의 다양한 검색 니즈를 균형있게 충족시키는 설명 가능한 맞춤형 추천 엔진을 개발합니다.</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li><strong>LLM 활용 대화형 추천:</strong> 대화를 통해 환자의 복잡한 의도(증상, 선호, 위치, 언어 등)를 자연스럽게 파악하고, 순차적으로 다양한 니즈를 반영하여 병원을 추천함으로써 특정 요소에 편중되지 않은 균형잡힌 결과를 제공합니다.</li>
-                    <li><strong>의료 도메인 특화 개선:</strong> 검증된 추천 알고리즘을 의료 분야에 맞게 최적화(TEM 7대 토픽 연계, 실시간 처리)하고, XAI 기술을 단계적으로 통합하여 추천 근거를 명확히 제시합니다.</li>
-                </ul>
-            </div>
-        </div>
-		<div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; padding: 30px; margin: 20px 0;">
-        <div style="text-align: center; margin-bottom: 25px;">
-            <div style="font-size: 20px; font-weight: 700; color: #667eea;">INTRO 엔진 아키텍처 (3단계 처리 흐름)</div>
-        </div>
-        
-        <div class="process-box" style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);">
-            <div class="process-title" style="color: #e65100;">① 대화 인터페이스 (LLM 기반)</div>
-            <div style="font-size: 14px; color: #666; line-height: 1.7;">
-                <strong>환자 입력:</strong> 자연어 대화 또는 검색 (다국어 지원)<br>
-                <strong>LLM 역할:</strong><br>
-                • 대화 이해 및 맥락 파악<br>
-                • 환자 의도 추출 (예: #친절도 중시, #통증 관리 우선, #영어 가능 병원)<br>
-                • 각 의도별 중요도 분석<br>
-                <strong>출력:</strong> 구조화된 의도 정보 (백엔드로 전달)
-            </div>
-        </div>
-        
-        <div style="text-align: center; margin: 15px 0; font-size: 24px; color: #667eea;">↓</div>
-        
-        <div class="process-box" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
-            <div class="process-title" style="color: #0d47a1;">② 백엔드 추천 로직</div>
-            <div style="font-size: 14px; color: #666; line-height: 1.7;">
-                <strong>입력 데이터:</strong><br>
-                • 환자 의도 정보 (①에서 전달)<br>
-                • 병원별 TEM 토픽 스코어 DB<br>
-                • 객관적 병원 정보 DB<br><br>
-                
-                <strong>처리 과정:</strong><br>
-                <div style="background: white; padding: 15px; border-radius: 4px; margin: 10px 0;">
-                    <strong>2-1. 후보 병원 검색</strong><br>
-                    의도 관련 병원군 선별 (키워드/지역 필터링)
-                </div>
-                
-                <div style="background: white; padding: 15px; border-radius: 4px; margin: 10px 0;">
-                    <strong>2-2. 순차적 추천 순위 결정 (핵심 알고리즘)</strong><br>
-                    <div style="background: #fff8e1; padding: 10px; margin-top: 10px; border-left: 3px solid #ffc107;">
-                        • <strong>1순위 선정:</strong> 모든 의도를 고려하여 종합 점수가 가장 높은 병원 선택<br>
-                        • <strong>2순위 이후:</strong> "1순위로 특정 의도(예: #친절도)가 충족되었다고 가정" → 남은 의도(예: #통증 관리, #접근성)의 중요도 상향 → 해당 의도를 잘 만족하는 병원 선택<br>
-                        • <strong>효과:</strong> 다양한 환자 니즈를 골고루 반영한 균형잡힌 추천 리스트 생성
-                    </div>
-                    • 계산 과정 기록: 각 병원의 추천 근거 상세 정보 저장
-                </div>
-                
-                <div style="background: white; padding: 15px; border-radius: 4px; margin: 10px 0;">
-                    <strong>2-3. 추천 근거 생성 (XAI)</strong><br>
-                    • 1차년도: 템플릿 기반 근거 제공<br>
-                    • 2차년도: AI 기반 근거 추출 고도화
-                </div>
-                
-                <strong>출력:</strong> 순위별 추천 병원 + 각 병원의 점수 계산 상세 정보
-            </div>
-        </div>
-        
-        <div style="text-align: center; margin: 15px 0; font-size: 24px; color: #667eea;">↓</div>
-        
-        <div class="process-box" style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);">
-            <div class="process-title" style="color: #6a1b9a;">③ 응답 생성 및 추천 이유 설명 (LLM 기반)</div>
-            <div style="font-size: 14px; color: #666; line-height: 1.7;">
-                <strong>핵심 역할:</strong> 백엔드의 계산 결과를 바탕으로 <strong>추천 이유를 이해하기 쉽게 설명</strong><br><br>
-                
-                <strong>설명 내용:</strong><br>
-                • 환자가 중시한 요소와 병원의 강점 매칭<br>
-                • 객관적 정보 제시 (위치, 언어 지원 등)<br>
-                • 다른 추천 병원과의 차이점<br>
-				• 자연스러운 대화체로 구성<br>
-				• 다국어 응답 생성 (외국인 사용자 지원)<br><br>
-				<div style="background: white; padding: 10px; border-radius: 4px; margin-top: 10px;">
-                    <strong>예시:</strong> "귀하가 중시하는 #친절도가 상위 5%이며, 영어 응대가 가능하고, 현재 위치에서 2km 거리입니다"
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div style="text-align: center; padding: 15px; background: #9c27b0; color: white; border-radius: 4px; font-weight: 700; margin-top: 20px;">
-        🎯 목표 성능: NDCG ≥ 0.60
-    </div>
-</div>
-</div>
-<!-- 슬라이드 11: B2C 서비스 적용 -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">2. 연구개발 내용 및 목표 - (5) 적용: B2C 서비스</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">고도화된 엔진 기반의 B2C 서비스는 내/외국인 환자 모두에게 신뢰 검색부터 다국어 맞춤 추천, 예약, 후기 작성까지 원스톱 경험을 제공합니다.</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li>VERA/TEM 엔진으로 검증되고 분석된 정보를 기반으로 사용자에게 신뢰도 높은 검색 결과를 제공합니다.</li>
-                    <li>INTRO 엔진을 통해 사용자의 니즈(다국어 인텐트 포함)를 파악하고 설명 가능한 맞춤형 병원 추천을 제공하여 만족도를 극대화합니다.</li>
-                </ul>
-            </div>
-        </div>
-		<div class="two-column">
-        <div class="column">
-            <h3 style="color: #f44336; margin-bottom: 15px;">❌ As-is (타 서비스)</h3>
-            <ul class="bullet-list" style="font-size: 14px;">
-                <li>광고/마케팅 정보 위주</li>
-                <li>획일적 평점 중심</li>
-                <li>파편화된 정보</li>
-                <li>추천 기준 불명확</li>
-            </ul>
-            
-            <div style="background: #f5f5f5; border: 2px dashed #ccc; border-radius: 8px; padding: 20px; margin-top: 15px; text-align: center;">
-                <div style="font-size: 13px; color: #999; margin-bottom: 10px;">일반적인 병원 검색 앱</div>
-                <div style="background: white; padding: 15px; border-radius: 4px; text-align: left; font-size: 12px;">
-                    <div style="background: #ffeb3b; padding: 5px; margin-bottom: 10px; text-align: center;">
-                        <strong>📢 광고 배너</strong>
-                    </div>
-                    <div style="padding: 8px; border: 1px solid #e0e0e0; margin-bottom: 8px;">
-                        ○○치과 | ⭐ 4.5 | 1.2km
-                    </div>
-                    <div style="padding: 8px; border: 1px solid #e0e0e0; margin-bottom: 8px;">
-                        △△치과 | ⭐ 4.3 | 2.5km
-                    </div>
-                    <div style="padding: 8px; border: 1px solid #e0e0e0;">
-                        □□치과 | ⭐ 4.7 | 3.1km
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="column">
-            <h3 style="color: #4caf50; margin-bottom: 15px;">✅ To-be (당사 B2C 서비스)</h3>
-            <ul class="bullet-list" style="font-size: 14px;">
-                <li><strong>신뢰 검색 (VERA/TEM):</strong> '진짜 평점순', '토픽별' 정렬, VERA 인증 마크</li>
-                <li><strong>맞춤 추천 (INTRO):</strong> 인텐트 기반 다국어 대화형/검색 추천 + 설명(XAI)</li>
-                <li><strong>통합 정보:</strong> 객관적 스펙, 가격, 검증된 평판 정보 동시 비교</li>
-                <li><strong>원스톱 경험:</strong> 예약 연동 및 후기 작성</li>
-            </ul>
-            
-            <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border: 2px solid #4caf50; border-radius: 8px; padding: 20px; margin-top: 15px;">
-                <div style="font-size: 13px; font-weight: 700; color: #2e7d32; margin-bottom: 10px; text-align: center;">당사 B2C 서비스</div>
-                <div style="background: white; padding: 15px; border-radius: 4px; text-align: left; font-size: 12px;">
-                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8px; margin-bottom: 10px; text-align: center; border-radius: 4px;">
-                        🔍 검색 결과 | 🌐 한국어 ▼
-                    </div>
-                    <div style="padding: 10px; border: 2px solid #4caf50; border-radius: 4px; margin-bottom: 8px;">
-                        <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 5px;">
-                            <strong>○○치과</strong>
-                            <span style="background: #4caf50; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px;">✓ VERA</span>
-                            <span style="background: #2196f3; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px;">영어</span>
-                        </div>
-                        <div style="font-size: 11px; color: #666; margin-bottom: 5px;">
-                            친절도 ⭐⭐⭐⭐⭐ | 통증관리 ⭐⭐⭐⭐
-                        </div>
-                        <div style="background: #e8f5e9; padding: 5px; border-radius: 3px; font-size: 10px;">
-                            💡 <strong>추천 이유:</strong> 친절도 상위 5%
-                        </div>
-                    </div>
-                    <div style="padding: 10px; border: 1px solid #e0e0e0; border-radius: 4px;">
-                        <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 5px;">
-                            <strong>△△치과</strong>
-                            <span style="background: #4caf50; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px;">✓ VERA</span>
-                        </div>
-                        <div style="font-size: 11px; color: #666; margin-bottom: 5px;">
-                            위생관리 ⭐⭐⭐⭐⭐ | 설명성 ⭐⭐⭐⭐
-                        </div>
-                        <div style="background: #e3f2fd; padding: 5px; border-radius: 3px; font-size: 10px;">
-                            💡 <strong>추천 이유:</strong> 위생관리 우수, 2km
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<!-- 슬라이드 12: 외국인 사용자 특화 -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">2. 연구개발 내용 및 목표 - (5) 적용: 외국인 사용자 특화 기능</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">국내 거주 외국인과 의료 관광객의 서로 다른 니즈를 파악하여, 각 그룹에 특화된 정보와 기능을 제공함으로써 글로벌 의료 정보 접근성을 향상시킵니다.</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li><strong>국내 거주 외국인 지원:</strong> 일상적 의료 서비스 이용을 위한 언어 소통 가능 병원 정보, 건강보험 적용 안내, 접근성 중심의 병원 추천을 제공합니다.</li>
-                    <li><strong>의료 관광객 지원:</strong> 전문 치료 목적 방문자를 위한 고품질 의료기관 정보, 해외 보험 청구 지원, 통역/숙박 등 의료 관광 편의 서비스 정보를 통합 제공합니다.</li>
-                </ul>
-            </div>
-        </div>
-		<div class="two-column">
-        <div class="column" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
-            <h3 style="color: #0d47a1; margin-bottom: 15px;">👨‍👩‍👧 그룹 1: 국내 거주 외국인</h3>
-            
-            <div style="background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
-                <div style="font-size: 15px; font-weight: 700; color: #1565c0; margin-bottom: 10px;">주요 니즈</div>
-                <ul style="font-size: 13px; color: #666; line-height: 1.7; padding-left: 20px;">
-                    <li>언어 소통 가능 병원</li>
-                    <li>건강보험 적용 안내</li>
-                    <li>거주지/직장 근처 접근성</li>
-                    <li>장기 관계 가능한 병원</li>
-                </ul>
-            </div>
-            
-            <div style="background: white; border-radius: 8px; padding: 15px;">
-                <div style="font-size: 15px; font-weight: 700; color: #1565c0; margin-bottom: 10px;">제공 솔루션</div>
-                
-                <div style="background: #f1f8ff; padding: 12px; border-radius: 4px; margin-bottom: 10px;">
-                    <div style="font-size: 13px; font-weight: 700; color: #0d47a1; margin-bottom: 5px;">① 외국어 응대 가능 병원 정보</div>
-                    <div style="font-size: 12px; color: #666; line-height: 1.5;">
-                        <strong>수집:</strong> 병원 홈페이지 외국어 페이지, <strong>구글맵 외국인 리뷰</strong> 분석<br>
-                        <strong>제공:</strong> 언어별 뱃지 표시, 검색 필터, 자동 우선 추천
-                    </div>
-                </div>
-                
-                <div style="background: #f1f8ff; padding: 12px; border-radius: 4px; margin-bottom: 10px;">
-                    <div style="font-size: 13px; font-weight: 700; color: #0d47a1; margin-bottom: 5px;">② 건강보험 적용 정보</div>
-                    <div style="font-size: 12px; color: #666;">
-                        심평원 API 연동, 비급여 정보, 예상 본인부담금 계산
-                    </div>
-                </div>
-                
-                <div style="background: #f1f8ff; padding: 12px; border-radius: 4px;">
-                    <div style="font-size: 13px; font-weight: 700; color: #0d47a1; margin-bottom: 5px;">③ 접근성 중심 추천</div>
-                    <div style="font-size: 12px; color: #666;">
-                        위치 기반 가까운 병원, 대중교통 정보
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="column" style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);">
-            <h3 style="color: #6a1b9a; margin-bottom: 15px;">✈️ 그룹 2: 의료 관광객</h3>
-            
-            <div style="background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
-                <div style="font-size: 15px; font-weight: 700; color: #7b1fa2; margin-bottom: 10px;">주요 니즈</div>
-                <ul style="font-size: 13px; color: #666; line-height: 1.7; padding-left: 20px;">
-                    <li>전문 치료 정보</li>
-                    <li>해외 보험 처리</li>
-                    <li>의료 관광 편의 (통역, 숙박)</li>
-                    <li>사후 관리 (원격 상담)</li>
-                </ul>
-            </div>
-            
-            <div style="background: white; border-radius: 8px; padding: 15px;">
-                <div style="font-size: 15px; font-weight: 700; color: #7b1fa2; margin-bottom: 10px;">제공 솔루션</div>
-                
-                <div style="background: #fce4ec; padding: 12px; border-radius: 4px; margin-bottom: 10px;">
-                    <div style="font-size: 13px; font-weight: 700; color: #6a1b9a; margin-bottom: 5px;">① 전문 의료기관 정보</div>
-                    <div style="font-size: 12px; color: #666; line-height: 1.5;">
-                        TEM 전문성 토픽 스코어, 의료진 경력, 시술 비용/기간
-                    </div>
-                </div>
-                
-                <div style="background: #fce4ec; padding: 12px; border-radius: 4px; margin-bottom: 10px;">
-                    <div style="font-size: 13px; font-weight: 700; color: #6a1b9a; margin-bottom: 5px;">② 해외 보험 처리 가능 병원</div>
-                    <div style="font-size: 12px; color: #666; line-height: 1.5;">
-                        <strong>수집:</strong> 국제 환자 센터 운영, <strong>구글맵 리뷰</strong>에서 "insurance claim" 키워드 분석<br>
-                        <strong>제공:</strong> "해외 보험 청구 지원" 뱃지 표시
-                    </div>
-                </div>
-                
-                <div style="background: #fce4ec; padding: 12px; border-radius: 4px; margin-bottom: 10px;">
-                    <div style="font-size: 13px; font-weight: 700; color: #6a1b9a; margin-bottom: 5px;">③ 의료 관광 편의 서비스</div>
-                    <div style="font-size: 12px; color: #666;">
-                        통역사 상주, 공항 픽업, 제휴 숙박, 24시간 연락 가능
-                    </div>
-                </div>
-                
-                <div style="background: #fce4ec; padding: 12px; border-radius: 4px;">
-                    <div style="font-size: 13px; font-weight: 700; color: #6a1b9a; margin-bottom: 5px;">④ 사후 관리 정보</div>
-                    <div style="font-size: 12px; color: #666;">
-                        원격 상담 가능, 영문 의료 기록 발급
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 20px; border-radius: 4px; margin-top: 20px;">
-        <div style="font-size: 16px; font-weight: 700; color: #e65100; margin-bottom: 10px;">🔍 핵심: 구글맵 리뷰 중심 분석</div>
-        <div style="font-size: 14px; color: #bf360c; line-height: 1.7;">
-            외국인은 구글맵을 주로 사용하므로, <strong>구글맵 외국인 작성 리뷰</strong>를 VERA 엔진으로 검증 후 언어 관련 키워드, 보험 처리 경험, 서비스 편의 정보 등을 추출하여 활용합니다. 병원 공식 정보와 교차 검증하여 정확성을 확보하고, 정보 출처를 투명하게 공개합니다.
-        </div>
-    </div>
-</div>
-</div>
-<!-- 슬라이드 13: B2B 솔루션 고도화 -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">2. 연구개발 내용 및 목표 - (5) 적용: B2B 솔루션 고도화</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">B2C 데이터를 활용하여 기존 B2B 3종 솔루션의 AI 기능을 고도화(각 100% 목표)함으로써, 병원 고객에게 실질적인 CS 개선 및 마케팅 효율 증대 가치를 제공합니다.</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li>B2C 플랫폼에서 축적된 신뢰도 높은 환자 경험 데이터(TEM)와 사용자 인텐트 데이터(INTRO)를 기존 B2B 솔루션(리뷰매니저, 리뷰부스터, 메디컨텐츠)에 연동합니다.</li>
-                    <li>이를 통해 각 솔루션의 분석 정확도, 추천 최적화, 콘텐츠 생성 능력을 향상시켜 병원의 운영 효율성과 경쟁력을 강화합니다.</li>
-                </ul>
-            </div>
-        </div>
-		<div style="display: grid; grid-template-columns: 1fr; gap: 20px; margin: 20px 0;">
-        <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 12px; padding: 25px;">
-            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-                <div style="font-size: 36px;">📊</div>
-                <div>
-                    <div style="font-size: 20px; font-weight: 700; color: #0d47a1;">1. 리뷰매니저 (평판 관리)</div>
-                    <div style="font-size: 14px; color: #1565c0;">멀티채널 리뷰 통합 관리 및 악성 리뷰 대응 솔루션</div>
-                </div>
-            </div>
-            <div style="background: white; border-radius: 8px; padding: 20px;">
-                <div style="font-size: 15px; font-weight: 700; color: #1976d2; margin-bottom: 10px;">🎯 고도화 내용 (TEM 연동)</div>
-                <div style="font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 15px;">
-                    B2C의 <strong>TEM 엔진 산출 토픽 스코어</strong>를 병원 대시보드에 시각화. "환자들이 '#대기 시간'에 불만이 높음(스코어 하락 추세)" 등 <strong>구체적 CS 개선점</strong> 및 경쟁 병원 비교 리포팅.
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; background: #f5f5f5; padding: 15px; border-radius: 4px;">
-                    <div style="text-align: center;">
-                        <div style="font-size: 12px; color: #999; margin-bottom: 5px;">현재 수준</div>
-                        <div style="font-size: 24px; font-weight: 700; color: #ff9800;">70%</div>
-                    </div>
-                    <div style="font-size: 24px; color: #667eea;">→</div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 12px; color: #999; margin-bottom: 5px;">고도화 목표</div>
-                        <div style="font-size: 24px; font-weight: 700; color: #4caf50;">100%</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); border-radius: 12px; padding: 25px;">
-            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-                <div style="font-size: 36px;">🚀</div>
-                <div>
-                    <div style="font-size: 20px; font-weight: 700; color: #6a1b9a;">2. 리뷰부스터 (리뷰 확보)</div>
-                    <div style="font-size: 14px; color: #7b1fa2;">내원 환자 대상 알림톡 발송으로 '진성 리뷰' 확보 유도 자동화</div>
-                </div>
-            </div>
-            <div style="background: white; border-radius: 8px; padding: 20px;">
-                <div style="font-size: 15px; font-weight: 700; color: #8e24aa; margin-bottom: 10px;">🎯 고도화 내용 (TEM 연동)</div>
-                <div style="font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 15px;">
-                    B2C의 <strong>키워드별 고객 검색량 데이터</strong> 반영. 병원/과목별 '실제 고객이 많이 궁금해하는' 키워드(예: '#꼼꼼한 진료')를 반영하여 리뷰 요청 문구/설문 항목 최적화.
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; background: #f5f5f5; padding: 15px; border-radius: 4px;">
-                    <div style="text-align: center;">
-                        <div style="font-size: 12px; color: #999; margin-bottom: 5px;">현재 수준</div>
-                        <div style="font-size: 24px; font-weight: 700; color: #ff9800;">85%</div>
-                    </div>
-                    <div style="font-size: 24px; color: #667eea;">→</div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 12px; color: #999; margin-bottom: 5px;">고도화 목표</div>
-                        <div style="font-size: 24px; font-weight: 700; color: #4caf50;">100%</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border-radius: 12px; padding: 25px;">
-            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-                <div style="font-size: 36px;">📝</div>
-                <div>
-                    <div style="font-size: 20px; font-weight: 700; color: #e65100;">3. 메디컨텐츠 (콘텐츠 생성)</div>
-                    <div style="font-size: 14px; color: #f57c00;">병원 제공 '실제 진료' 이미지/설명 기반, 의료법 준수 '정보성 콘텐츠' AI 자동 생성</div>
-                </div>
-            </div>
-            <div style="background: white; border-radius: 8px; padding: 20px;">
-                <div style="font-size: 15px; font-weight: 700; color: #ff6f00; margin-bottom: 10px;">🎯 고도화 내용 (INTRO 연동)</div>
-                <div style="font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 15px;">
-                    B2C의 <strong>INTRO 환자 검색 인텐트</strong> 데이터(<strong>다국어 포함</strong>) 반영. 환자들이 실제로 궁금해하는 주제(예: '#임플란트 통증 완화', '#veneers cost foreigner') 기반 콘텐츠 자동 생성 및 관련 키워드 기반 SEO 최적화.
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; background: #f5f5f5; padding: 15px; border-radius: 4px;">
-                    <div style="text-align: center;">
-                        <div style="font-size: 12px; color: #999; margin-bottom: 5px;">현재 수준</div>
-                        <div style="font-size: 24px; font-weight: 700; color: #ff9800;">60%</div>
-                    </div>
-                    <div style="font-size: 24px; color: #667eea;">→</div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 12px; color: #999; margin-bottom: 5px;">고도화 목표</div>
-                        <div style="font-size: 24px; font-weight: 700; color: #4caf50;">100%</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<!-- 슬라이드 14: 요약 -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">2. 연구개발 내용 및 목표 - 상세 내용 요약</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">기보유 B2B/정부 과제 기술을 기반으로 3대 핵심 AI 엔진(VERA/TEM/INTRO) '고도화' 및 '확장 적용'을 통해 B2C 서비스를 구축하고, 다시 B2B를 강화하는 선순환 구조입니다.</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li>본 사업은 기확보된 기술력 위에서 핵심 엔진을 '부분적으로 고도화'하고 '확장 적용'(다국어, 추천 등)하는 효율적인 기술 개선 전략입니다.</li>
-                    <li>데이터 파이프라인 개선(수집)부터 3대 엔진 고도화/개발(처리, 분석, 적용) 및 최종 서비스 고도화까지 체계적으로 추진하여 B2C-B2B 생태계를 완성합니다.</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div style="background: #e8f5e9; border: 2px solid #4caf50; border-radius: 12px; padding: 25px; margin-bottom: 25px;">
-            <div style="text-align: center; margin-bottom: 15px;">
-                <div style="font-size: 18px; font-weight: 700; color: #2e7d32;">📋 (0) 준비: 데이터 확보 계획 및 기반</div>
-            </div>
-            <div style="font-size: 14px; color: #1b5e20; line-height: 1.7;">
-                <strong>• 확보 대상 정의:</strong> 평판 데이터(리뷰, 블로그, 카페) 및 객관적 데이터(병원, 의사, 가격 등)<br>
-                <strong>• 확보 계획:</strong> 기 확보된 전국 5,000개+ 병원 데이터 기반, 1차년도(전국 치과), 2차년도(전국 모든 과목)<br>
-                <strong>• 법적 안정성:</strong> 사전 법률 검토 완료<br>
-                <strong>• 역할:</strong> 후속 기술 개선 단계 (1)~(5)의 필수적인 사전 준비
-            </div>
-        </div>
-        
-        <div class="content-section">
-            <div class="section-title">기술 개발 5단계 요약</div>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th style="width: 12%;">단계</th>
-                        <th style="width: 20%;">개발 내용</th>
-                        <th style="width: 15%;">진행도</th>
-                        <th style="width: 53%;">내용 상세 (기반 기술)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>(1) 수집</strong></td>
-                        <td>데이터 파이프라인 구축/고도화</td>
-                        <td>
-                            <div style="background: #e3f2fd; padding: 5px; border-radius: 4px; text-align: center;">
-                                <strong style="color: #1976d2;">70%</strong>
-                            </div>
-                        </td>
-                        <td style="font-size: 13px;">리뷰 매니저의 멀티채널 데이터 수집/처리 기술 기반. B2C 확장 위한 아키텍처 개선 및 객관적 데이터 수집 모듈 추가 필요.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>(2) 처리</strong></td>
-                        <td>VERA 엔진 고도화 (마케팅 콘텐츠 필터링)</td>
-                        <td>
-                            <div style="background: #fff3e0; padding: 5px; border-radius: 4px; text-align: center;">
-                                <strong style="color: #f57c00;">60%</strong>
-                            </div>
-                        </td>
-                        <td style="font-size: 13px;">기초 분석 AI(BERT, LLM 관련성 판단) 기확보. 2단계 하이브리드 아키텍처 구현, 멀티모달 적용, 다국어 처리 고도화 필요.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>(3) 분석</strong></td>
-                        <td>TEM 엔진 개선 (환자 경험 분석/스코어링)</td>
-                        <td>
-                            <div style="background: #f3e5f5; padding: 5px; border-radius: 4px; text-align: center;">
-                                <strong style="color: #7b1fa2;">50%</strong>
-                            </div>
-                        </td>
-                        <td style="font-size: 13px;">키워드/감성 분석 기확보. 4단계 하이브리드 파이프라인(BERTopic+지도학습+RAG) 구축, 7대 토픽 정의, 다국어 처리 필요.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>(4) 추천</strong></td>
-                        <td>INTRO 엔진 개발/개선 (맞춤 추천)</td>
-                        <td>
-                            <div style="background: #fce4ec; padding: 5px; border-radius: 4px; text-align: center;">
-                                <strong style="color: #c2185b;">40%</strong>
-                            </div>
-                        </td>
-                        <td style="font-size: 13px;">LLM 대화형 추천/다국어 처리 기반 확보. '순차적 의도 반영' 알고리즘 신규 개발, 실시간 처리 시스템 구축, XAI 구현 필요.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>(5) 적용</strong></td>
-                        <td>B2C 신규 구축 + B2B 솔루션 고도화</td>
-                        <td>
-                            <div style="background: #ffebee; padding: 5px; border-radius: 4px; text-align: center;">
-                                <strong style="color: #d32f2f;">30%</strong>
-                            </div>
-                        </td>
-                        <td style="font-size: 13px;"><strong>B2C:</strong> 신규 개발 필요 (외국인 특화 기능). <strong>B2B:</strong> 기존 3종 솔루션 운영 중. B2C 데이터 연동 및 AI 기능 고도화 개발 필요.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-<!-- 슬라이드 15: 기대 효과 -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">2. 연구개발 내용 및 목표 - 기대 효과</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">'신뢰' 기반의 B2C-B2B 선순환(Flywheel)을 통해 지속 가능한 의료 정보 생태계를 완성하고 글로벌 의료 정보 접근성을 향상시킵니다.</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li>본 사업의 기술 개선/확장 적용은 단순히 B2C 플랫폼을 구축하는 것을 넘어, B2B와 B2C가 상호 데이터를 주고받으며 함께 성장하는 선순환 구조를 만드는 핵심 동력입니다.</li>
-                    <li>이를 통해 정보 비대칭성을 해소하고, 환자(내/외국인 포함)와 병원 모두에게 긍정적인 가치를 제공하며 지속 가능한 성장을 추구합니다.</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="two-column">
-            <div class="column">
-                <h3 style="color: #667eea; margin-bottom: 15px;">🔄 B2C ↔ B2B 상호작용</h3>
-                <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 8px; padding: 20px; min-height: 250px;">
-                    <div style="text-align: center; margin-bottom: 20px;">
-                        <div style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 25px; border-radius: 50px; font-weight: 700; margin-bottom: 15px;">
-                            플랫폼 중심
-                        </div>
-                    </div>
-                    
-                    <div style="background: #e3f2fd; border-left: 4px solid #2196f3; padding: 15px; margin-bottom: 15px; border-radius: 4px;">
-                        <div style="font-size: 14px; font-weight: 700; color: #0d47a1; margin-bottom: 8px;">B2B → B2C</div>
-                        <div style="font-size: 13px; color: #1565c0;">
-                            B2B 기술/데이터('리뷰 부스터' 진성 리뷰 등)가 B2C 서비스의 신뢰도 확보 기반
-                        </div>
-                    </div>
-                    
-                    <div style="text-align: center; margin: 15px 0; font-size: 24px; color: #667eea;">⇅</div>
-                    
-                    <div style="background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 15px; border-radius: 4px;">
-                        <div style="font-size: 14px; font-weight: 700; color: #6a1b9a; margin-bottom: 8px;">B2C → B2B</div>
-                        <div style="font-size: 13px; color: #7b1fa2;">
-                            B2C에서 축적된 '환자 경험 데이터'(TEM 분석 결과)가 B2B AI 솔루션 고도화
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="column">
-                <h3 style="color: #667eea; margin-bottom: 15px;">🎯 성장 플라이휠</h3>
-                <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 8px; padding: 20px; min-height: 250px;">
-                    <svg viewBox="0 0 300 300" style="width: 100%; height: auto;">
-                        <!-- 중심 원 -->
-                        <circle cx="150" cy="150" r="40" fill="#667eea" />
-                        <text x="150" y="155" text-anchor="middle" fill="white" font-size="14" font-weight="bold">선순환</text>
-                        
-                        <!-- 화살표와 텍스트들 -->
-                        <g>
-                            <!-- B2B 성장 -->
-                            <rect x="50" y="20" width="80" height="50" rx="8" fill="#e3f2fd" stroke="#2196f3" stroke-width="2"/>
-                            <text x="90" y="40" text-anchor="middle" font-size="11" font-weight="bold" fill="#0d47a1">B2B 성장</text>
-                            <text x="90" y="55" text-anchor="middle" font-size="9" fill="#1565c0">병원 고객↑</text>
-                            
-                            <!-- 화살표 1 -->
-                            <path d="M 130 50 L 150 90" stroke="#667eea" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
-                            
-                            <!-- 신뢰도 높은 정보 -->
-                            <rect x="170" y="20" width="80" height="50" rx="8" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
-                            <text x="210" y="40" text-anchor="middle" font-size="10" font-weight="bold" fill="#e65100">투명 정보↑</text>
-                            <text x="210" y="55" text-anchor="middle" font-size="9" fill="#f57c00">신뢰도↑</text>
-                            
-                            <!-- 화살표 2 -->
-                            <path d="M 210 70 L 190 110" stroke="#667eea" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
-                            
-                            <!-- B2C 성장 -->
-                            <rect x="170" y="230" width="80" height="50" rx="8" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2"/>
-                            <text x="210" y="250" text-anchor="middle" font-size="11" font-weight="bold" fill="#6a1b9a">B2C 성장</text>
-                            <text x="210" y="265" text-anchor="middle" font-size="9" fill="#7b1fa2">환자 트래픽↑</text>
-                            
-                            <!-- 화살표 3 -->
-                            <path d="M 170 255 L 150 210" stroke="#667eea" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
-                            
-                            <!-- 리뷰 증가 -->
-                            <rect x="50" y="230" width="80" height="50" rx="8" fill="#e8f5e9" stroke="#4caf50" stroke-width="2"/>
-                            <text x="90" y="250" text-anchor="middle" font-size="10" font-weight="bold" fill="#2e7d32">환자 리뷰↑</text>
-                            <text x="90" y="265" text-anchor="middle" font-size="9" fill="#388e3c">데이터 증가</text>
-                            
-                            <!-- 화살표 4 -->
-                            <path d="M 90 230 L 110 190" stroke="#667eea" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
-                        </g>
-                        
-                        <!-- 화살표 마커 정의 -->
-                        <defs>
-                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                <polygon points="0 0, 10 3, 0 6" fill="#667eea" />
-                            </marker>
-                        </defs>
-                    </svg>
-                </div>
-            </div>
-        </div>
-        
-        <div class="content-section" style="margin-top: 30px;">
-            <div class="section-title">기대 효과</div>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-                <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 20px; border-radius: 8px;">
-                    <div style="font-size: 18px; font-weight: 700; color: #0d47a1; margin-bottom: 12px;">🏭 산업적 효과</div>
-                    <ul style="font-size: 13px; color: #1565c0; line-height: 1.8; padding-left: 18px;">
-                        <li>의료 리뷰 신뢰성 향상</li>
-                        <li>허위 광고 근절</li>
-                        <li>환자 중심 서비스 품질 개선</li>
-                        <li>의료 데이터 기반 신규 서비스 창출</li>
+            <div class="compare-container">
+                <div class="compare-box compare-bad">
+                    <span class="compare-badge badge-bad">기존의 광고성 블로그</span>
+                    <h3>"우리가 제일 좋아요!" (근거 부족)</h3>
+                    <ul style="text-align: left; color: #666; margin-top: 20px; line-height: 2;">
+                        <li><i class="fas fa-times-circle"></i> "무조건 쌉니다/좋습니다" 식의 주장</li>
+                        <li><i class="fas fa-times-circle"></i> 다른 병원 글을 복사한 듯한 뻔한 내용</li>
+                        <li><i class="fas fa-times-circle"></i> 전문성 없이 전후 사진만 나열</li>
+                        <li><i class="fas fa-times-circle"></i> <strong>결과: 환자는 '광고'라고 느끼고 이탈</strong></li>
                     </ul>
                 </div>
-                
-                <div style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); padding: 20px; border-radius: 8px;">
-                    <div style="font-size: 18px; font-weight: 700; color: #6a1b9a; margin-bottom: 12px;">⚙️ 기술적 효과</div>
-                    <ul style="font-size: 13px; color: #7b1fa2; line-height: 1.8; padding-left: 18px;">
-                        <li>AI 기반 콘텐츠 신뢰성 평가 표준화 선도</li>
-                        <li>비정형 환자경험 분석 국제 표준화</li>
-                        <li>한국형 의료정보 표준 글로벌 확산</li>
-                        <li>표준 기반 상호운용성 확보</li>
-                    </ul>
-                </div>
-                
-                <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 20px; border-radius: 8px;">
-                    <div style="font-size: 18px; font-weight: 700; color: #2e7d32; margin-bottom: 12px;">🌍 사회적 효과</div>
-                    <ul style="font-size: 13px; color: #388e3c; line-height: 1.8; padding-left: 18px;">
-                        <li>환자 알 권리 보장</li>
-                        <li>정보 접근성 향상 (외국인 포함)</li>
-                        <li>의료기관 품질 개선 동기 부여</li>
-                        <li>공정한 평가 체계로 사회적 신뢰 제고</li>
+                <div class="compare-box compare-good">
+                    <span class="compare-badge badge-good">메디컨텐츠 솔루션</span>
+                    <h3>"왜 우리 방식이 정답인가" (논리적 증명)</h3>
+                    <ul style="text-align: left; margin-top: 20px; line-height: 2;">
+                        <li><i class="fas fa-check-circle"></i> 시술 재료와 메커니즘의 <strong>기술적 분석</strong></li>
+                        <li><i class="fas fa-check-circle"></i> 경쟁 시술 대비 <strong>우월성 논증</strong></li>
+                        <li><i class="fas fa-check-circle"></i> 부작용 최소화 원리에 대한 의학적 칼럼</li>
+                        <li><i class="fas fa-check-circle"></i> <strong>결과: 환자는 '전문가'라 믿고 선택</strong></li>
                     </ul>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 
-<!-- 슬라이드 16: 기술 목표 (성능지표) -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">2. 연구개발 내용 및 목표 - 기술 목표 (성능지표)</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">개선/개발할 3대 핵심 AI 엔진은 기보유 자산(B2B 데이터, 정부 과제 기술)을 활용하여 각 분야 SOTA 이상의 성능 달성을 목표로 합니다.</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li>본 사업을 통해 개선/개발하는 핵심 AI 엔진(VERA, TEM, INTRO)의 최종 성능 목표를 세계 최고 수준(SOTA) 및 국내 수준과 비교하여 제시합니다.</li>
-                    <li>B2B 운영을 통해 확보한 대규모 도메인 특화 데이터와 정부 과제 기술 활용을 통해 목표 달성이 가능함을 강조합니다.</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="content-section">
-            <div class="section-title">핵심 기술 성능지표</div>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th style="width: 20%;">평가항목</th>
-                        <th style="width: 10%;">단위</th>
-                        <th style="width: 10%;">비중</th>
-                        <th style="width: 20%;">세계 최고수준 (SOTA)</th>
-                        <th style="width: 20%;">국내 수준</th>
-                        <th style="width: 10%;">최종 목표치</th>
-                        <th style="width: 10%;">목표 설정 근거</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>1. VERA 엔진</strong><br>(바이럴 마케팅 콘텐츠 판별)</td>
-                        <td>F1-score</td>
-                        <td style="text-align: center;"><strong>40%</strong></td>
-                        <td><strong>0.877</strong><br><span style="font-size: 11px; color: #666;">(미국, 중국)</span></td>
-                        <td><strong>0.86</strong><br><span style="font-size: 11px; color: #666;">(상명대학교)</span></td>
-                        <td style="text-align: center; background: #e8f5e9;"><strong style="color: #2e7d32; font-size: 18px;">0.88</strong></td>
-                        <td style="font-size: 11px;">SOTA 수준 달성 + 의료 특화 데이터 활용</td>
-                    </tr>
-                    <tr>
-                        <td><strong>2. TEM 엔진</strong><br>(환자 경험 토픽 분류)</td>
-                        <td>F1-score</td>
-                        <td style="text-align: center;"><strong>30%</strong></td>
-                        <td><strong>0.84</strong><br><span style="font-size: 11px; color: #666;">(중국/Fudan Univ.)</span></td>
-                        <td><strong>89.2% (정확도)</strong><br><span style="font-size: 11px; color: #666;">(광운대학교)</span></td>
-                        <td style="text-align: center; background: #e8f5e9;"><strong style="color: #2e7d32; font-size: 18px;">0.85</strong></td>
-                        <td style="font-size: 11px;">SOTA 상회 + 7대 토픽 정의 + RAG 기반 XAI</td>
-                    </tr>
-                    <tr>
-                        <td><strong>3. INTRO 엔진</strong><br>(맞춤형 추천 순위 정확도)</td>
-                        <td>NDCG</td>
-                        <td style="text-align: center;"><strong>30%</strong></td>
-                        <td><strong>0.57</strong><br><span style="font-size: 11px; color: #666;">(미국/USC, Adobe)</span></td>
-                        <td><strong>86.2% (정확도)</strong><br><span style="font-size: 11px; color: #666;">(경희대학교)</span></td>
-                        <td style="text-align: center; background: #e8f5e9;"><strong style="color: #2e7d32; font-size: 18px;">0.60</strong></td>
-                        <td style="font-size: 11px;">절대값 SOTA 기준 상회 + 의료 특화</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <div style="background: #fff8e1; border-left: 4px solid #ffc107; padding: 20px; border-radius: 4px; margin-top: 25px;">
-            <div style="font-size: 16px; font-weight: 700; color: #f57c00; margin-bottom: 12px;">📊 평가 지표 설명</div>
-            <div style="font-size: 14px; color: #e65100; line-height: 1.8;">
-                <strong>• F1-score (F1 점수):</strong> 정밀도(Precision)와 재현율(Recall)의 조화 평균. 분류 작업에서 '얼마나 정확하게' 그리고 '얼마나 놓치지 않고' 찾아내는지를 균형있게 평가하는 지표입니다. 1에 가까울수록 우수합니다.<br><br>
-                
-                <strong>• NDCG (정규화된 감쇠 누적 이득):</strong> 순위가 매겨진 목록(추천 결과)의 품질을 평가하는 지표. 관련성이 높은 항목이 목록의 앞 순위에 나타날수록 높은 점수를 받으며, 0과 1 사이의 값으로 1에 가까울수록 이상적인 추천 순위입니다.
-            </div>
-        </div>
-        
-        <div style="background: #e3f2fd; border-left: 4px solid #2196f3; padding: 20px; border-radius: 4px; margin-top: 20px;">
-            <div style="font-size: 16px; font-weight: 700; color: #0d47a1; margin-bottom: 12px;">🎯 사업화 적정 성능 근거</div>
-            <div style="font-size: 13px; color: #1565c0; line-height: 1.7;">
-                <strong>VERA (F1 0.88):</strong> 대부분의 교묘한 바이럴 마케팅을 효과적으로 필터링하면서도 정상 콘텐츠를 과도하게 차단하지 않아 플랫폼 '신뢰도 확보'의 핵심이 됩니다.<br><br>
-                
-                <strong>TEM (F1 0.85):</strong> 환자 경험의 세부 항목을 신뢰성 있게 식별하고 정량화하여 사용자에게는 의미 있는 병원 비교 정보를, 병원에게는 구체적인 CS 개선점을 제공합니다.<br><br>
-                
-                <strong>INTRO (NDCG 0.60):</strong> 사용자의 다양한 의도와 관련된 병원이 효과적으로 상위에 배치되어 사용자 만족도 및 재방문율(DAU) 향상으로 이어져 플랫폼의 장기적인 성장과 수익 창출에 직접 기여합니다.
-            </div>
-        </div>
-    </div>
-</div>
+    <section style="background-color: #fdfaff;">
+        <div class="container">
+            <h2>'시술 방법의 전쟁'에서 승리하십시오</h2>
+            <p class="section-desc">
+                라미네이트, 시력교정, 리프팅... 환자는 지금 A시술법과 B시술법 사이에서 고민 중입니다.<br>
+                결정의 순간, 우리 병원의 시술이 <strong>'가장 합리적이고 안전한 선택'</strong>임을 각인시킵니다.
+            </p>
 
-<!-- 슬라이드 17: 평가방법 및 환경 -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">2. 연구개발 내용 및 목표 - 평가방법 및 환경</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">개발된 3대 핵심 AI 엔진의 성능은 KOLAS 공인시험기관을 통해 객관적이고 신뢰성 있는 방법으로 검증합니다.</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li>각 엔진(VERA, TEM, INTRO)의 목표 성능 달성 여부를 공인된 절차와 표준화된 지표(F1-score, NDCG)를 사용하여 평가합니다.</li>
-                    <li>엔진별 특성에 맞는 자체 구축 테스트 데이터셋과 명확한 평가 기준을 적용하여 평가의 타당성을 확보합니다.</li>
-</ul>
-</div>
-</div>
-<div class="content-section">
-        <div class="section-title">핵심 기술 평가방법 및 환경 요약</div>
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th style="width: 20%;">순번</th>
-                    <th style="width: 20%;">평가항목 (성능지표)</th>
-                    <th style="width: 35%;">평가방법</th>
-                    <th style="width: 25%;">평가환경</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>1. VERA 엔진</strong><br>(허위/광고성 리뷰 판별)</td>
-                    <td>F1-score</td>
-                    <td style="font-size: 13px;">'허위/광고성' vs '정상' 라벨링된 테스트 데이터셋 (리뷰, 카페 글 등) 기반 F1-score 측정</td>
-                    <td style="font-size: 13px;"><strong>KOLAS 국제공인시험기관</strong>의 객관적인 시험 평가 실시</td>
-                </tr>
-                <tr>
-                    <td><strong>2. TEM 엔진</strong><br>(환자 경험 토픽 분류)</td>
-                    <td>F1-score</td>
-                    <td style="font-size: 13px;">'7대 토픽' 다중 라벨링된 리뷰 테스트 데이터셋 기반 F1-score (Macro/Micro Average) 측정</td>
-                    <td style="font-size: 13px;"><strong>KOLAS 국제공인시험기관</strong>의 객관적인 시험 평가 실시</td>
-                </tr>
-                <tr>
-                    <td><strong>3. INTRO 엔진</strong><br>(맞춤형 추천 순위 정확도)</td>
-                    <td>NDCG</td>
-                    <td style="font-size: 13px;">사용자 컨텍스트별 '실제 관련성 점수'가 부여된 병원 목록 테스트 데이터셋 기반 NDCG@10 측정</td>
-                    <td style="font-size: 13px;"><strong>KOLAS 국제공인시험기관</strong>의 객관적인 시험 평가 실시</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-    <div class="content-section">
-        <div class="section-title">각 평가방법 상세 계획</div>
-        
-        <div class="process-box" style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); margin-bottom: 20px;">
-            <div class="process-title" style="color: #e65100;">📋 규격 1: VERA 엔진 - 허위/광고성 리뷰 판별 성능 평가</div>
-            <div style="font-size: 14px; color: #666; line-height: 1.8;">
-                <strong>• 테스트 데이터셋:</strong> '허위/광고성' 또는 '정상'으로 정답 라벨링된 소셜 미디어 게시물(온라인 리뷰, 카페 게시글 등) 1,000건 이상 (이 중 '허위/광고성' 샘플 최소 200~300건 포함)<br><br>
-                
-                <strong>• 평가 방식:</strong> 구축된 테스트 데이터셋에 VERA 엔진을 적용하여 각 게시물을 분류하고, 예측 결과와 실제 라벨을 비교<br><br>
-                
-                <strong>• 성능 지표:</strong> F1-score를 사용하여 '허위/광고성' 콘텐츠 탐지 성능(정밀도와 재현율의 조화 평균)을 측정하여 <strong style="color: #e65100;">목표치 0.88 달성 여부</strong>를 평가
-            </div>
-        </div>
-        
-        <div class="process-box" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); margin-bottom: 20px;">
-            <div class="process-title" style="color: #0d47a1;">📋 규격 2: TEM 엔진 - 환자 경험 토픽 분류 성능 평가</div>
-            <div style="font-size: 14px; color: #666; line-height: 1.8;">
-                <strong>• 테스트 데이터셋:</strong> VERA 엔진으로 검증된 '진짜 리뷰' 중, 사전에 정의된 '7대 환자 경험 토픽'으로 다중 라벨링된 리뷰 1,500건 이상 (각 토픽별 최소 100~150건 샘플 포함)<br><br>
-                
-                <strong>• 평가 방식:</strong> 구축된 테스트 데이터셋에 TEM 엔진을 적용하여 각 리뷰별 해당 토픽을 분류하고, 예측 결과와 실제 라벨을 비교<br><br>
-                
-                <strong>• 성능 지표:</strong> F1-score (Macro/Micro Average)를 사용하여 7개 토픽 전반에 대한 분류 성능을 측정하고 <strong style="color: #0d47a1;">목표치 0.85 달성 여부</strong>를 평가
-            </div>
-        </div>
-        
-        <div class="process-box" style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);">
-            <div class="process-title" style="color: #6a1b9a;">📋 규격 3: INTRO 엔진 - 맞춤형 추천 순위 정확도 평가</div>
-            <div style="font-size: 14px; color: #666; line-height: 1.8;">
-                <strong>• 테스트 데이터셋:</strong><br>
-                &nbsp;&nbsp;- 다양한 사용자 컨텍스트(의도) 시나리오 300~500개 정의<br>
-                &nbsp;&nbsp;- 각 컨텍스트별 후보 병원 목록에 대해, LLM 초안 생성 + 전문가 검수를 통해 '실제 관련성 점수'(0~3점 척도)를 부여한 정답셋 구축<br><br>
-                
-                <strong>• 평가 방식:</strong> 정의된 각 사용자 컨텍스트를 INTRO 엔진에 입력하여 추천된 병원 목록(상위 10개)을 생성하고, 구축된 정답셋의 관련성 점수를 이용해 순위 품질 평가<br><br>
-                
-                <strong>• 성능 지표:</strong> NDCG@10 지표를 사용하여 관련성 높은 병원이 추천 목록 상위에 얼마나 잘 배치되었는지를 측정하고 <strong style="color: #6a1b9a;">목표치 0.60 달성 여부</strong>를 평가
-            </div>
-        </div>
-    </div>
-    
-    <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 20px; border-radius: 4px; margin-top: 25px;">
-        <div style="font-size: 16px; font-weight: 700; color: #2e7d32; margin-bottom: 12px;">✅ KOLAS 공인 시험 평가 절차</div>
-        <div style="font-size: 14px; color: #1b5e20; line-height: 1.8;">
-            KOLAS(한국인정기구)로부터 소프트웨어 시험 분야에 대한 공인 자격을 획득한 시험기관(예: 한국정보통신기술협회(TTA) 소프트웨어시험인증연구소, 한국산업기술시험원(KTL) 등)에 평가를 의뢰합니다. 개발 완료된 각 AI 엔진(소프트웨어 형태), 자체 구축한 테스트 데이터셋, 그리고 명확한 평가 절차를 시험기관에 제공하여 독립적으로 테스트를 수행하고, 결과가 포함된 공인 시험 성적서를 발급받습니다.
-        </div>
-    </div>
-</div>
-</div>
-<!-- 슬라이드 18: 선행연구 및 보유 지식재산권 -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">3. 연구개발 현황 - 선행연구 및 보유 지식재산권 현황</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">이미 확보된 B2B 서비스 기술력과 정부 R&D 역량을 바탕으로 본 과제 기술 개발의 상당 부분을 선행 완료했습니다.</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li><strong>기반 기술 확보 현황:</strong> B2B 서비스 운영 및 정부 R&D 과제 수행을 통해 본 과제에 필요한 핵심 AI 기술(데이터 수집/분석, LLM/RAG, 다국어 처리 등)을 이미 확보하였고, 본 과제 5단계 기술 개발 계획 중 상당 부분이 기보유 기술을 통해 선행 완료되었습니다.</li>
-                    <li><strong>보유 지식재산권 현황:</strong> 본 과제와 관련하여 '진료 매칭 방법 및 이를 수행하는 전자 장치' 등 3건의 등록 특허를 보유하고 있습니다.</li>
-                </ul>
-            </div>
-        </div>
-		<div class="content-section">
-        <div class="section-title">1. 선행 연구 개발 현황</div>
-        
-        <div style="background: #e3f2fd; border: 2px solid #2196f3; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
-            <div style="font-size: 16px; font-weight: 700; color: #0d47a1; margin-bottom: 15px;">📊 병원 평판 데이터 수집 현황</div>
-            <div style="font-size: 14px; color: #1565c0;">
-                전국 <strong style="font-size: 18px;">5,000개 이상</strong> 병·의원 대상 <strong style="font-size: 18px;">수백만 건</strong>의 멀티채널 평판 데이터 확보 및 분석 시스템 운영 중
-            </div>
-        </div>
-        
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 25px;">
-            <div style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border-radius: 8px; padding: 20px;">
-                <div style="text-align: center; font-size: 32px; margin-bottom: 10px;">📊</div>
-                <div style="font-size: 16px; font-weight: 700; color: #e65100; margin-bottom: 10px; text-align: center;">리뷰매니저</div>
-                <div style="font-size: 13px; color: #666; line-height: 1.6;">
-                    <strong>기술 1:</strong> 멀티소스 대량 데이터 수집 및 ETL 파이프라인<br><br>
-                    <strong>기술 2:</strong> BERT 기반 고객 경험 분석 (긍/부정, 키워드, 토픽)<br><br>
-                    <strong>기술 3:</strong> LLM 멀티에이전트 기반 병원 관련성 판단<br><br>
-                    <strong>기술 4:</strong> 병원별 맞춤형 답변 생성 LLM 모듈
+            <div class="grid-box" style="margin-top: 50px;">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-microscope"></i></div>
+                    <h3>기술적 우월성 (Superiority)</h3>
+                    <p>
+                        단순히 "결과가 좋다"가 아니라, <strong>"왜 좋은지"</strong>를 설명합니다.<br>
+                        소재의 강도, 삭제량의 차이, 장비의 정밀도 등 구체적인 데이터를 근거로 우리 시술의 기술적 우위를 논리적으로 입증합니다.
+                    </p>
                 </div>
-            </div>
-            
-            <div style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); border-radius: 8px; padding: 20px;">
-                <div style="text-align: center; font-size: 32px; margin-bottom: 10px;">🚀</div>
-                <div style="font-size: 16px; font-weight: 700; color: #6a1b9a; margin-bottom: 10px; text-align: center;">리뷰부스터</div>
-                <div style="font-size: 13px; color: #666; line-height: 1.6;">
-                    <strong>기술 1:</strong> 병원 EMR 연동 기반 진료 완료 환자 자동 리뷰 요청<br><br>
-                    <strong>기술 2:</strong> 진료과목별 특성 반영 키워드 추천<br><br>
-                    <strong>기술 3:</strong> 환자 선택 키워드 기반 자연스러운 리뷰 초안 생성 LLM 모듈
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>안전성 & 부작용 (Safety)</h3>
+                    <p>
+                        심미 치료 환자의 가장 큰 두려움은 '부작용'입니다.<br>
+                        경쟁 시술의 단점을 꼬집고, 우리 시술이 어떻게 그 문제를 해결했는지 <strong>의학적 메커니즘</strong>을 통해 설명하여 불안을 해소합니다.
+                    </p>
                 </div>
-            </div>
-            
-            <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-radius: 8px; padding: 20px;">
-                <div style="text-align: center; font-size: 32px; margin-bottom: 10px;">📝</div>
-                <div style="font-size: 16px; font-weight: 700; color: #2e7d32; margin-bottom: 10px; text-align: center;">메디컨텐츠</div>
-                <div style="font-size: 13px; color: #666; line-height: 1.6;">
-                    <strong>기술 1:</strong> 병원 제공 자료 기반 SEO 최적화 및 의료법 준수 콘텐츠 자동 생성<br><br>
-                    <strong>기술 2:</strong> 의료법규·심의사례·판례 기반 법률 RAG 및 멀티에이전트 활용 자동 검토
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-crown"></i></div>
+                    <h3>시그니처 브랜딩 (Signature)</h3>
+                    <p>
+                        어디서나 하는 시술이 아닌, <strong>우리 병원만의 고유한 프로토콜</strong>로 포장합니다.<br>
+                        프리미엄 마케팅에 걸맞은 고품격 칼럼 형식의 글쓰기로 병원의 격(Class)을 높입니다.
+                    </p>
                 </div>
             </div>
         </div>
-        
-        <div style="background: #f3e5f5; border: 2px solid #9c27b0; border-radius: 8px; padding: 20px;">
-            <div style="font-size: 16px; font-weight: 700; color: #6a1b9a; margin-bottom: 15px;">🏛️ 정부 R&D 사업 기반 기술 확보 현황</div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div style="background: white; padding: 15px; border-radius: 8px;">
-                    <div style="font-size: 14px; font-weight: 700; color: #7b1fa2; margin-bottom: 10px;">초거대 AI 데이터 구축 사업</div>
-                    <div style="font-size: 13px; color: #666; line-height: 1.6;">
-                        법률 문서 구조 이해, 핵심 내용 추출, 서식 자동 생성을 위한 초거대 AI 학습 데이터셋(1만건+ 문서, 60만건+ 라벨링) 및 법률 특화 Llama3.1 모델 구축 기술 확보
-                    </div>
-                </div>
-                <div style="background: white; padding: 15px; border-radius: 8px;">
-                    <div style="font-size: 14px; font-weight: 700; color: #7b1fa2; margin-bottom: 10px;">생성형 AI 법률상담 플랫폼 개발</div>
-                    <div style="font-size: 13px; color: #666; line-height: 1.6;">
-                        LLM 멀티에이전트 아키텍처, MRC 기반 쟁점 분석 알고리즘, 다국어 실시간 번역 및 OCR 연동 기술, 리서치/리포트 자동 생성 등 지능형 플랫폼 개발 기술 확보
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="content-section" style="margin-top: 25px;">
-        <div class="section-title">2. 본 과제 관련 지식재산권 보유 현황</div>
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th style="width: 8%;">순번</th>
-                    <th style="width: 12%;">구분</th>
-                    <th style="width: 20%;">출원인</th>
-                    <th style="width: 15%;">등록번호</th>
-                    <th style="width: 45%;">특허명</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="text-align: center;">1</td>
-                    <td>특허</td>
-                    <td>주식회사 리걸케어</td>
-                    <td><strong>10-2227833</strong></td>
-                    <td>진료 매칭 방법 및 이를 수행하는 전자 장치</td>
-                </tr>
-                <tr>
-                    <td style="text-align: center;">2</td>
-                    <td>특허</td>
-                    <td>주식회사 리걸케어</td>
-                    <td><strong>10-2672368</strong></td>
-                    <td>문서 관리 서버 및 그에 대한 방법</td>
-                </tr>
-                <tr>
-                    <td style="text-align: center;">3</td>
-                    <td>특허</td>
-                    <td>주식회사 리걸케어</td>
-                    <td><strong>10-2611052</strong></td>
-                    <td>문서 작성 지원 방법 및 이를 구현하는 시스템</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-</div>
-<!-- 슬라이드 19: 지식재산권 확보 및 회피 방안 -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">3. 연구개발 현황 - 지식재산권 확보 및 회피 방안</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">핵심 기술(VERA, TEM, INTRO)의 독창성을 기반으로 선행 특허와의 차별성을 확보하고, 신규 지식재산권 확보를 통해 기술 경쟁 우위를 공고히 합니다.</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li><strong>유사 특허 분석:</strong> 본 과제 핵심 기술과 관련하여 국내 등록 특허를 분석하여 유사도가 높은 선행 특허 3건을 식별하고, 중복 우려 영역을 파악하였습니다.</li>
-                    <li><strong>회피 및 확보 방안:</strong> 식별된 유사 특허와의 차별화 전략(도메인 특화, 엔진 융합 등)을 수립하여, 본 과제만의 고유 기술(알고리즘, 시스템 구조)에 대한 신규 특허 출원 계획을 통해 지식재산권을 확보하겠습니다.</li>
-                </ul>
-            </div>
-        </div>
-		<div class="content-section">
-        <div class="section-title">1. 유사 특허 분석 결과</div>
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th style="width: 8%;">순번</th>
-                    <th style="width: 22%;">출원인</th>
-                    <th style="width: 15%;">등록번호</th>
-                    <th style="width: 30%;">특허명</th>
-                    <th style="width: 25%;">유사·중복 우려 영역</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="text-align: center;">1</td>
-                    <td>주식회사 포트럭테이블</td>
-                    <td><strong>10-2723275</strong></td>
-                    <td>큐레이션엔진을 이용한 추천음식콘텐츠 미디어 제공시스템</td>
-                    <td style="font-size: 13px;">콘텐츠 큐레이션, 개인화 추천, 메타데이터 처리</td>
-                </tr>
-                <tr>
-                    <td style="text-align: center;">2</td>
-                    <td>주식회사 소금광산</td>
-                    <td><strong>10-2790406</strong></td>
-                    <td>생성형 AI를 활용한 소비자 내면 성향 유형화 분석 모델 제작 시스템 및 그 방법</td>
-                    <td style="font-size: 13px;">AI 기반 콘텐츠 분석, 소비자 성향 분석, 개인화</td>
-                </tr>
-                <tr>
-                    <td style="text-align: center;">3</td>
-                    <td>에쓰오씨소프트(주)</td>
-                    <td><strong>10-2464117</strong></td>
-                    <td>인공지능을 활용하여 공공기관 빅데이터 포털의 콘텐츠를 분석 및 관리하는 방법 및 장치</td>
-                    <td style="font-size: 13px;">빅데이터 콘텐츠 분석, 자동 관리, 텍스트 마이닝</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-    <div class="content-section" style="margin-top: 25px;">
-        <div class="section-title">2. 유사 특허별 회피 방안</div>
-        
-        <div style="display: grid; grid-template-columns: 1fr; gap: 15px;">
-            <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 8px; padding: 20px;">
-                <div style="font-size: 16px; font-weight: 700; color: #0d47a1; margin-bottom: 12px;">🔷 특허 1 (포트럭테이블) - 큐레이션엔진 기반 음식 추천 시스템 회피 방안</div>
-                <ul style="font-size: 14px; color: #1565c0; line-height: 1.8; padding-left: 20px;">
-                    <li><strong>① 의료/병원 도메인 특화:</strong> 기술 적용 범위를 명확히 한정하여 음식 레시피 큐레이션과 차별화</li>
-                    <li><strong>② TEM 엔진:</strong> 환자 리뷰 텍스트 기반 7대 토픽 분석/스코어링 기술 적용 (단순 메타데이터 처리와 상이)</li>
-                    <li><strong>③ VERA 엔진:</strong> 허위/광고성 리뷰 및 바이럴 마케팅 콘텐츠 탐지/필터링 기능 추가 (선행 특허 미포함)</li>
-                    <li><strong>④ INTRO 엔진:</strong> 사용자의 복합적 의도를 반영한 순차적 다양화 추천 알고리즘 적용 (선행 특허 미포함)</li>
-                </ul>
-            </div>
-            
-            <div style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); border-radius: 8px; padding: 20px;">
-                <div style="font-size: 16px; font-weight: 700; color: #6a1b9a; margin-bottom: 12px;">🔷 특허 2 (소금광산) - AI 기반 소비자 성향 분석 시스템 회피 방안</div>
-                <ul style="font-size: 14px; color: #7b1fa2; line-height: 1.8; padding-left: 20px;">
-                    <li><strong>① 병원 리뷰 특화:</strong> 분석 대상을 의료 서비스 관련 환자 리뷰로 한정 (일반 소비자 성향 분석과 차별화)</li>
-                    <li><strong>② VERA 엔진 독창성:</strong> 텍스트, 이미지, 작성자 행동 패턴 등 멀티모달 정보를 활용한 교묘한 허위/광고 탐지 기술</li>
-                    <li><strong>③ TEM 엔진 고도화:</strong> 의료 특화 7대 토픽 모델링 결과와 실제 예약 데이터를 연동한 강화학습 기반 분석</li>
-                    <li><strong>④ 환자-병원 매칭:</strong> 분석 결과를 단순 성향 분류가 아닌, 환자 의도와 병원 특성 간의 최적 매칭 추천(INTRO)에 활용</li>
-                </ul>
-            </div>
-            
-            <div style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border-radius: 8px; padding: 20px;">
-                <div style="font-size: 16px; font-weight: 700; color: #e65100; margin-bottom: 12px;">🔷 특허 3 (에쓰오씨소프트) - 공공 빅데이터 포털 콘텐츠 분석/관리 시스템 회피 방안</div>
-                <ul style="font-size: 14px; color: #f57c00; line-height: 1.8; padding-left: 20px;">
-                    <li><strong>① 의료/병원 서비스 도메인 특화:</strong> 분석 대상 및 목적을 명확히 한정 (공공 데이터 포털과 차별화)</li>
-                    <li><strong>② 3개 엔진 통합 시너지:</strong> VERA(신뢰도) + TEM(인사이트) + INTRO(맞춤 액션) 유기적 결합을 통한 독자적 가치 창출</li>
-                    <li><strong>③ 통합 기능:</strong> 단순 분석/관리를 넘어, 허위 탐지 + 심층 토픽 분류 + 의도 기반 설명가능 추천을 통합 제공</li>
-<li><strong>④ 예약 데이터 연동:</strong> 실제 사용자 행동 피드백(예약)을 TEM/INTRO 엔진 강화학습에 활용</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="content-section" style="margin-top: 25px;">
-        <div class="section-title">3. 종합 회피 전략 및 신규 지식재산권 확보 방안</div>
-        
-        <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 20px; border-radius: 4px; margin-bottom: 20px;">
-            <div style="font-size: 16px; font-weight: 700; color: #2e7d32; margin-bottom: 12px;">🎯 핵심 차별화 요소</div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                <div>
-                    <ul style="font-size: 14px; color: #1b5e20; line-height: 1.8; padding-left: 20px;">
-                        <li><strong>의료/병원 도메인</strong>으로 명확히 한정</li>
-                        <li><strong>VERA(허위 탐지) + TEM(토픽 분석) + INTRO(의도 기반 추천)</strong> 3개 엔진의 유기적 결합 및 시너지</li>
-                        <li>텍스트, 이미지, 댓글, 행동 패턴 등 <strong>멀티모달 정보</strong> 종합 분석</li>
-                    </ul>
-                </div>
-                <div>
-                    <ul style="font-size: 14px; color: #1b5e20; line-height: 1.8; padding-left: 20px;">
-                        <li><strong>실제 병원 예약 데이터</strong>를 TEM/INTRO 엔진 강화학습에 활용</li>
-                        <li><strong>의료 특화 7대 토픽</strong> 구조 기반의 심층적인 환자 경험 분석(TEM)</li>
-                        <li><strong>외국인 사용자</strong> 특화 기능 및 다국어 처리 기술 통합</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <div style="background: #e3f2fd; border-left: 4px solid #2196f3; padding: 20px; border-radius: 4px;">
-            <div style="font-size: 16px; font-weight: 700; color: #0d47a1; margin-bottom: 12px;">📋 신규 지식재산권 확보 계획</div>
-            <div style="font-size: 14px; color: #1565c0; line-height: 1.8;">
-                상기 차별화 요소를 중심으로, 다음 항목에 대한 <strong>국내 특허 출원</strong>을 통해 핵심 기술을 보호할 계획입니다:<br><br>
-                
-                <strong>(1)</strong> 3개 엔진 통합 시스템 및 데이터 처리 방법<br>
-                <strong>(2)</strong> VERA 엔진의 하이브리드 아키텍처 및 멀티모달 분석 방법<br>
-                <strong>(3)</strong> TEM 엔진의 하이브리드 파이프라인 및 XAI 구현 방법<br>
-                <strong>(4)</strong> INTRO 엔진의 순차적 의도 반영 추천 알고리즘 및 설명가능성 구현 방법<br><br>
-                
-                (필요시 영업비밀(Know-how)로 관리 병행)
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<!-- 슬라이드 20: 표준화 전략 -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">4. 표준화 전략</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">독자 개발 AI 기술(VERA, TEM) 기반의 'Trust-Score' 및 'PX 분석'을 국가 및 국제 표준으로 제정하여 의료 정보 신뢰성 및 환자 경험 평가의 새로운 기준을 제시합니다.</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li><strong>'Trust-Score' 표준화:</strong> VERA 엔진의 허위 리뷰 탐지 기술을 기반으로, 온라인 의료 정보의 신뢰도를 평가하는 표준 지표(Trust-Score)를 NP 제안부터 국제 표준화까지 단계적으로 추진합니다.</li>
-                    <li><strong>'PX 분석' 표준화:</strong> TEM 엔진의 환자 경험 토픽 분석 기술을 활용하여, 비정형 리뷰 데이터 기반의 환자 경험(PX) 분석 및 평가 표준을 국가표준(NP) 제안 및 국제 표준(HL7, ISO 등) 연계 중심으로 추진합니다.</li>
-                </ul>
-            </div>
-        </div>
-		<div class="two-column">
-        <div class="column" style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);">
-            <h3 style="color: #e65100; margin-bottom: 15px; text-align: center;">🛡️ 'Trust-Score' 표준화</h3>
-            
-            <div style="background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
-                <div style="font-size: 15px; font-weight: 700; color: #f57c00; margin-bottom: 10px;">📅 1단계: NP 제안 (1-2년차)</div>
-                <div style="font-size: 13px; color: #666; line-height: 1.7;">
-                    <strong>• 기술 개발:</strong> VERA 엔진 기반 Trust-Score 알고리즘 고도화 (멀티모달, F1≥0.88)<br>
-                    <strong>• 표준안:</strong> 신뢰도 점수, 탐지 근거, 신뢰 등급 등 메타데이터 정의<br>
-                    <strong>• 검증:</strong> 협력 병원 시범 운영, 심평원 PEA 연계 검토
-                </div>
-            </div>
-            
-            <div style="background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
-                <div style="font-size: 15px; font-weight: 700; color: #f57c00; margin-bottom: 10px;">📅 2단계: 사실상 표준 (2-3년차)</div>
-                <div style="font-size: 13px; color: #666; line-height: 1.7;">
-                    <strong>• 시장 주도:</strong> 주요 의료 플랫폼(네이버, 카카오 등)과 협력, Trust-Score API 생태계 구축<br>
-                    <strong>• 기술 우위:</strong> SOTA 이상 성능 확보, 특허 등록, 국제 학술 발표<br>
-                    <strong>• 인증:</strong> 의료 마케팅 업체 대상 인증제 운영
-                </div>
-            </div>
-            
-            <div style="background: white; border-radius: 8px; padding: 15px;">
-                <div style="font-size: 15px; font-weight: 700; color: #f57c00; margin-bottom: 10px;">📅 3단계: 국제 표준화 (3-4년차)</div>
-                <div style="font-size: 13px; color: #666; line-height: 1.7;">
-                    <strong>• 참여:</strong> ISO/IEC JTC1 SC42 (AI) - 콘텐츠 신뢰성 평가 표준 제안<br>
-                    <strong>• 연계:</strong> W3C Verifiable Credential 연동 (블록체인 기반 검증)
-                </div>
-            </div>
-            
-            <div style="background: #fff8e1; padding: 12px; border-radius: 4px; margin-top: 15px; text-align: center; font-size: 12px; color: #f57c00;">
-                <strong>협력 기관:</strong> TTA, KATS, ISO/IEC JTC1 SC42, W3C
-            </div>
-        </div>
-        
-        <div class="column" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
-            <h3 style="color: #0d47a1; margin-bottom: 15px; text-align: center;">📊 환자 경험(PX) 분석 표준화</h3>
-            
-            <div style="background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
-                <div style="font-size: 15px; font-weight: 700; color: #1976d2; margin-bottom: 10px;">📅 1단계: NP 제안 (1-2년차)</div>
-                <div style="font-size: 13px; color: #666; line-height: 1.7;">
-                    <strong>• 토픽 체계:</strong> 4대 Dimension (의료진 태도, 서비스 품질, 치료 결과, 행정) 기반 PX 표준 토픽 정의<br>
-                    <strong>• 메타데이터:</strong> HL7 FHIR 기반 PX 리소스 확장 제안 (Observation, Topic Code 등)<br>
-                    <strong>• 검증:</strong> TEM 엔진 성능(F1≥0.85), 기존 PEA 결과와 상관관계 분석
-                </div>
-            </div>
-            
-            <div style="background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
-                <div style="font-size: 15px; font-weight: 700; color: #1976d2; margin-bottom: 10px;">📅 2단계: 사실상 표준 (2-3년차)</div>
-                <div style="font-size: 13px; color: #666; line-height: 1.7;">
-                    <strong>• 심평원 PEA 연계:</strong> 비정형 데이터 분석 결과와 PEA 설문 결과 통합 활용 방안 협의<br>
-                    <strong>• 기술 보급:</strong> PX 분석 결과 시각화 및 리포팅 표준 템플릿 개발/보급<br>
-                    <strong>• 데이터 활용:</strong> 의료기관 품질 개선(QI) 활동 및 연구 목적 활용 가이드라인 제시
-                </div>
-            </div>
-            
-            <div style="background: white; border-radius: 8px; padding: 15px;">
-                <div style="font-size: 15px; font-weight: 700; color: #1976d2; margin-bottom: 10px;">📅 3단계: 국제 표준화 (3-5년차)</div>
-                <div style="font-size: 13px; color: #666; line-height: 1.7;">
-                    <strong>• HL7 협력:</strong> KR Core 확장 (PX 리소스), Connectathon 통한 상호운용성 검증<br>
-                    <strong>• ISO 참여:</strong> ISO TC215 (Health Informatics) - 환자경험 평가 국제 표준(ISO/TS) 제정 기여<br>
-                    <strong>• 확산:</strong> 한국형 PX 표준 분석 결과의 글로벌 Best Practice 전파
-                </div>
-            </div>
-            
-            <div style="background: #e8f5e9; padding: 12px; border-radius: 4px; margin-top: 15px; text-align: center; font-size: 12px; color: #2e7d32;">
-                <strong>협력 기관:</strong> 심평원, TTA, KATS, HL7 Korea, ISO TC215
-            </div>
-        </div>
-    </div>
-    
-    <div class="content-section" style="margin-top: 25px;">
-        <div class="section-title">기대 효과</div>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
-            <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 18px; border-radius: 8px; text-align: center;">
-                <div style="font-size: 16px; font-weight: 700; color: #2e7d32; margin-bottom: 10px;">🏭 산업적 효과</div>
-                <div style="font-size: 13px; color: #388e3c; line-height: 1.6;">
-                    의료 리뷰 신뢰성 향상<br>허위 광고 근절<br>환자 중심 품질 개선
-                </div>
-            </div>
-            <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 18px; border-radius: 8px; text-align: center;">
-                <div style="font-size: 16px; font-weight: 700; color: #0d47a1; margin-bottom: 10px;">⚙️ 기술적 효과</div>
-                <div style="font-size: 13px; color: #1565c0; line-height: 1.6;">
-                    AI 신뢰성 평가 표준화 선도<br>한국형 의료정보 표준 확산<br>상호운용성 확보
-                </div>
-            </div>
-            <div style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); padding: 18px; border-radius: 8px; text-align: center;">
-                <div style="font-size: 16px; font-weight: 700; color: #6a1b9a; margin-bottom: 10px;">🌍 사회적 효과</div>
-                <div style="font-size: 13px; color: #7b1fa2; line-height: 1.6;">
-                    환자 알 권리 보장<br>정보 접근성 향상<br>사회적 신뢰 제고
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<!-- 슬라이드 21: 업무분장 및 추진일정 -->
-<div class="slide">
-    <div class="slide-header">
-        <div class="major-category">II. 해결방안 및 세부내용</div>
-        <div class="minor-category">5. 업무분장 및 추진일정</div>
-    </div>
-    <div class="slide-content">
-        <div class="governing-message">
-            <div class="gov-msg-title">주관기관의 단독 수행으로 책임 있는 기술 개발을 추진하며, 2개년 24개월간 체계적인 일정 계획하에 사업 목표를 달성합니다.</div>
-            <div class="gov-msg-content">
-                <ul>
-                    <li><strong>업무 분장:</strong> 본 과제의 모든 기술 개발(AI 엔진 고도화, 플랫폼 구축 등)은 주관기관인 당사가 100% 책임지고 수행합니다.</li>
-                    <li><strong>추진 일정:</strong> 데이터 확보부터 엔진 개발, 서비스 적용, 최종 평가까지 2개년(24개월)간의 단계별 세부 추진 계획 및 일정에 맞춰 성공적으로 수행하겠습니다.</li>
-                </ul>
-            </div>
-        </div>
-		<div class="content-section">
-        <div class="section-title">1. 수행기관별 업무 분장</div>
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th style="width: 20%;">수행기관</th>
-                    <th style="width: 65%;">담당 기술개발 내용</th>
-                    <th style="width: 15%;">기술개발 비중(%)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>당사<br>(주관기관)</strong></td>
-                    <td style="font-size: 14px;">
-                        • 핵심 AI 엔진(VERA, TEM, INTRO) 고도화 및 신규 개발<br>
-                        • 데이터 수집/처리 파이프라인 구축 및 운영<br>
-                        • B2C 플랫폼 신규 구축 및 외국인 특화 기능 개발<br>
-                        • 기존 B2B 솔루션 연동 및 고도화<br>
-                        • 전체 시스템 통합, 테스트 및 성능 평가
-                    </td>
-                    <td style="text-align: center; font-size: 24px; font-weight: 700; color: #4caf50;">100%</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-    <div class="content-section" style="margin-top: 30px;">
-        <div class="section-title">2. 기술개발 추진 일정 (2개년, 24개월)</div>
-        
-        <div style="background: #f8f9fa; border-radius: 8px; padding: 20px; overflow-x: auto;">
-            <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
-                <thead>
-                    <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-                        <th style="padding: 10px; border: 1px solid #ddd;">차수</th>
-                        <th style="padding: 10px; border: 1px solid #ddd;">세부 추진내용</th>
-                        <th colspan="12" style="padding: 10px; border: 1px solid #ddd;">월별 일정</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 1차년도 -->
-                    <tr style="background: #e3f2fd;">
-                        <td rowspan="10" style="padding: 10px; border: 1px solid #ddd; font-weight: 700; text-align: center; vertical-align: top;"><strong>1차년도<br>(2026)</strong></td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border: 1px solid #ddd;"><strong>(0) 준비</strong> - 데이터 확보 계획 구체화/검증</td>
-                        <td style="background: #667eea; border: 1px solid #ddd;"></td>
-                        <td style="background: #667eea; border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border: 1px solid #ddd;"><strong>(1) 수집</strong> - 데이터 파이프라인 설계/구축, 1차 데이터 확보</td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="background: #ff9800; border: 1px solid #ddd;"></td>
-                        <td style="background: #ff9800; border: 1px solid #ddd;"></td>
-                        <td style="background: #ff9800; border: 1px solid #ddd;"></td>
-                        <td style="background: #ff9800; border: 1px solid #ddd;"></td>
-                        <td style="background: #ff9800; border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border: 1px solid #ddd;"><strong>(2) 처리 (VERA)</strong> - 하이브리드 아키텍처 설계/개발, 1차 모델 학습</td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="background: #2196f3; border: 1px solid #ddd;"></td>
-                        <td style="background: #2196f3; border: 1px solid #ddd;"></td>
-                        <td style="background: #2196f3; border: 1px solid #ddd;"></td>
-                        <td style="background: #2196f3; border: 1px solid #ddd;"></td>
-                        <td style="background: #2196f3; border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border: 1px solid #ddd;"><strong>(3) 분석 (TEM)</strong> - 하이브리드 파이프라인 설계/개발, 1차 토픽 정의</td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="background: #9c27b0; border: 1px solid #ddd;"></td>
-                        <td style="background: #9c27b0; border: 1px solid #ddd;"></td>
-                        <td style="background: #9c27b0; border: 1px solid #ddd;"></td>
-                        <td style="background: #9c27b0; border: 1px solid #ddd;"></td>
-                        <td style="background: #9c27b0; border: 1px solid #ddd;"></td>
-                        <td style="background: #9c27b0; border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border: 1px solid #ddd;"><strong>(4) 추천 (INTRO)</strong> - 순차적 알고리즘 설계/개발</td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="background: #4caf50; border: 1px solid #ddd;"></td>
-                        <td style="background: #4caf50; border: 1px solid #ddd;"></td>
-                        <td style="background: #4caf50; border: 1px solid #ddd;"></td>
-                        <td style="background: #4caf50; border: 1px solid #ddd;"></td>
-                        <td style="background: #4caf50; border: 1px solid #ddd;"></td>
-                        <td style="background: #4caf50; border: 1px solid #ddd;"></td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border: 1px solid #ddd;"><strong>(5) 적용</strong> - B2C 플랫폼 기본 설계/개발, B2B 솔루션 연동 설계</td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="background: #f44336; border: 1px solid #ddd;"></td>
-                        <td style="background: #f44336; border: 1px solid #ddd;"></td>
-                        <td style="background: #f44336; border: 1px solid #ddd;"></td>
-                        <td style="background: #f44336; border: 1px solid #ddd;"></td>
-                        <td style="background: #f44336; border: 1px solid #ddd;"></td>
-                        <td style="background: #f44336; border: 1px solid #ddd;"></td>
-                        <td style="background: #f44336; border: 1px solid #ddd;"></td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border: 1px solid #ddd;">프로젝트 관리/문서화</td>
-                        <td colspan="12" style="background: #e0e0e0; border: 1px solid #ddd; text-align: center;">지속적 수행</td>
-                    </tr>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="ceo-section">
+                <div style="text-align: center;">
+                    <h2 style="margin-bottom: 30px; color: var(--primary-color);">치열한 '비교 마케팅', 법적으로 안전합니까?</h2>
                     
-                    <!-- 2차년도 -->
-                    <tr style="background: #f3e5f5;">
-                        <td rowspan="8" style="padding: 10px; border: 1px solid #ddd; font-weight: 700; text-align: center; vertical-align: top;"><strong>2차년도<br>(2027)</strong></td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px; border: 1px solid #ddd;"><strong>(1) 수집</strong> - 파이프라인 고도화, 2차 데이터 확보 (전국 모든 과목)</td>
-                        <td style="background: #ff9800; border: 1px solid #ddd;"></td>
-                        <td style="background: #ff9800; border: 1px solid #ddd;"></td>
-                        <td style="background: #ff9800; border: 1px solid #ddd;"></td>
-                        <td style="background: #ff9800; border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style="border: 1px solid #ddd;"></td>
-                        <td style=border: 1px solid #ddd;"></td>
-<td style="border: 1px solid #ddd;"></td>
-<td style="border: 1px solid #ddd;"></td>
-<td style="border: 1px solid #ddd;"></td>
-<td style="border: 1px solid #ddd;"></td>
-<td style="border: 1px solid #ddd;"></td>
-</tr>
-<tr>
-<td style="padding: 8px; border: 1px solid #ddd;"><strong>(2) 처리 (VERA)</strong> - 멀티모달 적용 및 최종 튜닝, KOLAS 평가</td>
-<td style="background: #2196f3; border: 1px solid #ddd;"></td>
-<td style="background: #2196f3; border: 1px solid #ddd;"></td>
-<td style="background: #2196f3; border: 1px solid #ddd;"></td>
-<td style="background: #2196f3; border: 1px solid #ddd;"></td>
-<td style="background: #2196f3; border: 1px solid #ddd;"></td>
-<td style="background: #2196f3; border: 1px solid #ddd;"></td>
-<td style="border: 1px solid #ddd;"></td>
-<td style="border: 1px solid #ddd;"></td>
-<td style="border: 1px solid #ddd;"></td>
-<td style="border: 1px solid #ddd;"></td>
-<td style="border: 1px solid #ddd;"></td>
-<td style="border: 1px solid #ddd;"></td>
-</tr>
-<tr>
-<td style="padding: 8px; border: 1px solid #ddd;"><strong>(3) 분석 (TEM)</strong> - 예약 연동 학습 및 최종 튜닝, KOLAS 평가</td>
-<td style="background: #9c27b0; border: 1px solid #ddd;"></td>
-<td style="background: #9c27b0; border: 1px solid #ddd;"></td>
-<td style="background: #9c27b0; border: 1px solid #ddd;"></td>
-<td style="background: #9c27b0; border: 1px solid #ddd;"></td>
-<td style="background: #9c27b0; border: 1px solid #ddd;"></td>
-<td style="background: #9c27b0; border: 1px solid #ddd;"></td>
-<td style="background: #9c27b0; border: 1px solid #ddd;"></td>
-<td style="background: #9c27b0; border: 1px solid #ddd;"></td>
-<td style="border: 1px solid #ddd;"></td>
-<td style="border: 1px solid #ddd;"></td>
-<td style="border: 1px solid #ddd;"></td>
-<td style="border: 1px solid #ddd;"></td>
-</tr>
-<tr>
-<td style="padding: 8px; border: 1px solid #ddd;"><strong>(4) 추천 (INTRO)</strong> - TEM 연계 및 XAI 구현/최종 튜닝, KOLAS 평가</td>
-<td style="background: #4caf50; border: 1px solid #ddd;"></td>
-<td style="background: #4caf50; border: 1px solid #ddd;"></td>
-<td style="background: #4caf50; border: 1px solid #ddd;"></td>
-<td style="background: #4caf50; border: 1px solid #ddd;"></td>
-<td style="background: #4caf50; border: 1px solid #ddd;"></td>
-<td style="background: #4caf50; border: 1px solid #ddd;"></td>
-<td style="background: #4caf50; border: 1px solid #ddd;"></td>
-<td style="background: #4caf50; border: 1px solid #ddd;"></td>
-<td style="background: #4caf50; border: 1px solid #ddd;"></td>
-<td style="background: #4caf50; border: 1px solid #ddd;"></td>
-<td style="border: 1px solid #ddd;"></td>
-<td style="border: 1px solid #ddd;"></td>
-</tr>
-<tr>
-<td style="padding: 8px; border: 1px solid #ddd;"><strong>(5) 적용</strong> - B2C 완성/외국인 특화, 엔진 통합, B2B 고도화, 최종 론칭</td>
-<td style="background: #f44336; border: 1px solid #ddd;"></td>
-<td style="background: #f44336; border: 1px solid #ddd;"></td>
-<td style="background: #f44336; border: 1px solid #ddd;"></td>
-<td style="background: #f44336; border: 1px solid #ddd;"></td>
-<td style="background: #f44336; border: 1px solid #ddd;"></td>
-<td style="background: #f44336; border: 1px solid #ddd;"></td>
-<td style="background: #f44336; border: 1px solid #ddd;"></td>
-<td style="background: #f44336; border: 1px solid #ddd;"></td>
-<td style="background: #f44336; border: 1px solid #ddd;"></td>
-<td style="background: #f44336; border: 1px solid #ddd;"></td>
-<td style="background: #f44336; border: 1px solid #ddd;"></td>
-<td style="background: #f44336; border: 1px solid #ddd;"></td>
-</tr>
-<tr>
-<td style="padding: 8px; border: 1px solid #ddd;">프로젝트 관리/결과 보고</td>
-<td colspan="12" style="background: #e0e0e0; border: 1px solid #ddd; text-align: center;">지속적 수행</td>
-</tr>
-</tbody>
-</table>
-<div style="display: flex; gap: 15px; margin-top: 20px; flex-wrap: wrap; justify-content: center;">
-                <div style="display: flex; align-items: center; gap: 5px;">
-                    <div style="width: 20px; height: 20px; background: #667eea; border: 1px solid #ddd;"></div>
-                    <span style="font-size: 12px;">준비</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 5px;">
-                    <div style="width: 20px; height: 20px; background: #ff9800; border: 1px solid #ddd;"></div>
-                    <span style="font-size: 12px;">수집</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 5px;">
-                    <div style="width: 20px; height: 20px; background: #2196f3; border: 1px solid #ddd;"></div>
-                    <span style="font-size: 12px;">VERA</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 5px;">
-                    <div style="width: 20px; height: 20px; background: #9c27b0; border: 1px solid #ddd;"></div>
-                    <span style="font-size: 12px;">TEM</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 5px;">
-                    <div style="width: 20px; height: 20px; background: #4caf50; border: 1px solid #ddd;"></div>
-                    <span style="font-size: 12px;">INTRO</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 5px;">
-                    <div style="width: 20px; height: 20px; background: #f44336; border: 1px solid #ddd;"></div>
-                    <span style="font-size: 12px;">적용</span>
+                    <div class="ceo-badges">
+                        <div class="ceo-badge"><i class="fas fa-user-md"></i> 치과의사 면허 보유</div>
+                        <div class="ceo-badge"><i class="fas fa-balance-scale"></i> 의료법 전문 변호사</div>
+                    </div>
+
+                    <p style="font-size: 1.2em; line-height: 1.8; color: #444; margin-bottom: 30px;">
+                        "내 시술이 타 병원보다 좋다고 말하는 순간, <strong>비방 광고</strong>와 <strong>허위/과장 광고</strong>의 위험에 노출됩니다.<br>
+                        심미 치료 마케팅은 의료법 위반 신고가 가장 빈번하게 일어나는 영역입니다."
+                    </p>
+                    
+                    <div style="background: white; padding: 20px; border-radius: 10px; display: inline-block; text-align: left;">
+                        <p style="margin: 0; color: #555;">
+                            <i class="fas fa-check" style="color: var(--primary-color);"></i> <strong>Risk-Free Comparison:</strong> 법적 테두리 내에서 가능한 '비교 우위' 표현 전략<br>
+                            <i class="fas fa-check" style="color: var(--primary-color);"></i> <strong>Legal Inspection:</strong> 치과의사 출신 변호사가 설계한 검수 로직 적용
+                        </p>
+                    </div>
+                    
+                    <p style="font-weight: bold; font-size: 1.3em; color: var(--primary-color); margin-top: 30px;">
+                        "가장 공격적인 마케팅을, 가장 안전한 법적 보호 아래 수행하십시오."
+                    </p>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-</div>
-<!-- 네비게이션 -->
-<div class="slide-counter">
-    <span id="currentSlide">1</span> / <span id="totalSlides">13</span>
-</div>
-<div class="slide-nav">
-    <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← 이전</button>
-    <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">다음 →</button>
-</div>
-<script>
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-const totalSlides = slides.length;
-document.getElementById('totalSlides').textContent = totalSlides;
-function showSlide(n) {
-slides.forEach(slide => slide.classList.remove('active'));
-if (n >= slides.length) {
-    currentSlide = slides.length - 1;
-} else if (n < 0) {
-    currentSlide = 0;
-} else {
-    currentSlide = n;
-}
+    </section>
 
-slides[currentSlide].classList.add('active');
-document.getElementById('currentSlide').textContent = currentSlide + 1;
+    <section style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2>네이버를 넘어, 구글과 홈페이지로 확장</h2>
+            <p class="section-desc">프리미엄 환자는 네이버 블로그만 보고 결정하지 않습니다. 홈페이지와 구글을 탐색합니다.</p>
 
-// 버튼 상태 업데이트
-document.getElementById('prevBtn').disabled = currentSlide === 0;
-document.getElementById('nextBtn').disabled = currentSlide === slides.length - 1;
-}
-function changeSlide(direction) {
-showSlide(currentSlide + direction);
-}
-// 키보드 네비게이션
-document.addEventListener('keydown', (e) => {
-if (e.key === 'ArrowLeft') {
-changeSlide(-1);
-} else if (e.key === 'ArrowRight') {
-changeSlide(1);
-}
-});
-// 초기 슬라이드 표시
-showSlide(0);
-</script>
+            <div class="grid-box">
+                <div class="card">
+                    <h3><i class="fas fa-laptop-code" style="color:var(--primary-color); margin-right:10px;"></i> 홈페이지 로그인 콘텐츠</h3>
+                    <p>의료법 제약이 덜한 <strong>홈페이지 로그인 영역</strong>을 활용하세요.<br>블로그에서는 말할 수 없는 더 강력한 비교 데이터, 시술 전후 사진, 구체적인 가격 정보를 제공하여 확실한 '결정타'를 날립니다.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fab fa-google" style="color:#4285F4; margin-right:10px;"></i> 구글 & AI 검색 최적화</h3>
+                    <p>전문적인 정보를 찾는 환자들은 구글과 ChatGPT를 사용합니다.<br>단순 홍보글이 아닌, <strong>구조화된 전문 지식 정보</strong>를 생성하여 AI와 구글 검색 상단을 선점합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <h2 style="color: #fff; font-size: 2em; border: none;">당신의 기술에 확신이 있다면, 이제 제대로 증명할 때입니다.</h2>
+            <p>단순한 광고가 아닌, 환자를 설득하는 '논리'를 제공합니다.</p>
+            <a href="#" class="btn-cta">심미치료 특화 솔루션 상담하기</a>
+        </div>
+    </footer>
+
 </body>
 </html>
-
-				
-		
-		
