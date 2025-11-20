@@ -211,7 +211,10 @@
                 
                 Step0{{"Step 0. 환경 평가<br>(병원 공식 채널인가?)"}}:::step
                 Step1{{"Step 1. 콘텐츠 평가<br>(본문에 홍보 내용이 있는가?)"}}:::step
-                Step2{{"Step 2. 단순 정보 여부<br>(기본 정보만 기재했는가?)"}}:::step
+                
+                %% Step 2 Split into Media & Content
+                Step2_Media{{"Step 2-1. 매체 평가<br>(일 이용자 10만 이상 매체인가?)"}}:::step
+                Step2_Simple{{"Step 2-2. 단순 정보 여부<br>(기본 정보만 기재했는가?)"}}:::step
     
                 LogicA[/"🟢 Logic A<br>순수 정보"/]:::resA
                 LogicB[/"🟡 Logic B<br>심의 면제"/]:::resB
@@ -220,14 +223,21 @@
                 %% Flow Connections
                 START --> Step0
                 
+                %% Step 0: Environment
                 Step0 -- YES (홍보환경) --> LogicC
                 Step0 -- NO --> Step1
                 
+                %% Step 1: Content Nature
                 Step1 -- NO (정보성) --> LogicA
-                Step1 -- YES (광고성) --> Step2
+                Step1 -- YES (광고성) --> Step2_Media
                 
-                Step2 -- YES (기본정보) --> LogicB
-                Step2 -- NO (상세내용) --> LogicC
+                %% Step 2-1: Media Criteria
+                Step2_Media -- NO (소규모 매체) --> LogicB
+                Step2_Media -- YES (주요 매체) --> Step2_Simple
+                
+                %% Step 2-2: Exemption Criteria
+                Step2_Simple -- YES (기본정보) --> LogicB
+                Step2_Simple -- NO (상세내용) --> LogicC
     
                 %% Interactions (Click to Scroll)
                 click LogicA href "javascript:showSection('logic-a')" "Logic A 기준 보기"
