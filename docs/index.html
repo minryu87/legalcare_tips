@@ -213,20 +213,12 @@
             currentDoc = docName;
 
             try {
-                if (docName === 'research') {
-                    // Markdown 파일 처리
-                    const response = await fetch('./data/research.md');
-                    if (!response.ok) throw new Error('파일을 찾을 수 없습니다.');
-                    
-                    const mdContent = await response.text();
-                    const htmlContent = marked.parse(mdContent);
-                    
-                    contentDiv.innerHTML = `<div class="markdown-container">${htmlContent}</div>`;
-                } else {
-                    // HTML 파일 처리
-                    const filePath = `./data/${docName}.html`;
-                    contentDiv.innerHTML = `<iframe class="html-container" src="${filePath}"></iframe>`;
-                }
+                // 'research' 조건문을 제거하여 모든 문서를 HTML(iframe)로 처리
+                
+                // HTML 파일 처리 (chatgpt, claude, gemini, research 모두 포함)
+                const filePath = `./data/${docName}.html`;
+                contentDiv.innerHTML = `<iframe class="html-container" src="${filePath}"></iframe>`;
+
             } catch (error) {
                 contentDiv.innerHTML = `<div class="error">문서를 불러오는데 실패했습니다.<br>${error.message}</div>`;
             }
@@ -235,8 +227,11 @@
         // 페이지 로드 시 첫 번째 문서 자동 로드
         window.addEventListener('DOMContentLoaded', () => {
             const firstButton = document.querySelector('.doc-button');
-            firstButton.classList.add('active');
-            loadDocument('chatgpt');
+            if(firstButton) {
+                firstButton.classList.add('active');
+                // 기본 로드할 문서 지정 (필요에 따라 변경)
+                loadDocument('chatgpt'); 
+            }
         });
     </script>
 </body>
