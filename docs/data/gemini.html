@@ -3,798 +3,306 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>의료광고 통합 리스크 진단 시스템 (Updated)</title>
+    <title>메디컨텐츠 원페이지 제안서</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #2980b9;
-            --bg-color: #f0f2f5;
-            --border-color: #dcdcdc;
-            --danger-color: #c0392b;
-            --warning-color: #f39c12;
-            --success-color: #27ae60;
-            --text-color: #333;
+            --primary: #005AEE;
+            --dark-blue: #003c9e;
+            --text: #333;
+            --light-bg: #f4f8ff;
+            --accent: #FFD700;
         }
-        body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            background-color: var(--bg-color);
-        }
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        h1 {
-            text-align: center;
-            color: var(--primary-color);
-            padding-bottom: 20px;
-            border-bottom: 2px solid var(--border-color);
-        }
-        h2 {
-            margin-top: 60px;
-            padding-left: 15px;
-            border-left: 5px solid var(--accent-color);
-            color: var(--primary-color);
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-        h3 { margin-top: 30px; color: #555; }
 
-        /* Flowchart Styles */
-        .flowchart-box {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 10px;
-            border: 1px dashed #bdc3c7;
-            text-align: center;
-            margin-bottom: 40px;
-            overflow-x: auto;
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact; /* 인쇄 시 배경색 유지 */
+            print-color-adjust: exact;
         }
-        .flow-row {
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #e0e0e0; /* 브라우저 배경 */
+            font-family: 'Noto Sans KR', sans-serif;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            gap: 20px;
-            flex-wrap: wrap;
         }
-        .flow-node {
+
+        /* A4 Paper Size Settings */
+        .page {
+            width: 210mm;
+            height: 297mm;
             background: white;
-            border: 2px solid var(--primary-color);
-            padding: 15px;
-            border-radius: 8px;
-            width: 180px;
-            font-size: 0.9em;
             position: relative;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .flow-node strong { display: block; font-size: 1.1em; margin-bottom: 5px; color: var(--accent-color); }
-        .flow-arrow {
-            margin-top: 30px;
-            font-size: 1.5em;
-            color: #bdc3c7;
-            font-weight: bold;
-        }
-        .flow-decision {
-            font-size: 0.8em;
-            color: #e67e22;
-            font-weight: bold;
-            margin-top: 5px;
-        }
-        .node-result { color: white; border: none; }
-        .res-c { background-color: var(--danger-color); }
-        .res-b { background-color: var(--warning-color); }
-        .res-a { background-color: var(--success-color); }
-
-        /* Checklist Tables */
-        .check-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-            background: white;
-        }
-        .check-table th, .check-table td {
-            padding: 12px 15px;
-            border: 1px solid var(--border-color);
-            text-align: left;
-            vertical-align: middle;
-        }
-        .check-table th {
-            background-color: #ecf0f1;
-            color: var(--primary-color);
-            text-align: center;
-            font-weight: bold;
-        }
-        .verdict-row {
-            background-color: #fff9f9;
-            border-left: 5px solid var(--danger-color);
-        }
-        .verdict-text {
-            font-weight: bold;
-            color: var(--danger-color);
-        }
-        .verdict-pass {
-            background-color: #f0fff4;
-            border-left: 5px solid var(--success-color);
-        }
-        .verdict-pass-text {
-            font-weight: bold;
-            color: var(--success-color);
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Source Button */
-        .btn-source {
-            font-size: 0.75em;
-            background: #fff;
-            border: 1px solid #bdc3c7;
-            color: #7f8c8d;
-            padding: 2px 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-left: 5px;
-            display: inline-block;
-            margin-top: 5px;
+        @media print {
+            body { background: none; }
+            .page { box-shadow: none; margin: 0; width: 100%; height: 100%; }
+            @page { margin: 0; size: A4; }
         }
-        .btn-source:hover { background: var(--accent-color); color: white; border-color: var(--accent-color); }
 
-        /* Logic Badges (Reusable) */
-        .logic-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 15px;
+        /* Header Section */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark-blue));
             color: white;
-            font-weight: bold;
-            font-size: 0.85em;
-            cursor: pointer;
-            margin-left: 10px;
+            padding: 35px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 140px;
         }
-        .logic-a { background-color: var(--success-color); }
-        .logic-b { background-color: var(--warning-color); }
-        .logic-c { background-color: var(--danger-color); }
 
-        /* Previous Styles for Case Study & Modal */
-        .case-card { border: 1px solid var(--border-color); border-radius: 10px; margin-bottom: 20px; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .case-card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .case-header { padding: 15px 20px; background: #f8f9fa; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
-        .case-title { font-weight: bold; color: var(--primary-color); font-size: 1.05em; }
-        .case-body { padding: 20px; display: none; background: #fff; }
-        .origin-link { display: inline-block; margin-bottom: 15px; font-size: 0.9em; color: var(--accent-color); text-decoration: none; border-bottom: 1px dashed var(--accent-color); }
-        .comp-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .comp-table th { background: #f1f2f6; text-align: left; padding: 10px; font-size: 0.9em; }
-        .comp-table td { border-bottom: 1px solid #eee; padding: 12px 10px; vertical-align: top; font-size: 0.95em; }
-        .risk-high { color: var(--danger-color); font-weight: bold; }
-        .risk-med { color: #d35400; font-weight: bold; }
-        .logic-path { background: #e8f4fd; padding: 12px; border-radius: 6px; margin-bottom: 20px; font-size: 0.9em; border-left: 4px solid var(--accent-color); }
+        .logo h1 { margin: 0; font-size: 32px; font-weight: 900; letter-spacing: -1px; }
+        .logo p { margin: 5px 0 0; font-size: 14px; opacity: 0.9; font-weight: 300; }
+        .header-badge {
+            text-align: right;
+            border-left: 1px solid rgba(255,255,255,0.3);
+            padding-left: 20px;
+        }
+        .header-badge h2 { margin: 0; font-size: 18px; color: var(--accent); }
+        .header-badge span { font-size: 12px; font-weight: 300; }
+
+        /* Content Body */
+        .content {
+            padding: 30px 40px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* Intro Hook */
+        .intro-hook {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+        }
+        .intro-hook h3 {
+            font-size: 20px; color: var(--text); margin: 0 0 10px 0; font-weight: 700;
+        }
+        .intro-hook p {
+            margin: 0; font-size: 14px; color: #555; line-height: 1.5;
+        }
+        .highlight { color: var(--primary); font-weight: bold; }
+
+        /* 3 Key Pillars Grid */
+        .pillars {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+        }
+        .pillar-card {
+            background: var(--light-bg);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e1e9f5;
+        }
+        .pillar-icon {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .pillar-card h4 {
+            margin: 0 0 8px 0; font-size: 16px; color: var(--dark-blue);
+        }
+        .pillar-card p {
+            margin: 0; font-size: 12px; color: #666; line-height: 1.4;
+            word-break: keep-all;
+        }
+        .badge-tag {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--text);
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+
+        /* Process Section */
+        .process-section {
+            background: #fff;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary);
+            padding-left: 10px;
+        }
         
-        /* Detail Sections */
-        .detail-section { margin-top: 30px; padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); background-color: #fff; display: none; animation: slideDown 0.4s ease-out; }
-        .detail-section.active { display: block; border: 2px solid var(--accent-color); }
-        .check-header { background-color: #ecf0f1; padding: 10px 15px; font-weight: bold; margin-top: 20px; border-radius: 6px; color: var(--primary-color); display: flex; justify-content: space-between; align-items: center; }
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .step { text-align: center; position: relative; width: 22%; }
+        .step i {
+            background: white;
+            width: 40px; height: 40px; line-height: 40px;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .step strong { display: block; font-size: 13px; margin-bottom: 4px; }
+        .step span { font-size: 11px; color: #777; display: block; line-height: 1.3; }
+        .arrow { color: #ccc; font-size: 14px; }
 
-        /* Modal */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 999; }
-        .modal-box { background: white; width: 90%; max-width: 600px; padding: 0; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        .modal-head { background: var(--primary-color); color: white; padding: 15px 20px; font-weight: bold; display: flex; justify-content: space-between; }
-        .modal-body { padding: 25px; max-height: 400px; overflow-y: auto; color: #444; font-size: 0.95em; line-height: 1.7; }
-        .modal-foot { background: #f8f9fa; padding: 10px 20px; text-align: right; font-size: 0.85em; color: #666; }
-        .close-icon { cursor: pointer; font-size: 1.2em; }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            background: var(--dark-blue);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            align-items: center;
+        }
+        .stat-item { text-align: center; flex: 1; border-right: 1px solid rgba(255,255,255,0.2); }
+        .stat-item:last-child { border-right: none; }
+        .stat-num { font-size: 28px; font-weight: 900; color: var(--accent); line-height: 1; margin-bottom: 5px; }
+        .stat-desc { font-size: 11px; font-weight: 300; opacity: 0.9; }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: white;
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-msg h4 { margin: 0 0 5px 0; font-size: 16px; }
+        .footer-msg p { margin: 0; font-size: 12px; color: #aaa; }
+        .contact-info { text-align: right; font-size: 13px; line-height: 1.6; }
+        .contact-info strong { color: var(--accent); }
+
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>⚖️ 의료광고 통합 리스크 진단 시스템</h1>
-    <p style="text-align: center; color: #666;">
-        검토 로직 순서도에 따라 포스트를 진단하고, 최종적으로 적용되는 법적 기준을 확인하십시오.
-    </p>
-
-    <h2>1. 검토 로직 순서도 (Logic Flowchart)</h2>
-        <div class="flowchart-box" style="background:white; border:1px solid #e0e0e0; padding:20px; overflow-x:auto;">
-            <div class="mermaid">
-                graph TD
-                %% Node Styling
-                classDef start fill:#2c3e50,color:#fff,stroke:#2c3e50,stroke-width:2px;
-                classDef step fill:#fff,stroke:#3498db,stroke-width:2px,color:#333;
-                classDef resA fill:#27ae60,color:#fff,stroke:#27ae60,stroke-width:2px,cursor:pointer;
-                classDef resB fill:#f39c12,color:#fff,stroke:#f39c12,stroke-width:2px,cursor:pointer;
-                classDef resC fill:#c0392b,color:#fff,stroke:#c0392b,stroke-width:2px,cursor:pointer;
-    
-                %% Nodes Definition
-                START([START: 포스트 입력]):::start
-                
-                Step0{{"Step 0. 환경 평가<br>(병원 공식 채널인가?)"}}:::step
-                Step1{{"Step 1. 콘텐츠 평가<br>(본문에 홍보 내용이 있는가?)"}}:::step
-                Step2{{"Step 2. 단순 정보 여부<br>(기본 정보만 기재했는가?)"}}:::step
-    
-                LogicA[/"🟢 Logic A<br>순수 정보"/]:::resA
-                LogicB[/"🟡 Logic B<br>심의 면제"/]:::resB
-                LogicC[/"🔴 Logic C<br>심의 대상"/]:::resC
-    
-                %% Flow Connections
-                START --> Step0
-                
-                Step0 -- YES (홍보환경) --> LogicC
-                Step0 -- NO --> Step1
-                
-                Step1 -- NO (정보성) --> LogicA
-                Step1 -- YES (광고성) --> Step2
-                
-                Step2 -- YES (기본정보) --> LogicB
-                Step2 -- NO (상세내용) --> LogicC
-    
-                %% Interactions (Click to Scroll)
-                click LogicA href "javascript:showSection('logic-a')" "Logic A 기준 보기"
-                click LogicB href "javascript:showSection('logic-b')" "Logic B 기준 보기"
-                click LogicC href "javascript:showSection('logic-c')" "Logic C 기준 보기"
+    <div class="page">
+        <header>
+            <div class="logo">
+                <h1>MEDICONTENTS</h1>
+                <p>병원 마케팅, '비용'에서 '자산'으로</p>
             </div>
-            <p style="font-size:0.85em; color:#888; margin-top:10px;">※ 결과 박스를 클릭하면 상세 검토 기준으로 이동합니다.</p>
-        </div>
-    
-        <script type="module">
-            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-            mermaid.initialize({ startOnLoad: true, securityLevel: 'loose' });
-        </script>
+            <div class="header-badge">
+                <h2>Dentist & Lawyer</h2>
+                <span>치과의사 출신 변호사가 설계한<br>Premium Legal-Tech Solution</span>
+            </div>
+        </header>
 
-    <h2>2. 로직 판단을 위한 상세 체크리스트</h2>
-    <p style="color: #e74c3c; font-weight: bold; margin-bottom: 20px;">※ 각 Step별로 하나라도 'YES'가 나오면 해당 속성을 가진 것으로 간주합니다.</p>
+        <div class="content">
+            <div class="intro-hook">
+                <h3>"원장님, 온라인에서의 첫인상은 '호텔'입니까, '전단지'입니까?"</h3>
+                <p>
+                    고가의 인테리어와 고귀한 진료 철학을 갖추셨더라도, 온라인상의 이미지가 조잡하다면 환자는 신뢰하지 않습니다.<br>
+                    <span class="highlight">메디컨텐츠</span>는 단순 노출을 넘어, 병원의 격을 높이고 실제 내원으로 이어지는 <span class="highlight">신뢰 기반 마케팅</span>을 제안합니다.
+                </p>
+            </div>
 
-    <h3>[Step 0] 환경 평가 (Environment Check)</h3>
-    <p>목적: 콘텐츠가 담긴 '그릇(블로그)'이 광고판인지 확인</p>
-    <table class="check-table">
-        <thead>
-            <tr>
-                <th width="20%">구분</th>
-                <th>체크포인트 (Y/N 판단 기준)</th>
-                <th width="15%">관련 근거</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>채널 정체성</strong></td>
-                <td>□ 블로그/채널명, 닉네임, ID에 의료기관 명칭(예: OO치과)이 포함되어 있는가?</td>
-                <td><button class="btn-source" onclick="openModal('1454')">근거</button></td>
-            </tr>
-            <tr>
-                <td><strong>구조적 노출</strong></td>
-                <td>□ 블로그 스킨(PC 배경), 모바일 홈 화면, 프로필 영역에 전화번호, 진료시간, 주소가 기재되어 있는가?</td>
-                <td><button class="btn-source" onclick="openModal('1454')">근거</button></td>
-            </tr>
-            <tr>
-                <td><strong>위젯/배너</strong></td>
-                <td>□ 사이드바나 하단에 '상담 문의', '예약하기', '카카오톡 친구추가' 등의 위젯/배너가 설치되어 있는가?</td>
-                <td><button class="btn-source" onclick="openModal('1454')">근거</button></td>
-            </tr>
-            <tr>
-                <td><strong>인접성</strong></td>
-                <td>□ 포스트 목록이나 카테고리에 '진료 후기', '병원 이벤트', '공지사항' 등 명백한 병원 홍보 게시판이 노출되는가?</td>
-                <td><button class="btn-source" onclick="openModal('1454')">근거</button></td>
-            </tr>
-            <tr class="verdict-row">
-                <td colspan="3" class="verdict-text">👉 판정: 하나라도 YES면 → '의료광고 환경' (Logic C 진입)</td>
-            </tr>
-        </tbody>
-    </table>
+            <div>
+                <div class="section-title">메디컨텐츠만의 3가지 핵심 경쟁력</div>
+                <div class="pillars">
+                    <div class="pillar-card">
+                        <div class="pillar-icon"><i class="fas fa-gavel"></i></div>
+                        <span class="badge-tag">Legal-Tech</span>
+                        <h4>안전성 100%</h4>
+                        <p>치과의사 면허와 변호사 자격증을 동시에 보유한 대표가 직접 설계했습니다. 의료법 위반 리스크를 원천 차단합니다.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-icon"><i class="fas fa-pen-fancy"></i></div>
+                        <span class="badge-tag">Doctor's Voice</span>
+                        <h4>고품질 스토리텔링</h4>
+                        <p>비의료인 알바생이 아닌, 임상 데이터를 학습한 AI와 전문가가 '의사의 시점'에서 진정성 있는 글을 작성합니다.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-icon"><i class="fas fa-bullseye"></i></div>
+                        <span class="badge-tag">High-Intent</span>
+                        <h4>구매 전환 타겟팅</h4>
+                        <p>단순 검색량 경쟁이 아닌, "통증", "공포", "재수술" 등 치료 결정 직전의 환자가 검색하는 키워드를 선점합니다.</p>
+                    </div>
+                </div>
+            </div>
 
-    <h3>[Step 1] 콘텐츠 평가 (Content Check)</h3>
-    <p>목적: 본문 내용이 '정보'를 가장한 '광고'인지 확인 (환경이 깨끗할 경우 진행)</p>
-    <table class="check-table">
-        <thead>
-            <tr>
-                <th width="20%">구분</th>
-                <th>체크포인트 (Y/N 판단 기준)</th>
-                <th width="15%">관련 근거</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>식별성</strong><br>(Identification)</td>
-                <td>
-                    □ 본문 내 텍스트나 이미지로 <strong>의료기관 명칭(로고 포함)</strong>이 노출되는가?<br>
-                    □ 본문 하단에 네이버 지도(플레이스), 약도, 주소가 첨부되어 있는가?<br>
-                    □ 전화번호나 홈페이지/SNS 링크가 포함되어 있는가?
-                </td>
-                <td>
-                    <button class="btn-source" onclick="openModal('1391')">광고정의</button><br>
-                    <button class="btn-source" onclick="openModal('1454')">판례</button>
-                </td>
-            </tr>
-            <tr>
-                <td><strong>유인성</strong><br>(Enticement)</td>
-                <td>
-                    □ "저희 병원에서는", "제가 치료한" 등 <strong>1인칭 시점(주관적)</strong>으로 서술되었는가?<br>
-                    □ "내원하시면", "상담받아보세요" 등 행동 유도(Call to Action) 문구가 있는가?<br>
-                    □ 가격 할인, 이벤트, 무료 검진 등의 혜택이 언급되었는가?
-                </td>
-                <td>
-                    <button class="btn-source" onclick="openModal('1454')">판례</button><br>
-                    <button class="btn-source" onclick="openModal('605')">유인금지</button><br>
-                    <button class="btn-source" onclick="openModal('1563')">할인광고</button>
-                </td>
-            </tr>
-            <tr>
-                <td><strong>구체성</strong><br>(Specificity)</td>
-                <td>
-                    □ 특정 환자의 치료 전후 사진이나 엑스레이가 사용되었는가?<br>
-                    □ 환자의 자필 후기, 인터뷰, 리뷰 캡처 이미지가 포함되었는가?<br>
-                    □ "본원에서 실제 치료한 사례입니다"라는 설명이 있는가?
-                </td>
-                <td>
-                    <button class="btn-source" onclick="openModal('860')">전후사진</button><br>
-                    <button class="btn-source" onclick="openModal('915')">후기</button>
-                </td>
-            </tr>
-            <tr class="verdict-row">
-                <td colspan="3" class="verdict-text">👉 판정: 하나라도 YES면 → '광고성 콘텐츠' (Logic C 진입 가능성 높음)</td>
-            </tr>
-            <tr class="verdict-pass">
-                <td colspan="3" class="verdict-pass-text">👉 판정: 모두 NO이고, 환경 평가도 깨끗하다면 → Logic A (순수 정보)</td>
-            </tr>
-        </tbody>
-    </table>
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-num">300%</div>
+                    <div class="stat-desc">타겟 키워드 노출 증가율</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">5.2배</div>
+                    <div class="stat-desc">블로그 유입 환자 상담 전환율</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">0건</div>
+                    <div class="stat-desc">의료법 위반/행정 제재 발생</div>
+                </div>
+            </div>
 
-    <h3>[Step 2] 매체 및 면제 여부 평가 (Exemption Check)</h3>
-    <p>목적: 광고임이 확인된 경우, 심의를 받아야 하는지 확인</p>
-    <table class="check-table">
-        <thead>
-            <tr>
-                <th width="20%">구분</th>
-                <th>체크포인트 (Y/N 판단 기준)</th>
-                <th width="15%">관련 근거</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>매체 기준</strong></td>
-                <td>
-                    □ 게시하려는 곳이 네이버 블로그/카페, 유튜브, 인스타그램, 페이스북인가?<br>
-                    <span style="font-size:0.9em; color:#666;">(전년도 말 기준 직전 3개월 일일 평균 이용자 10만 명 이상)</span>
-                </td>
-                <td><button class="btn-source" onclick="openModal('162')">시행령</button></td>
-            </tr>
-            <tr>
-                <td><strong>단순 정보</strong></td>
-                <td>
-                    □ 콘텐츠 내용이 오직 다음 항목들로만 구성되어 있는가?<br>
-                    - 의료기관 명칭, 소재지, 전화번호<br>
-                    - 진료과목 (법정 진료과목만)<br>
-                    - 의료인 성명, 성별, 면허 종류<br>
-                    - 진료일 및 진료시간, 홈페이지 주소<br>
-                    <strong>(수술법 설명, 장비 자랑, 인사말 등 일체 없음)</strong>
-                </td>
-                <td><button class="btn-source" onclick="openModal('156')">법령</button><br><button class="btn-source" onclick="openModal('1465')">세부항목</button></td>
-            </tr>
-            <tr class="verdict-row">
-                <td colspan="3" class="verdict-text">👉 판정: 매체 기준이 YES이고, 단순 정보가 NO라면 → Logic C (심의 필수)</td>
-            </tr>
-            <tr class="verdict-pass">
-                <td colspan="3" style="color:var(--warning-color); font-weight:bold;">👉 판정: 단순 정보가 YES라면 → Logic B (심의 면제)</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h2>3. 로직별 합법성 검토 기준 (Compliance Check)</h2>
-    <p style="color: #555;">아래 배지를 클릭하여 각 로직의 상세 검토 내용을 확인하세요.</p>
-    
-    <div style="text-align: center; margin-bottom: 20px;">
-        <span class="logic-badge logic-a" onclick="showSection('logic-a')">Logic A (순수 정보)</span>
-        <span class="logic-badge logic-b" onclick="showSection('logic-b')">Logic B (심의 면제)</span>
-        <span class="logic-badge logic-c" onclick="showSection('logic-c')">Logic C (심의 대상)</span>
-    </div>
-
-    <div id="logic-a" class="detail-section">
-        <div class="check-header" style="background: #e8f8f5; color: #27ae60;">
-            <span>🟢 Logic A: 순수 정보 (심의 X)</span>
-            <span style="font-size: 0.8em;">규제 대상 아님</span>
-        </div>
-        <p style="margin: 15px 0;"><strong>[핵심]</strong> 의료광고가 아니므로 심의는 필요 없으나, <strong>내용상 '불법 행위'</strong>가 포함되면 처벌받습니다.</p>
-        <table class="comp-table">
-            <tr><th>구분</th><th>위법 판단 기준</th><th>근거</th></tr>
-            <tr>
-                <td class="risk-high">광고성 변질</td>
-                <td>□ 정보 제공 후 하단에 병원 지도, 상담 링크, 전화번호 노출 시 즉시 '의료광고'로 간주됨</td>
-                <td><button class="btn-source" onclick="openModal('1447')">보기</button></td>
-            </tr>
-            <tr>
-                <td class="risk-med">타 의료인 비방</td>
-                <td>□ "다른 치과는 과잉진료하지만..." 등 경쟁자를 깎아내리는 내용</td>
-                <td><button class="btn-source" onclick="openModal('276')">보기</button></td>
-            </tr>
-        </table>
-    </div>
-
-    <div id="logic-b" class="detail-section">
-        <div class="check-header" style="background: #fef9e7; color: #f39c12;">
-            <span>🟡 Logic B: 심의 면제 광고 (심의 X)</span>
-            <span style="font-size: 0.8em;">형식적 규제 면제</span>
-        </div>
-        <p style="margin: 15px 0;"><strong>[핵심]</strong> 심의를 받을 필요는 없으나, 기재된 정보가 <strong>거짓이거나 과장</strong>되면 처벌받습니다.</p>
-        <table class="comp-table">
-            <tr><th>구분</th><th>위법 판단 기준</th><th>근거</th></tr>
-            <tr>
-                <td class="risk-high">허위 정보</td>
-                <td>□ 전문의가 아님에도 'OO 전문의' 표기, 법적 진료과목 외 명칭 사용</td>
-                <td><button class="btn-source" onclick="openModal('270')">보기</button></td>
-            </tr>
-            <tr>
-                <td class="risk-high">비공인 인증</td>
-                <td>□ '소비자만족대상' 등 사설 상장 기재</td>
-                <td><button class="btn-source" onclick="openModal('1584')">보기</button></td>
-            </tr>
-            <tr>
-                <td class="risk-med">범위 초과</td>
-                <td>□ "아프지 않은", "최고의 시설" 등 수식어 사용 시 Logic C로 전환됨</td>
-                <td><button class="btn-source" onclick="openModal('1465')">보기</button></td>
-            </tr>
-        </table>
-    </div>
-
-    <div id="logic-c" class="detail-section">
-        <div class="check-header" style="background: #fdedec; color: #c0392b;">
-            <span>🔴 Logic C: 심의 대상 광고 (심의 O)</span>
-            <span style="font-size: 0.8em;">모든 규제 적용</span>
-        </div>
-        <p style="margin: 15px 0;"><strong>[핵심]</strong> 반드시 <strong>사전 심의(절차)</strong>를 통과해야 하며, 통과했더라도 <strong>금지 내용</strong>이 포함되면 안 됩니다.</p>
-        <table class="comp-table">
-            <tr><th>구분</th><th>위법 판단 기준 (체크리스트)</th><th>근거</th></tr>
-            <tr>
-                <td class="risk-high">1. 절차 위반</td>
-                <td>□ 유효한 <strong>'의료광고심의필 번호'</strong> 누락 (미심의 광고)</td>
-                <td><button class="btn-source" onclick="openModal('1390')">보기</button></td>
-            </tr>
-            <tr>
-                <td class="risk-high">2. 환자 안전</td>
-                <td>
-                    □ <strong>수술 장면 노출:</strong> 피, 절개된 잇몸, 뼈 노출 (혐오감 유발)<br>
-                    □ <strong>미평가 신기술:</strong> 복지부 미인증 시술 광고<br>
-                    □ <strong>치료보장:</strong> "100% 성공", "재발 없음" 등 단정적 표현
-                </td>
-                <td><button class="btn-source" onclick="openModal('1076')">보기</button></td>
-            </tr>
-            <tr>
-                <td class="risk-high">3. 소비자 오인</td>
-                <td>
-                    □ <strong>전후사진 위반:</strong> 촬영시기, 부작용, 동일조건 미명시<br>
-                    □ <strong>치료후기 공개:</strong> 로그인 없이 환자 자필 후기 노출<br>
-                    □ <strong>최상급 표현:</strong> "최고", "유일", "완벽" 등 사용
-                </td>
-                <td>
-                    <button class="btn-source" onclick="openModal('860')">사진</button>
-                    <button class="btn-source" onclick="openModal('915')">후기</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="risk-med">4. 공정 경쟁</td>
-                <td>
-                    □ <strong>사설 상장:</strong> 민간단체/언론사 상장 게시<br>
-                    □ <strong>할인 유인:</strong> 기간/대상/범위 누락, "선착순" 유도
-                </td>
-                <td><button class="btn-source" onclick="openModal('1584')">보기</button></td>
-            </tr>
-        </table>
-    </div>
-
-    <h2>4. 실전 사례 검토 (Case Analysis)</h2>
-    <p style="background-color: #e8f4fd; padding: 15px; border-radius: 8px; color: var(--primary-color); margin-bottom: 30px;">
-        <strong>💡 분석 전제:</strong> 4개 샘플 모두 <strong>'병원 공식 블로그(네이버)'</strong>에 게시된 것으로 간주합니다.<br>
-        따라서 Step 0 환경 평가(채널 정체성)에 의해 모두 <strong>[Logic C: 심의 대상 의료광고]</strong> 기준을 적용하여 진단합니다.
-    </p>
-
-    <div class="case-card">
-        <div class="case-header" onclick="toggleCase('case1')">
-            <div class="case-title">Case 1. 임플란트 정보 및 구조 (File: 1.jpg)</div>
-            <div class="case-status status-danger">🚨 위법 (High Risk)</div>
-        </div>
-        <div id="case1" class="case-body">
-            <a href="https://blog.naver.com/peko8804/224063267518" target="_blank" class="origin-link">🔗 원문 포스트 확인하기 (새창)</a>
+            <div class="process-section">
+                <div class="section-title">원장님은 진료에만 집중하세요 (One-Line Process)</div>
+                <div class="process-steps">
+                    <div class="step">
+                        <i class="fas fa-mobile-alt"></i>
+                        <strong>Step 1. 입력</strong>
+                        <span>사진 + 핵심문장 1줄<br>간편 전송</span>
+                    </div>
+                    <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+                    <div class="step">
+                        <i class="fas fa-cogs"></i>
+                        <strong>Step 2. 생성</strong>
+                        <span>AI 엔진 원고 작성<br>+ 법률 자동 검수</span>
+                    </div>
+                    <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+                    <div class="step">
+                        <i class="fas fa-check-circle"></i>
+                        <strong>Step 3. 승인</strong>
+                        <span>완성본 확인 후<br>원클릭 승인</span>
+                    </div>
+                    <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+                    <div class="step">
+                        <i class="fas fa-share-square"></i>
+                        <strong>Step 4. 게시</strong>
+                        <span>블로그/홈페이지<br>자동 업로드</span>
+                    </div>
+                </div>
+            </div>
             
-            <div class="logic-path">
-                <strong>🛠 로직 판단 근거 (팩트 체크 반영):</strong><br>
-                1. <strong>Step 0 (환경):</strong> 병원 공식 블로그 (YES - 전제조건)<br>
-                2. <strong>Step 1 (콘텐츠):</strong> 
-                <span style="color:#c0392b; font-weight:bold;">식별성(하단 지도/배너) YES</span>, 
-                <span style="color:#c0392b; font-weight:bold;">구체성(X-ray 사진) YES</span><br>
-                👉 <strong>결과: [식별성] 및 [구체성] 항목에 의해 Logic C (심의 대상 의료광고) 확정</strong>
+            <div style="background: #f0f7ff; padding: 15px; border-radius: 8px; text-align: center; font-size: 13px; color: #555;">
+                <i class="fas fa-quote-left" style="color: var(--primary); margin-right: 5px;"></i>
+                지금, 우리 병원만의 <strong>디지털 자산</strong>을 쌓기 시작하십시오. 마케팅 비용이 <strong>투자</strong>로 바뀝니다.
+                <i class="fas fa-quote-right" style="color: var(--primary); margin-left: 5px;"></i>
             </div>
 
-            <table class="comp-table">
-                <tr>
-                    <th width="30%">위반 항목</th>
-                    <th>상세 분석 내용</th>
-                    <th width="15%">판정/근거</th>
-                </tr>
-                <tr>
-                    <td><strong>1. 절차 위반<br>(미심의 광고)</strong></td>
-                    <td>
-                        <strong>[팩트]</strong> 하단에 병원 지도와 상담 배너가 포함된 명백한 '의료광고'임에도 불구하고, 이미지 내에 <strong>'의료광고 심의필 번호'</strong>가 기재되어 있지 않음.<br>
-                        <strong>[판단]</strong> 네이버 블로그는 사전심의 대상 매체이므로 절차 위반임.
-                    </td>
-                    <td>
-                        <span class="verdict-badge v-fail">위법</span>
-                        <button class="btn-source" onclick="openModal('1390')">근거보기</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>2. 치료 결과 오인<br>(X-ray 표기 미비)</strong></td>
-                    <td>
-                        <strong>[팩트]</strong> 본문 중간에 환자의 치아 상태를 보여주는 <strong>파노라마 X-ray 사진</strong>이 사용됨.<br>
-                        <strong>[판단]</strong> X-ray 사진도 치료 결과를 보여주는 것이므로 <strong>①촬영일자, ②부작용 문구</strong>가 텍스트로 명시되어야 하나 누락됨.
-                    </td>
-                    <td>
-                        <span class="verdict-badge v-fail">위법</span>
-                        <button class="btn-source" onclick="openModal('860')">근거보기</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>3. 거짓/과장 표현<br>(검토 필요)</strong></td>
-                    <td>
-                        <strong>[분석]</strong> 텍스트가 흐릿하여 정확한 문구 확인은 어려우나, 임플란트 구조 설명 시 "반영구적", "부작용 없는" 등의 단정적 표현이 있는지 확인 필요.<br>
-                        (※ 통상적으로 장점만 나열할 경우 과장 광고 리스크 있음)
-                    </td>
-                    <td>
-                        <span class="verdict-badge v-warn">주의</span>
-                        <button class="btn-source" onclick="openModal('995')">근거보기</button>
-                    </td>
-                </tr>
-            </table>
         </div>
-    </div>
 
-    <div class="case-card">
-        <div class="case-header" onclick="toggleCase('case2')">
-            <div class="case-title">Case 2. 이벤트 및 가격 할인 (File: 2.jpg)</div>
-            <div class="case-status status-danger">🚨 위법 (High Risk)</div>
-        </div>
-        <div id="case2" class="case-body">
-            <a href="https://blog.naver.com/dpwlsdudrjf/224074652344" target="_blank" class="origin-link">🔗 원문 포스트 확인하기 (새창)</a>
-            
-            <div class="logic-path">
-                <strong>🛠 로직 판단 근거 (팩트 체크 반영):</strong><br>
-                1. <strong>Step 0 (환경):</strong> 병원 공식 블로그 (YES - 전제조건)<br>
-                2. <strong>Step 1 (콘텐츠):</strong> 
-                <span style="color:#999;">상장/후기 없음(정정)</span>, 
-                <span style="color:#c0392b; font-weight:bold;">유인성(가격할인 49만원) YES</span><br>
-                👉 <strong>결과: [유인성] 항목에 의해 Logic C (심의 대상 의료광고) 확정</strong>
+        <footer>
+            <div class="footer-msg">
+                <h4>메디컨텐츠 (MediContents)</h4>
+                <p>프리미엄 병원 브랜딩 & 리스크 매니지먼트 솔루션</p>
             </div>
-
-            <table class="comp-table">
-                <tr>
-                    <th width="30%">위반 항목</th>
-                    <th>상세 분석 내용</th>
-                    <th width="15%">판정/근거</th>
-                </tr>
-                <tr>
-                    <td><strong>1. 비급여 가격 할인<br>(필수 정보 누락)</strong></td>
-                    <td>
-                        <strong>[분석]</strong> '임플란트 49만원' 등 파격적인 할인을 강조하고 있으나, 의료법상 필수 기재 사항인 <strong>①할인 기간, ②적용 대상, ③치료 범위, ④할인 전 원가</strong>가 명확히 병기되지 않음.<br>
-                        <strong>[판단]</strong> 단순 저가 마케팅은 환자 유인 행위 및 거짓·과장 광고로 간주되어 처벌 대상임.
-                    </td>
-                    <td>
-                        <span class="verdict-badge v-fail">위법</span>
-                        <button class="btn-source" onclick="openModal('1563')">근거보기</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>2. 절차 위반<br>(미심의 광고)</strong></td>
-                    <td>
-                        <strong>[분석]</strong> 가격 할인과 같은 강력한 유인 요소를 포함한 광고물임에도 불구하고 <strong>'의료광고 심의필 번호'</strong>가 누락됨.<br>
-                        <strong>[판단]</strong> 네이버 블로그 등 주요 매체에서 가격 마케팅을 하려면 반드시 사전 심의를 통과해야 함.
-                    </td>
-                    <td>
-                        <span class="verdict-badge v-fail">위법</span>
-                        <button class="btn-source" onclick="openModal('1390')">근거보기</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>3. 과장 문구 주의<br>(검토 필요)</strong></td>
-                    <td>
-                        <strong>[분석]</strong> 이벤트 배너 내에 "최저가", "선착순", "특별 혜택" 등의 문구가 포함되어 있다면, 이는 소비자를 현혹하는 문구로 추가 위반 소지가 있음.
-                    </td>
-                    <td>
-                        <span class="verdict-badge v-warn">주의</span>
-                        <button class="btn-source" onclick="openModal('995')">근거보기</button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-    <div class="case-card">
-        <div class="case-header" onclick="toggleCase('case3')">
-            <div class="case-title">Case 3. 고난도 수술 증례 (File: 3.jpg)</div>
-            <div class="case-status status-danger">🚨 위법 (High Risk)</div>
-        </div>
-        <div id="case3" class="case-body">
-            <a href="https://blog.naver.com/tnjdt/223455964287" target="_blank" class="origin-link">🔗 원문 포스트 확인하기 (새창)</a>
-
-            <div class="logic-path">
-                <strong>🛠 로직 판단 근거 (팩트 체크 반영):</strong><br>
-                1. <strong>Step 0 (환경):</strong> 병원 공식 블로그 (YES - 전제조건)<br>
-                2. <strong>Step 1 (콘텐츠):</strong> 
-                <span style="color:#c0392b; font-weight:bold;">식별성(지도/배너) YES</span>, 
-                <span style="color:#c0392b; font-weight:bold;">구체성(전후사진) YES</span><br>
-                👉 <strong>결과: [식별성] 및 [구체성] 항목에 의해 Logic C (심의 대상 의료광고) 확정</strong>
+            <div class="contact-info">
+                <div><strong>T.</strong> 02-1234-5678</div>
+                <div><strong>E.</strong> contact@medicontents.com</div>
+                <div><strong>W.</strong> www.medicontents.com</div>
             </div>
-
-            <table class="comp-table">
-                <tr>
-                    <th width="30%">위반 항목</th>
-                    <th>상세 분석 내용</th>
-                    <th width="15%">판정/근거</th>
-                </tr>
-                <tr>
-                    <td><strong>1. 치료 전후 사진<br>요건 미비</strong></td>
-                    <td>
-                        <strong>[팩트]</strong> '고난도 임플란트' 이미지 내에 X-ray와 구강 포토가 비교 제시됨.<br>
-                        <strong>[판단]</strong> 치료 결과를 광고할 때 필수적인 <strong>①치료 기간(시작/종료일), ②부작용 문구</strong>가 이미지 내 텍스트로 명시되지 않아 의료법 위반임.
-                    </td>
-                    <td>
-                        <span class="verdict-badge v-fail">위법</span>
-                        <button class="btn-source" onclick="openModal('860')">근거보기</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>2. 절차 위반<br>(미심의 광고)</strong></td>
-                    <td>
-                        <strong>[팩트]</strong> 병원 지도와 상담 배너가 포함된 광고물이나 심의필 번호가 없음.<br>
-                        <strong>[판단]</strong> 네이버 블로그 게시물은 사전심의 대상이므로 절차 위반임.
-                    </td>
-                    <td>
-                        <span class="verdict-badge v-fail">위법</span>
-                        <button class="btn-source" onclick="openModal('1390')">근거보기</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>3. 시술 장면<br>(안전성 확인)</strong></td>
-                    <td>
-                        <strong>[분석]</strong> 상단 의료진 시술 사진은 환부(피, 뼈)가 노출되지 않은 일반적인 진료 모습임.<br>
-                        <strong>[판단]</strong> Case 4와 달리 혐오감을 주지 않으므로 이 사진 자체는 <strong>게시 가능(Safe)</strong>함.
-                    </td>
-                    <td>
-                        <span class="verdict-badge v-pass" style="background:#e6ffe6; color:#27ae60;">통과</span>
-                        <button class="btn-source" onclick="openModal('1076')">근거보기</button>
-                    </td>
-                </tr>
-            </table>
-        </div>
+        </footer>
     </div>
-
-<div class="case-card">
-        <div class="case-header" onclick="toggleCase('case4')">
-            <div class="case-title">Case 4. 수술 과정 상세 (File: 4.jpg)</div>
-            <div class="case-status status-danger">🚨 위법 (Fatal)</div>
-        </div>
-        <div id="case4" class="case-body">
-            <a href="https://blog.naver.com/medicontent_medi/224047465845" target="_blank" class="origin-link">🔗 원문 포스트 확인하기 (새창)</a>
-
-            <div class="logic-path">
-                <strong>🛠 로직 판단 근거 (팩트 체크 반영):</strong><br>
-                1. <strong>Step 0 (환경):</strong> 병원 공식 블로그가 아니라고 가정 (NO)<br>
-                2. <strong>Step 1 (콘텐츠):</strong> 
-                <span style="color:#999;">식별성(지도/명칭) NO</span>, 
-                <span style="color:#999;">유인성(할인) NO</span>, 
-                <span style="color:#c0392b; font-weight:bold;">구체성(수술 사례/사진) YES</span><br>
-                👉 <strong>결과: [구체성] 항목에 의해 Logic C (심의 대상 의료광고) 확정</strong>
-            </div>
-
-            <table class="comp-table">
-                <tr>
-                    <th width="30%">위반 항목</th>
-                    <th>상세 분석 내용</th>
-                    <th width="15%">판정/근거</th>
-                </tr>
-                <tr>
-                    <td><strong>1. 시술행위 노출 금지<br>(치명적 위반)</strong></td>
-                    <td>
-                        <strong>[분석]</strong> 잇몸을 절개하여 젖히고(Flap), 뼈와 임플란트 나사가 노출된 상태에서 피가 묻은 수술 도구가 삽입된 장면을 컬러 사진으로 게재함.<br>
-                        <strong>[판단]</strong> 이는 일반인에게 <strong>혐오감</strong>을 일으키는 '수술 장면'으로, 의료법상 <strong>절대 금지</strong>된 항목임.
-                    </td>
-                    <td>
-                        <span class="verdict-badge v-fail" style="background:#c0392b; color:white;">치명적 위법</span>
-                        <button class="btn-source" onclick="openModal('1076')">근거보기</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>2. 치료 전후 사진<br>요건 미비</strong></td>
-                    <td>
-                        <strong>[분석]</strong> 상단(수술 전 파노라마)과 하단(보철 체결 후) 사진을 나열하여 치료 효과를 과시하고 있음.<br>
-                        <strong>[판단]</strong> 필수 기재 사항인 <strong>①촬영 일자</strong>, <strong>②부작용 문구</strong>, <strong>③동일 조건 명시</strong>가 텍스트로 확인되지 않아 위법함.
-                    </td>
-                    <td>
-                        <span class="verdict-badge v-fail">위법</span>
-                        <button class="btn-source" onclick="openModal('860')">근거보기</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>3. 절차 위반<br>(미심의)</strong></td>
-                    <td>
-                        <strong>[분석]</strong> 구체적인 수술 사례를 다루는 광고성 콘텐츠임에도 심의필 번호가 없음.<br>
-                        <strong>[판단]</strong> 네이버 블로그 등 주요 매체 게재 시 사전심의 필수 대상임.
-                    </td>
-                    <td>
-                        <span class="verdict-badge v-fail">위법</span>
-                        <button class="btn-source" onclick="openModal('1390')">근거보기</button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-</div>
-
-<div id="guidelineModal" class="modal-overlay" onclick="closeModal(event)">
-    <div class="modal-box">
-        <div class="modal-head">
-            <span>가이드라인 근거 원문</span>
-            <span class="close-icon" onclick="closeModalBtn()">&times;</span>
-        </div>
-        <div class="modal-body" id="modalText"></div>
-        <div class="modal-foot" id="modalRef"></div>
-    </div>
-</div>
-
-<script>
-    // Source Data
-    const sources = {
-        '1454': { text: "<strong>[블로그의 광고성 판단]</strong><br>의료인이 운영하는 블로그에 그 의료기관이나 의료방법 소개가 결부되면 소비자를 유인하는 광고 성격을 가짐. (헌재 2016헌마636)", page: "p.92 (참고사례)" },
-        '1391': { text: "<strong>[의료광고 정의]</strong><br>의료인등이 매체를 통해 의료행위, 의료기관 정보를 소비자에게 알리는 행위.", page: "p.29 (의료법 제56조)" },
-        '605': { text: "<strong>[환자 유인행위]</strong><br>영리를 목적으로 환자를 의료기관에 소개·알선·유인하는 행위 금지.", page: "p.51 (의료법 제27조)" },
-        '1563': { text: "<strong>[비급여 할인 광고]</strong><br>할인 금액, 대상, 기간, 범위를 명확히 하지 않거나 허위 정보를 게재하는 것 금지.", page: "p.96 (시행령 제23조)" },
-        '860': { text: "<strong>[치료 전후 사진 요건]</strong><br>1. 전·후 촬영 시기 명시<br>2. 동일 조건 촬영<br>3. 부작용 명시<br>위 요건을 텍스트로 기재해야 함.", page: "p.66 (Q&A)" },
-        '915': { text: "<strong>[치료경험담 금지]</strong><br>로그인 없이 불특정 다수에게 환자의 치료 후기를 공개하는 것은 금지됨.", page: "p.66 (Q1)" },
-        '162': { text: "<strong>[사전심의 매체]</strong><br>일일 이용자 10만명 이상 인터넷 매체 (네이버, 유튜브, SNS 등).", page: "p.30 (시행령 제24조)" },
-        '156': { text: "<strong>[심의 면제 대상]</strong><br>의료기관 명칭, 위치, 전화번호, 진료과목 등 기본 정보만 있는 경우.", page: "p.30 (의료법 제57조)" },
-        '1390': { text: "<strong>[미심의 광고]</strong><br>심의 대상임에도 심의를 받지 않거나 내용이 다른 경우 처벌 대상.", page: "p.89" },
-        '1076': { text: "<strong>[시술행위 노출]</strong><br>수술 장면(피, 환부 등)을 노출하여 혐오감을 주는 광고 금지.", page: "p.74" },
-        '1584': { text: "<strong>[사설 상장 금지]</strong><br>언론사, 사설 단체의 상장/감사장/인증을 이용한 광고 금지.", page: "p.98" },
-        '995': { text: "<strong>[거짓/과장 광고]</strong><br>객관적 증명이 어려운 배타적 표현(최고, 완벽 등) 사용 금지.", page: "p.68" },
-        '1447': { text: "<strong>[순수 정보의 판단]</strong><br>단순히 일반적인 건강상식, 의학정보를 제공하는 행위가 단순한 학술활동이나 정보공유의 목적이라면 일률적으로 의료광고로 보기는 어려울 것임.<br>단, 특정 의료기관이나 의료인에게 환자를 유인하는 목적인 경우에는 의료광고에 해당될 수 있음.", page: "p.91 (Q6 답변)" },
-        '276': { text: "<strong>[비방 광고 금지]</strong><br>다른 의료인등을 비방할 목적으로 해당 의료인등이 수행하거나 광고하는 기능 또는 진료 방법에 관하여 불리한 사실을 광고하는 행위는 금지됨.", page: "p.36" },
-        '270': { text: "<strong>[거짓 광고 금지]</strong><br>거짓된 내용을 표시하는 광고. 의료인, 의료기관, 의료서비스 및 의료 관련 각종 사항에 대하여 객관적인 사실과 다른 내용을 광고하는 것.", page: "p.36" },
-        '1465': { text: "<strong>[심의 면제 세부 항목]</strong><br>대통령령으로 정하는 사항이란:<br>1. 의료기관 개설자 및 개설연도<br>2. 인터넷 홈페이지 주소<br>3. 진료일 및 진료시간<br>4. 전문병원 지정 사실<br>5. 의료기관 인증 사실<br>6. 전문의 자격 인정 사실", page: "p.92" }
-    };
-
-    function showSection(id) {
-        document.querySelectorAll('.detail-section').forEach(el => {
-            el.classList.remove('active');
-            el.style.display = 'none';
-        });
-        const target = document.getElementById(id);
-        target.style.display = 'block';
-        setTimeout(() => target.classList.add('active'), 10);
-        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    function toggleCase(id) {
-        const body = document.getElementById(id);
-        body.style.display = (body.style.display === 'block') ? 'none' : 'block';
-    }
-
-    function openModal(id) {
-        const data = sources[id];
-        if (data) {
-            document.getElementById('modalText').innerHTML = data.text;
-            document.getElementById('modalRef').innerText = "출처: 2025 의료광고 가이드라인(2판) " + data.page;
-            document.getElementById('guidelineModal').style.display = 'flex';
-        }
-    }
-
-    function closeModal(e) {
-        if (e.target.id === 'guidelineModal') {
-            document.getElementById('guidelineModal').style.display = 'none';
-        }
-    }
-    
-    function closeModalBtn() {
-        document.getElementById('guidelineModal').style.display = 'none';
-    }
-</script>
 
 </body>
 </html>
