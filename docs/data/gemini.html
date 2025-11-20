@@ -76,7 +76,7 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 20px; /* 간격 조정 */
+            gap: 20px;
         }
 
         /* Intro Hook */
@@ -111,6 +111,7 @@
         }
         .pillar-card h4 {
             margin: 0 0 8px 0; font-size: 16px; color: var(--dark-blue);
+            word-break: keep-all;
         }
         .pillar-card p {
             margin: 0; font-size: 12px; color: #666; line-height: 1.5;
@@ -127,7 +128,7 @@
             margin-bottom: 5px;
         }
 
-        /* [NEW] Comparison Section (Replaces Stats) */
+        /* Comparison Section */
         .comparison-section {
             background: #fff;
             border: 1px solid #eee;
@@ -179,10 +180,12 @@
             display: flex;
             align-items: flex-start;
             line-height: 1.4;
+            word-break: keep-all;
         }
         .check-list li i {
             margin-right: 8px;
             margin-top: 3px;
+            min-width: 15px;
         }
         .bad .check-list li i { color: var(--danger); }
         .good .check-list li i { color: var(--primary); }
@@ -255,11 +258,11 @@
         <header>
             <div class="logo">
                 <h1>결국, 환자는<br>'블로그 글'을 보고 내원합니다.</h1>
-                <p>치과의사 출신 변호사가 검수하는 <strong>프리미엄 블로그 포스팅</strong></p>
+                <p>3인의 전문가가 작성하는 <strong>프리미엄 블로그 포스팅</strong></p>
             </div>
             <div class="header-badge">
-                <h2>Dentist & Lawyer</h2>
-                <span>의료법 걱정 없는<br><strong>전문 원고 작성 서비스</strong></span>
+                <h2>Triple Expert System</h2>
+                <span>의학+법률+SEO 전문가의<br><strong>고품격 원고 작성 서비스</strong></span>
             </div>
         </header>
 
@@ -268,31 +271,31 @@
                 <h3>"수억 원 인테리어 병원, 왜 <span style="color:var(--primary);">블로그 글</span>은 전단지입니까?"</h3>
                 <p>
                     화려한 병원 로비보다 환자가 먼저 마주하는 것은 스마트폰 속 <strong>'블로그 포스팅'</strong>입니다.<br>
-                    메디컨텐츠는 단순 마케팅 대행이 아닙니다. 임상 지식과 의료법을 갖춘 전문가가<br> 
-                    원장님의 진료 철학을 담은 <span class="highlight">고품질 블로그 원고를 대신 작성해 드리는 서비스</span>입니다.
+                    메디컨텐츠는 기계적인 공장형 글쓰기가 아닙니다. <strong>의학, 법률, 검색 최적화(SEO) 전문가</strong>가<br> 
+                    팀을 이루어 원장님의 진료 철학을 담은 <span class="highlight">완벽한 블로그 원고를 대신 작성해 드립니다.</span>
                 </p>
             </div>
 
             <div>
-                <div class="section-title">메디컨텐츠만의 3가지 작성 원칙</div>
+                <div class="section-title">메디컨텐츠의 'Triple Expert' 시스템</div>
                 <div class="pillars">
                     <div class="pillar-card">
+                        <div class="pillar-icon"><i class="fas fa-user-md"></i></div>
+                        <span class="badge-tag">Medical Expert</span>
+                        <h4>의학 전문가</h4>
+                        <p>임상 지식을 갖춘 전문가가 작성하여, 겉핥기식이 아닌 <strong>깊이 있는 질환 정보와 치료 과정</strong>을 담습니다.</p>
+                    </div>
+                    <div class="pillar-card">
                         <div class="pillar-icon"><i class="fas fa-gavel"></i></div>
-                        <span class="badge-tag">Legal-Tech</span>
-                        <h4>안전한 글쓰기</h4>
-                        <p>치과의사+변호사 대표가 검수합니다. 의료법 위반 걱정 없이 <strong>블로그를 운영</strong>할 수 있습니다.</p>
+                        <span class="badge-tag">Legal Expert</span>
+                        <h4>의료법 전문가</h4>
+                        <p>치과의사 출신 <strong>변호사가 직접 검수</strong>합니다. 의료법 위반 리스크 0%의 안전한 글을 보장합니다.</p>
                     </div>
                     <div class="pillar-card">
-                        <div class="pillar-icon"><i class="fas fa-pen-fancy"></i></div>
-                        <span class="badge-tag">Doctor's Voice</span>
-                        <h4>의사 시점 스토리텔링</h4>
-                        <p>비의료인 알바생의 글이 아닙니다. AI와 전문가가 <strong>원장님이 직접 쓴 듯한 전문성 있는 글</strong>을 완성합니다.</p>
-                    </div>
-                    <div class="pillar-card">
-                        <div class="pillar-icon"><i class="fas fa-bullseye"></i></div>
-                        <span class="badge-tag">High-Intent</span>
-                        <h4>내원 유도 키워드</h4>
-                        <p>단순 노출이 아닌, 치료가 급한 환자가 검색하는 <strong>핵심 키워드로 포스팅</strong>하여 내원율을 높입니다.</p>
+                        <div class="pillar-icon"><i class="fas fa-search"></i></div>
+                        <span class="badge-tag">SEO Expert</span>
+                        <h4>SEO 전문가</h4>
+                        <p>단순 노출이 아닙니다. <strong>구매 전환(내원)</strong>이 일어나는 'High-Intent' 키워드를 정교하게 설계합니다.</p>
                     </div>
                 </div>
             </div>
@@ -303,43 +306,43 @@
                     <div class="comp-col bad">
                         <span class="comp-title" style="color:#999;">❌ 일반 마케팅 대행사</span>
                         <ul class="check-list">
-                            <li><i class="fas fa-times-circle"></i> <strong>비전문가 작성:</strong> 질환 이해도 부족으로 겉도는 내용</li>
-                            <li><i class="fas fa-times-circle"></i> <strong>공장형 배포:</strong> 다른 병원과 똑같은 이미지/문구 복사</li>
-                            <li><i class="fas fa-times-circle"></i> <strong>법률 리스크:</strong> 자극적 표현으로 의료법 위반 위험</li>
-                            <li><i class="fas fa-times-circle"></i> <strong>낮은 신뢰도:</strong> 읽자마자 "광고구나" 느껴지는 글</li>
+                            <li><i class="fas fa-times-circle"></i> <strong>비전문가(알바) 작성:</strong> 의학적 깊이가 없는 얕은 글</li>
+                            <li><i class="fas fa-times-circle"></i> <strong>복사/붙여넣기:</strong> 어디서 본 듯한 공장형 콘텐츠</li>
+                            <li><i class="fas fa-times-circle"></i> <strong>법률 리스크 방치:</strong> 자극적 표현으로 제재 위험</li>
+                            <li><i class="fas fa-times-circle"></i> <strong>낮은 신뢰도:</strong> 환자가 "광고구나" 하고 이탈함</li>
                         </ul>
                     </div>
                     <div class="comp-col good">
                         <span class="comp-title" style="color:var(--primary);">⭕ 메디컨텐츠 (MediContents)</span>
                         <ul class="check-list">
-                            <li><i class="fas fa-check-circle"></i> <strong>임상 기반 작성:</strong> 의학적 근거가 확실한 깊이 있는 글</li>
-                            <li><i class="fas fa-check-circle"></i> <strong>1:1 맞춤 원고:</strong> 우리 병원만의 치료 사례 스토리텔링</li>
-                            <li><i class="fas fa-check-circle"></i> <strong>법률 검수 완료:</strong> 변호사가 확인한 안전한 포스팅</li>
-                            <li><i class="fas fa-check-circle"></i> <strong>높은 신뢰도:</strong> "여기 원장님 믿을 만하다"는 확신 부여</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>의학 전문가 작성:</strong> 원장님 수준의 전문적 식견 반영</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>SEO 전문가 설계:</strong> 내원 의지가 높은 환자 정밀 타겟팅</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>변호사 법률 검수:</strong> 의료법을 준수한 안전한 포스팅</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>높은 신뢰도:</strong> "믿고 갈 수 있는 병원"으로 브랜딩</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <div class="process-section">
-                <div class="section-title">원장님은 진료만 하세요. 글은 저희가 씁니다.</div>
+                <div class="section-title">원장님은 진료만 하세요. 글은 전문가들이 씁니다.</div>
                 <div class="process-steps">
                     <div class="step">
                         <i class="fas fa-mobile-alt"></i>
                         <strong>Step 1. 주제 전달</strong>
-                        <span>사진 + 핵심내용 1줄<br>(카톡/앱 전송)</span>
+                        <span>사진 + 핵심내용 1줄<br>(EMR 연동 가능)</span>
                     </div>
                     <div class="arrow"><i class="fas fa-chevron-right"></i></div>
                     <div class="step">
-                        <i class="fas fa-cogs"></i>
-                        <strong>Step 2. 원고 생성</strong>
-                        <span>AI + 변호사 검수<br><strong>블로그 포스팅 작성</strong></span>
+                        <i class="fas fa-users"></i>
+                        <strong>Step 2. 전문가 작성</strong>
+                        <span>의학+SEO 전문가 집필<br><strong>고품질 원고 완성</strong></span>
                     </div>
                     <div class="arrow"><i class="fas fa-chevron-right"></i></div>
                     <div class="step">
-                        <i class="fas fa-check-circle"></i>
-                        <strong>Step 3. 승인</strong>
-                        <span>완성된 원고 확인 후<br>원클릭 승인</span>
+                        <i class="fas fa-file-contract"></i>
+                        <strong>Step 3. 법률 검수</strong>
+                        <span>전문 변호사 확인 후<br>최종 승인 요청</span>
                     </div>
                     <div class="arrow"><i class="fas fa-chevron-right"></i></div>
                     <div class="step">
@@ -352,7 +355,7 @@
             
             <div style="background: #f0f7ff; padding: 15px; border-radius: 8px; text-align: center; font-size: 13px; color: #555;">
                 <i class="fas fa-quote-left" style="color: var(--primary); margin-right: 5px;"></i>
-                매일 고민하던 <strong>블로그 포스팅 숙제</strong>, 이제 전문가에게 맡기고 진료에만 전념하십시오.
+                매일 고민하던 <strong>블로그 포스팅 숙제</strong>, 이제 각 분야 <strong>최고의 전문가 팀</strong>에게 맡기십시오.
                 <i class="fas fa-quote-right" style="color: var(--primary); margin-left: 5px;"></i>
             </div>
 
@@ -361,7 +364,7 @@
         <footer>
             <div class="footer-msg">
                 <h4>메디컨텐츠 (MediContents)</h4>
-                <p>프리미엄 병원 블로그 포스팅 & 리스크 매니지먼트</p>
+                <p>전문가가 만드는 병원 블로그 & 리스크 매니지먼트</p>
             </div>
             <div class="contact-info">
                 <div><strong>T.</strong> 02-1234-5678</div>
