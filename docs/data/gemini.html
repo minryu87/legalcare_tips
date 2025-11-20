@@ -17,20 +17,19 @@
 
         * {
             box-sizing: border-box;
-            -webkit-print-color-adjust: exact; /* 인쇄 시 배경색 유지 */
+            -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background: #e0e0e0; /* 브라우저 배경 */
+            background: #e0e0e0;
             font-family: 'Noto Sans KR', sans-serif;
             display: flex;
             justify-content: center;
         }
 
-        /* A4 Paper Size Settings */
         .page {
             width: 210mm;
             height: 297mm;
@@ -56,18 +55,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 140px;
+            height: 150px;
         }
 
-        .logo h1 { margin: 0; font-size: 32px; font-weight: 900; letter-spacing: -1px; }
-        .logo p { margin: 5px 0 0; font-size: 14px; opacity: 0.9; font-weight: 300; }
+        .logo h1 { margin: 0 0 5px 0; font-size: 28px; font-weight: 900; letter-spacing: -1px; line-height: 1.2; }
+        .logo p { margin: 0; font-size: 15px; opacity: 0.95; font-weight: 400; color: var(--accent); }
         .header-badge {
             text-align: right;
             border-left: 1px solid rgba(255,255,255,0.3);
             padding-left: 20px;
         }
-        .header-badge h2 { margin: 0; font-size: 18px; color: var(--accent); }
-        .header-badge span { font-size: 12px; font-weight: 300; }
+        .header-badge h2 { margin: 0; font-size: 16px; color: #fff; font-weight: 500;}
+        .header-badge strong { color: var(--accent); font-weight: 700; font-size: 18px; }
+        .header-badge span { font-size: 12px; font-weight: 300; display: block; margin-top: 3px;}
 
         /* Content Body */
         .content {
@@ -84,12 +84,12 @@
             padding-bottom: 20px;
         }
         .intro-hook h3 {
-            font-size: 20px; color: var(--text); margin: 0 0 10px 0; font-weight: 700;
+            font-size: 21px; color: var(--text); margin: 0 0 12px 0; font-weight: 800; word-break: keep-all;
         }
         .intro-hook p {
-            margin: 0; font-size: 14px; color: #555; line-height: 1.5;
+            margin: 0; font-size: 14px; color: #555; line-height: 1.6;
         }
-        .highlight { color: var(--primary); font-weight: bold; }
+        .highlight { color: var(--primary); font-weight: bold; text-decoration: underline; text-underline-offset: 3px;}
 
         /* 3 Key Pillars Grid */
         .pillars {
@@ -99,7 +99,7 @@
         }
         .pillar-card {
             background: var(--light-bg);
-            padding: 15px;
+            padding: 18px 15px;
             border-radius: 12px;
             border: 1px solid #e1e9f5;
         }
@@ -112,7 +112,7 @@
             margin: 0 0 8px 0; font-size: 16px; color: var(--dark-blue);
         }
         .pillar-card p {
-            margin: 0; font-size: 12px; color: #666; line-height: 1.4;
+            margin: 0; font-size: 12px; color: #666; line-height: 1.5;
             word-break: keep-all;
         }
         .badge-tag {
@@ -197,44 +197,45 @@
     <div class="page">
         <header>
             <div class="logo">
-                <h1>MEDICONTENTS</h1>
-                <p>병원 마케팅, '비용'에서 '자산'으로</p>
+                <h1>결국, 환자는<br>'블로그 글'을 보고 내원합니다.</h1>
+                <p>치과의사 출신 변호사가 검수하는 <strong>프리미엄 블로그 포스팅</strong></p>
             </div>
             <div class="header-badge">
                 <h2>Dentist & Lawyer</h2>
-                <span>치과의사 출신 변호사가 설계한<br>Premium Legal-Tech Solution</span>
+                <span>의료법 걱정 없는<br><strong>전문 원고 작성 서비스</strong></span>
             </div>
         </header>
 
         <div class="content">
             <div class="intro-hook">
-                <h3>"원장님, 온라인에서의 첫인상은 '호텔'입니까, '전단지'입니까?"</h3>
+                <h3>"수억 원 인테리어 병원, 왜 <span style="color:var(--primary);">블로그 글</span>은 전단지입니까?"</h3>
                 <p>
-                    고가의 인테리어와 고귀한 진료 철학을 갖추셨더라도, 온라인상의 이미지가 조잡하다면 환자는 신뢰하지 않습니다.<br>
-                    <span class="highlight">메디컨텐츠</span>는 단순 노출을 넘어, 병원의 격을 높이고 실제 내원으로 이어지는 <span class="highlight">신뢰 기반 마케팅</span>을 제안합니다.
+                    화려한 병원 로비보다 환자가 먼저 마주하는 것은 스마트폰 속 <strong>'블로그 포스팅'</strong>입니다.<br>
+                    메디컨텐츠는 단순 마케팅 대행이 아닙니다. 임상 지식과 의료법을 갖춘 전문가가<br> 
+                    원장님의 진료 철학을 담은 <span class="highlight">고품질 블로그 원고를 대신 작성해 드리는 서비스</span>입니다.
                 </p>
             </div>
 
             <div>
-                <div class="section-title">메디컨텐츠만의 3가지 핵심 경쟁력</div>
+                <div class="section-title">메디컨텐츠만의 3가지 작성 원칙</div>
                 <div class="pillars">
                     <div class="pillar-card">
                         <div class="pillar-icon"><i class="fas fa-gavel"></i></div>
                         <span class="badge-tag">Legal-Tech</span>
-                        <h4>안전성 100%</h4>
-                        <p>치과의사 면허와 변호사 자격증을 동시에 보유한 대표가 직접 설계했습니다. 의료법 위반 리스크를 원천 차단합니다.</p>
+                        <h4>안전한 글쓰기</h4>
+                        <p>치과의사+변호사 대표가 검수합니다. 의료법 위반 걱정 없이 <strong>블로그를 운영</strong>할 수 있습니다.</p>
                     </div>
                     <div class="pillar-card">
                         <div class="pillar-icon"><i class="fas fa-pen-fancy"></i></div>
                         <span class="badge-tag">Doctor's Voice</span>
-                        <h4>고품질 스토리텔링</h4>
-                        <p>비의료인 알바생이 아닌, 임상 데이터를 학습한 AI와 전문가가 '의사의 시점'에서 진정성 있는 글을 작성합니다.</p>
+                        <h4>의사 시점 스토리텔링</h4>
+                        <p>비의료인 알바생의 글이 아닙니다. AI와 전문가가 협업하여 <strong>원장님이 직접 쓴 듯한 전문성 있는 글</strong>을 완성합니다.</p>
                     </div>
                     <div class="pillar-card">
                         <div class="pillar-icon"><i class="fas fa-bullseye"></i></div>
                         <span class="badge-tag">High-Intent</span>
-                        <h4>구매 전환 타겟팅</h4>
-                        <p>단순 검색량 경쟁이 아닌, "통증", "공포", "재수술" 등 치료 결정 직전의 환자가 검색하는 키워드를 선점합니다.</p>
+                        <h4>내원 유도 키워드</h4>
+                        <p>단순 노출이 아닌, 치료가 급한 환자가 검색하는 <strong>핵심 키워드로 포스팅</strong>하여 내원율을 높입니다.</p>
                     </div>
                 </div>
             </div>
@@ -242,7 +243,7 @@
             <div class="stats-bar">
                 <div class="stat-item">
                     <div class="stat-num">300%</div>
-                    <div class="stat-desc">타겟 키워드 노출 증가율</div>
+                    <div class="stat-desc">블로그 키워드 노출 증가율</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-num">5.2배</div>
@@ -255,37 +256,37 @@
             </div>
 
             <div class="process-section">
-                <div class="section-title">원장님은 진료에만 집중하세요 (One-Line Process)</div>
+                <div class="section-title">원장님은 진료만 하세요. 글은 저희가 씁니다.</div>
                 <div class="process-steps">
                     <div class="step">
                         <i class="fas fa-mobile-alt"></i>
-                        <strong>Step 1. 입력</strong>
-                        <span>사진 + 핵심문장 1줄<br>간편 전송</span>
+                        <strong>Step 1. 주제 전달</strong>
+                        <span>사진 + 핵심내용 1줄<br>(카톡/앱 전송)</span>
                     </div>
                     <div class="arrow"><i class="fas fa-chevron-right"></i></div>
                     <div class="step">
                         <i class="fas fa-cogs"></i>
-                        <strong>Step 2. 생성</strong>
-                        <span>AI 엔진 원고 작성<br>+ 법률 자동 검수</span>
+                        <strong>Step 2. 원고 생성</strong>
+                        <span>AI + 변호사 검수<br><strong>블로그 포스팅 작성</strong></span>
                     </div>
                     <div class="arrow"><i class="fas fa-chevron-right"></i></div>
                     <div class="step">
                         <i class="fas fa-check-circle"></i>
                         <strong>Step 3. 승인</strong>
-                        <span>완성본 확인 후<br>원클릭 승인</span>
+                        <span>완성된 원고 확인 후<br>원클릭 승인</span>
                     </div>
                     <div class="arrow"><i class="fas fa-chevron-right"></i></div>
                     <div class="step">
                         <i class="fas fa-share-square"></i>
-                        <strong>Step 4. 게시</strong>
-                        <span>블로그/홈페이지<br>자동 업로드</span>
+                        <strong>Step 4. 업로드</strong>
+                        <span>네이버 블로그/홈페이지<br>자동 발행 완료</span>
                     </div>
                 </div>
             </div>
             
             <div style="background: #f0f7ff; padding: 15px; border-radius: 8px; text-align: center; font-size: 13px; color: #555;">
                 <i class="fas fa-quote-left" style="color: var(--primary); margin-right: 5px;"></i>
-                지금, 우리 병원만의 <strong>디지털 자산</strong>을 쌓기 시작하십시오. 마케팅 비용이 <strong>투자</strong>로 바뀝니다.
+                매일 고민하던 <strong>블로그 포스팅 숙제</strong>, 이제 전문가에게 맡기고 진료에만 전념하십시오.
                 <i class="fas fa-quote-right" style="color: var(--primary); margin-left: 5px;"></i>
             </div>
 
@@ -294,7 +295,7 @@
         <footer>
             <div class="footer-msg">
                 <h4>메디컨텐츠 (MediContents)</h4>
-                <p>프리미엄 병원 브랜딩 & 리스크 매니지먼트 솔루션</p>
+                <p>프리미엄 병원 블로그 포스팅 & 리스크 매니지먼트</p>
             </div>
             <div class="contact-info">
                 <div><strong>T.</strong> 02-1234-5678</div>
