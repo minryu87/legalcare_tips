@@ -130,7 +130,7 @@
             font-weight: bold;
         }
         .score-low { color: var(--danger); font-weight: bold; }
-        .score-mid { color: #f39c12; font-weight: bold; } /* 주황색 추가 */
+        .score-mid { color: #f39c12; font-weight: bold; }
         .score-high { color: var(--success); font-weight: bold; }
 
         /* Slide 4: Matrix Chart */
@@ -236,13 +236,17 @@
         .ceo-spec { margin-bottom: 20px; font-weight: bold; color: #555; }
         .ceo-quote { font-style: italic; color: #666; font-size: 1.1em; border-top: 1px solid #ccc; padding-top: 20px; margin-top: 20px; }
 
-        /* Footer (Updated to Match Cover Slide) */
+        /* Footer (Updated Height) */
         footer {
-            text-align: center;
-            padding: 100px 20px; /* 여백을 키워 슬라이드 느낌 강화 */
-            /* 배경색을 첫 페이지와 동일하게 변경 */
+            height: 16cm; /* 16cm 고정 높이 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
+            box-sizing: border-box;
+            padding: 0 20px;
         }
         footer h2 {
             color: white;
