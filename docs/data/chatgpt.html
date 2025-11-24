@@ -41,8 +41,8 @@
             margin-bottom: 40px;
             padding: 60px 50px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            border-radius: 0; /* 슬라이드 느낌을 위해 각지게 하거나, 둥글게 하거나 선택 가능. 여기선 약간의 간격만 둠 */
-            page-break-after: always; /* 인쇄 시 페이지 구분 */
+            border-radius: 0;
+            page-break-after: always;
             position: relative;
             overflow: hidden;
         }
@@ -130,6 +130,7 @@
             font-weight: bold;
         }
         .score-low { color: var(--danger); font-weight: bold; }
+        .score-mid { color: #f39c12; font-weight: bold; } /* 주황색 추가 */
         .score-high { color: var(--success); font-weight: bold; }
 
         /* Slide 4: Matrix Chart */
@@ -163,26 +164,9 @@
             transition: all 0.3s;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        /* SEO 해킹 (High Exp, Low Trust) */
-        .zone-hacking {
-            top: 20px; right: 20px;
-            width: 180px; height: 120px;
-            background-color: var(--graph-light-grey);
-            color: #555;
-            border: 1px dashed #999;
-        }
-        /* 일반 사례 (Low Exp, High Trust) */
-        .zone-general {
-            bottom: 20px; left: 20px;
-            width: 180px; height: 120px;
-            background-color: var(--graph-dark-grey);
-            color: white;
-        }
-        /* 메디컨텐츠 (High Exp, High Trust) */
+        .zone-hacking { background-color: var(--graph-light-grey); color: #555; border: 1px dashed #999; }
+        .zone-general { background-color: var(--graph-dark-grey); color: white; }
         .zone-medi {
-            top: 20px; right: 20px; /* Initially overlapped, need to position better */
-            top: 40px; right: 60px; /* Adjusted for visual */
-            width: 220px; height: 220px;
             background-color: var(--primary-color);
             color: white;
             z-index: 10;
@@ -195,27 +179,21 @@
             100% { transform: scale(1); }
         }
         
-        /* Custom Positioning for Chart */
-        .zone-hacking { top: 10%; right: 5%; width: 35%; height: 35%; }
-        .zone-general { bottom: 5%; left: 5%; width: 35%; height: 35%; }
-        .zone-medi { top: 5%; right: 5%; width: 40%; height: 40%; background: rgba(0, 90, 238, 0.9); }
-
-
-        /* Slide 6: Process Flow (Modified for Single Line) */
+        /* Slide 6: Process Flow */
         .process-container {
             display: flex;
             justify-content: space-between;
             align-items: stretch;
             margin-top: 40px;
-            flex-wrap: nowrap; /* 수정됨: 줄바꿈 방지 */
-            gap: 10px; /* 요소 간 최소 간격 */
+            flex-wrap: nowrap;
+            gap: 10px;
         }
         .process-step {
             background: #f8f9fa;
-            padding: 30px 10px; /* 좌우 패딩을 조금 줄임 */
+            padding: 30px 10px;
             border-radius: 15px;
             text-align: center;
-            width: 20%; /* 수정됨: 22% -> 20%로 축소하여 한 줄 배치 확보 */
+            width: 20%;
             position: relative;
             border: 1px solid #eee;
             display: flex;
@@ -231,7 +209,7 @@
             font-size: 1.5em;
             color: #ccc;
             align-self: center;
-            flex-shrink: 0; /* 화살표가 찌그러지지 않도록 고정 */
+            flex-shrink: 0;
         }
         .emr-badge {
             background: var(--accent-color);
@@ -258,12 +236,24 @@
         .ceo-spec { margin-bottom: 20px; font-weight: bold; color: #555; }
         .ceo-quote { font-style: italic; color: #666; font-size: 1.1em; border-top: 1px solid #ccc; padding-top: 20px; margin-top: 20px; }
 
-        /* Footer */
+        /* Footer (Updated to Match Cover Slide) */
         footer {
             text-align: center;
-            padding: 50px;
-            background: #333;
+            padding: 100px 20px; /* 여백을 키워 슬라이드 느낌 강화 */
+            /* 배경색을 첫 페이지와 동일하게 변경 */
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
+        }
+        footer h2 {
+            color: white;
+            border-bottom: none;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        footer p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.3em;
+            margin-bottom: 40px;
         }
     </style>
 </head>
@@ -290,8 +280,8 @@
             <div style="display: flex; gap: 30px; align-items: center;">
                 
                 <div style="flex: 1; text-align: center;">
-                    <div style="height: 300px; width: 100%; overflow: hidden; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
-                        <img src="./interior.jpg" alt="Hospital Interior" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div style="height: 300px; width: 100%; overflow: hidden; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); background: #eee; display:flex; align-items:center; justify-content:center;">
+                        <i class="fas fa-hospital-alt" style="font-size: 4em; color:#ccc;"></i>
                     </div>
                     <p style="margin-top: 20px; font-size: 1.1em;"><strong>Reality A:</strong><br>수억 원을 투자한 프리미엄 공간</p>
                 </div>
@@ -299,8 +289,8 @@
                 <div style="font-size: 2.5em; font-weight: 900; color: #ddd; font-style: italic;">VS</div>
                 
                 <div style="flex: 1; text-align: center;">
-                    <div style="height: 300px; width: 100%; overflow: hidden; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 4px solid #ffebeb; box-sizing: border-box;">
-                        <img src="./blogs.png" alt="Low Quality Blog" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div style="height: 300px; width: 100%; overflow: hidden; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 4px solid #ffebeb; box-sizing: border-box; background: #fff5f5; display:flex; align-items:center; justify-content:center;">
+                        <i class="fas fa-file-alt" style="font-size: 4em; color:#ffcccc;"></i>
                     </div>
                     <p style="margin-top: 20px; font-size: 1.1em;"><strong>Reality B:</strong><br>공장형 대행사의 '전단지' 수준 글</p>
                 </div>
@@ -493,7 +483,6 @@
                     <p style="font-size: 0.9em; margin-bottom: 0;">단순히 예뻐진 것을 넘어,<br>환자의 삶이 긍정적으로 변화</p>
                 </div>
             </div>
-        </section>
         </section>
 
         <section>
